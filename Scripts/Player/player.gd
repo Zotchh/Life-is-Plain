@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var move_speed: float = 100
+@export var diagonale_ratio: float = 1.4
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 var last_direction: Vector2
@@ -12,8 +13,12 @@ func _physics_process(delta: float):
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
 	
-	# Update velocity
 	velocity = input_direction * move_speed
+	
+	# Update velocity
+	if ((input_direction.x > 0 or input_direction.x < 0)
+	and (input_direction.y > 0 or input_direction.y < 0)):
+		velocity = velocity / diagonale_ratio
 	
 	# Determine the animation to play
 	play_animation(input_direction)
