@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtroag4wg3q77"]
+[gd_scene load_steps=9 format=3 uid="uid://dtroag4wg3q77"]
 
 [ext_resource type="Texture2D" uid="uid://dvsl6dwyfusst" path="res://assets/sprites/Tilesets/Interiors_free_16x16.png" id="1_bmfcf"]
+[ext_resource type="Script" path="res://main/level.gd" id="1_qb7wi"]
 [ext_resource type="Texture2D" uid="uid://dag0e6got2t4m" path="res://assets/sprites/Tilesets/Room_Builder_free_16x16.png" id="2_a6tsn"]
 [ext_resource type="PackedScene" uid="uid://4xfhgbqjhejp" path="res://main/player.tscn" id="3_478uj"]
+[ext_resource type="PackedScene" uid="uid://d3vptq6og431i" path="res://main/programming_minigame.tscn" id="5_lei1h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdk64"]
 resource_name = "interiors"
@@ -4061,16 +4063,22 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_wdk64")
 sources/1 = SubResource("TileSetAtlasSource_stlc5")
 
-[node name="Level" type="Node2D"]
-position = Vector2(-1, 2)
+[node name="Node" type="Node"]
 
-[node name="Ground" type="Node2D" parent="."]
+[node name="Level" type="Node2D" parent="."]
+position = Vector2(-1, 2)
+script = ExtResource("1_qb7wi")
+
+[node name="Ground" type="Node2D" parent="Level"]
 position = Vector2(257, 90)
 
-[node name="TileMap" type="TileMap" parent="Ground"]
+[node name="TileMap" type="TileMap" parent="Level/Ground"]
 tile_set = SubResource("TileSet_igrk0")
 format = 2
 layer_0/tile_data = PackedInt32Array(65541, 786433, 14, 131077, 786433, 14, 131078, 786433, 14, 131079, 786433, 14, 196615, 786433, 14, 65542, 786433, 14, 65543, 786433, 14, 196614, 786433, 14, 196613, 786433, 14, 262149, 786433, 14, 262150, 786433, 14, 262151, 786433, 14, 262152, 786433, 14, 196616, 786433, 14, 131080, 786433, 14, 65544, 786433, 14, 65545, 786433, 14, 131081, 786433, 14, 196617, 786433, 14, 262153, 786433, 14, 5, 786433, 14, 4, 786433, 14, 65540, 786433, 14, 131076, 786433, 14, 196612, 786433, 14, 262148, 786433, 14, 327684, 786433, 14, 327685, 786433, 14, 327686, 786433, 14, 327687, 786433, 14, 262154, 786433, 14, 196618, 786433, 14, 131082, 786433, 14, 65546, 786433, 14, 10, 786433, 14, 9, 786433, 14, 8, 786433, 14, 7, 786433, 14, 6, 786433, 14, 327690, 786433, 14, 327689, 786433, 14, 327688, 786433, 14, -65533, 720897, 2, -131068, 1, 15, -65532, 1, 16, -131067, 65537, 15, -65531, 65537, 16, -131066, 65537, 15, -65530, 65537, 16, -131065, 65537, 15, -65529, 65537, 16, -131064, 65537, 15, -65528, 65537, 16, -131063, 65537, 15, -65527, 65537, 16, -131062, 131073, 15, -65526, 131073, 16, -131069, 720897, 1, 3, 720897, 2, 65539, 720897, 2, 131075, 720897, 2, 196611, 720897, 2, 262147, 720897, 2, 327683, 720897, 2, 393219, 720897, 3, 393227, 851969, 3, -131061, 851969, 1, -65525, 851969, 2, 11, 851969, 2, 65547, 851969, 2, 131083, 851969, 2, 196619, 851969, 2, 262155, 851969, 2, 327691, 851969, 2, 393220, 786433, 3, 393221, 786433, 3, 393222, 786433, 0, 393223, 786433, 0, 393224, 786433, 0, 393225, 786433, 3, 393226, 786433, 3)
 
-[node name="Player" parent="." instance=ExtResource("3_478uj")]
+[node name="Player" parent="Level" instance=ExtResource("3_478uj")]
 position = Vector2(366, 125)
+
+[node name="ProgrammingMiniGame" parent="." instance=ExtResource("5_lei1h")]
+visible = false
