@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtroag4wg3q77"]
+[gd_scene load_steps=9 format=3 uid="uid://d1yirk0lp7gxs"]
 
-[ext_resource type="Texture2D" uid="uid://dvsl6dwyfusst" path="res://assets/sprites/Tilesets/Interiors_free_16x16.png" id="1_bmfcf"]
-[ext_resource type="Texture2D" uid="uid://dag0e6got2t4m" path="res://assets/sprites/Tilesets/Room_Builder_free_16x16.png" id="2_a6tsn"]
-[ext_resource type="PackedScene" uid="uid://4xfhgbqjhejp" path="res://main/player.tscn" id="3_478uj"]
-[ext_resource type="Script" path="res://main/Area2D.gd" id="4_3rggj"]
+[ext_resource type="Texture2D" uid="uid://dvsl6dwyfusst" path="res://assets/sprites/Tilesets/Interiors_free_16x16.png" id="1_w3t0k"]
+[ext_resource type="Texture2D" uid="uid://dag0e6got2t4m" path="res://assets/sprites/Tilesets/Room_Builder_free_16x16.png" id="2_30m2n"]
+[ext_resource type="PackedScene" uid="uid://4xfhgbqjhejp" path="res://main/player.tscn" id="3_ihor1"]
+[ext_resource type="Script" path="res://main/Area2D.gd" id="4_7d5ws"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdk64"]
 resource_name = "interiors"
-texture = ExtResource("1_bmfcf")
+texture = ExtResource("1_w3t0k")
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
@@ -3365,7 +3365,7 @@ texture = ExtResource("1_bmfcf")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_stlc5"]
 resource_name = "buildings"
-texture = ExtResource("2_a6tsn")
+texture = ExtResource("2_30m2n")
 5:0/0 = 0
 5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:0/0/physics_layer_0/angular_velocity = 0.0
@@ -4065,7 +4065,7 @@ sources/1 = SubResource("TileSetAtlasSource_stlc5")
 [sub_resource type="CircleShape2D" id="CircleShape2D_efaik"]
 radius = 117.209
 
-[node name="Level" type="Node2D"]
+[node name="Level2" type="Node2D"]
 position = Vector2(-1, 2)
 
 [node name="Ground" type="Node2D" parent="."]
@@ -4078,13 +4078,13 @@ layer_0/tile_data = PackedInt32Array(65541, 786433, 14, 131077, 786433, 14, 1310
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(257, 90)
-script = ExtResource("4_3rggj")
+script = ExtResource("4_7d5ws")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(120, 31)
 shape = SubResource("CircleShape2D_efaik")
 
-[node name="Player" parent="." instance=ExtResource("3_478uj")]
+[node name="Player" parent="." instance=ExtResource("3_ihor1")]
 position = Vector2(366, 125)
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
