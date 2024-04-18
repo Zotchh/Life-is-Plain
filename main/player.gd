@@ -12,24 +12,24 @@ var minigame_types = preload("res://main/minigame_types.gd")
 var last_direction: Vector2
 
 func _process(_delta: float):
-	# Get the input direction
-	var input_direction: Vector2 = Vector2(
-		Input.get_action_strength("right") - Input.get_action_strength("left"),
-		Input.get_action_strength("down") - Input.get_action_strength("up")
-	)
-	
-	# Update velocity
-	velocity = input_direction * move_speed
-	
-	if ((input_direction.x > 0 or input_direction.x < 0)
-	and (input_direction.y > 0 or input_direction.y < 0)):
-		velocity = velocity / diagonale_ratio
-	
-	# Determine the animation to play
-	play_animation(input_direction)
-	
-	# Call movement method
-	move_and_slide()
+	## Get the input direction
+	#var input_direction: Vector2 = Vector2(
+		#Input.get_action_strength("right") - Input.get_action_strength("left"),
+		#Input.get_action_strength("down") - Input.get_action_strength("up")
+	#)
+	#
+	## Update velocity
+	#velocity = input_direction * move_speed
+	#
+	#if ((input_direction.x > 0 or input_direction.x < 0)
+	#and (input_direction.y > 0 or input_direction.y < 0)):
+		#velocity = velocity / diagonale_ratio
+	#
+	## Determine the animation to play
+	#play_animation(input_direction)
+	#
+	## Call movement method
+	#move_and_slide()
 	
 	# Check for all actions
 	check_interaction()
