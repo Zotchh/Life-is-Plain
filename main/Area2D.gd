@@ -14,7 +14,7 @@ func _ready():
 	if get_tree().get_current_scene().get_name() == "Level2":
 		# Set up the sequence of actions
 		sequence = ["t", "key_down", "key_up", "key_down", "key_up" ]
-		next_scene = "res://main/level1.tscn"
+		next_scene = "res://main/level.tscn"
 
 
 func _on_body_entered(body: CharacterBody2D):
