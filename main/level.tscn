@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://main/level.gd" id="1_qb7wi"]
 [ext_resource type="Texture2D" uid="uid://dag0e6got2t4m" path="res://assets/sprites/Tilesets/Room_Builder_free_16x16.png" id="2_a6tsn"]
 [ext_resource type="PackedScene" uid="uid://4xfhgbqjhejp" path="res://main/player.tscn" id="3_478uj"]
-[ext_resource type="PackedScene" uid="uid://d3vptq6og431i" path="res://main/programming_minigame.tscn" id="5_lei1h"]
+[ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/programming_minigame.tscn" id="5_lei1h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdk64"]
 resource_name = "interiors"

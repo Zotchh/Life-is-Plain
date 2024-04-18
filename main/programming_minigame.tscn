@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3vptq6og431i"]
+[gd_scene load_steps=3 format=3 uid="uid://cap3afu2y48l6"]
 
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="1_etutl"]
 [ext_resource type="Script" path="res://main/programming_minigame.gd" id="1_vtmyx"]
