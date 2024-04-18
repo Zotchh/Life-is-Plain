@@ -9,11 +9,11 @@ func _ready():
 	print(get_tree().get_current_scene().get_name())
 	if get_tree().get_current_scene().get_name() == "Level":
 		# Set up the sequence of actions
-		sequence = ["key_up", "key_down", "key_up", "key_down" ]
+		sequence = ["t", "key_up", "key_down", "key_up", "key_down" ]
 		next_scene = "res://main/level2.tscn"
 	if get_tree().get_current_scene().get_name() == "Level2":
 		# Set up the sequence of actions
-		sequence = ["key_down", "key_up", "key_down", "key_up" ]
+		sequence = ["t", "key_down", "key_up", "key_down", "key_up" ]
 		next_scene = "res://main/level1.tscn"
 
 
