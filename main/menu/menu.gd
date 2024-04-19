@@ -22,7 +22,7 @@ func _process(_delta):
 
 func _start_button_pressed():
 	print("Start button pressed")
-	get_tree().change_scene_to_file("res://main/level.tscn")
+	get_tree().change_scene_to_file("res://main/level_programming/level_programming.tscn")
 
 func _option_button_pressed():
 	print("Option button pressed")

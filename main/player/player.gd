@@ -1,17 +1,11 @@
 extends CharacterBody2D
 
-signal minigame_started(minigame_type)
-signal minigame_closed(minigame_type)
-
-var minigame_types = preload("res://main/minigame_types.gd")
-
-@export var move_speed: float = 100
-@export var diagonale_ratio: float = 1.4
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 var last_direction: Vector2
 
 func _process(_delta: float):
+	pass
 	## Get the input direction
 	#var input_direction: Vector2 = Vector2(
 		#Input.get_action_strength("right") - Input.get_action_strength("left"),
@@ -30,18 +24,6 @@ func _process(_delta: float):
 	#
 	## Call movement method
 	#move_and_slide()
-	
-	# Check for all actions
-	check_interaction()
-	check_close_interface()
-
-func check_close_interface():
-	if Input.is_action_just_pressed("close"):
-		minigame_closed.emit(minigame_types.PROGRAMMING)
-
-func check_interaction():
-	if Input.is_action_just_pressed("interact"):
-		minigame_started.emit(minigame_types.PROGRAMMING)
 
 
 func play_animation(input_direction: Vector2):
