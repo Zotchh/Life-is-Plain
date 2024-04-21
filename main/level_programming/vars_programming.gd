@@ -1,6 +1,6 @@
 extends Node
 
-var instructions = {
+var instructions: Dictionary = {
 	"B": Instruction.new("Body", "B", "minigame_b"),
 	"C": Instruction.new("Cond", "C", "minigame_c"),
 	"E": Instruction.new("End", "E", "minigame_e"),
@@ -8,7 +8,7 @@ var instructions = {
 	"V": Instruction.new("Variable", "V", "minigame_v"),
 }
 
-var sequences = [
+var sequences: Array = [
 	["I", "C", "B", "I", "C", "B", "E", "E"],
 	["V", "V", "I", "C", "B", "E"],
 ]
