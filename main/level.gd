@@ -16,28 +16,11 @@ const MAX_MOVE: int = 4
 var log_enabled: bool = true
 var is_moving: bool = false
 var possible_moves: Array[String] = ["up", "down", "right", "left"]
-
-# TODO: move the dict into another file and autoload
-var minigames_from_scene: Dictionary = {
-	"LevelProgramming": Minigame.new(
-		"level_programming", 
-		MinigameTypes.PROGRAMMING,
-		["▲", "◀", "▼", "▶"],
-		["up", "left", "down", "right"],
-		0,
-	),
-	"LevelChemistry": Minigame.new(
-		"level_chemistry",
-		MinigameTypes.CHEMISTRY,
-		["▼", "▲", "▼", "▲"],
-		["down", "up", "down", "up"],
-		0,
-	),
-}
+var minigames_from_scene: Dictionary
 
 """ Called once when instanciated """
 func _ready():
-	pass
+	minigames_from_scene = VarsMinigame.minigames_properties
 
 """ Called every frame """
 func _process(_delta):
