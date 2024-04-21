@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 Global="*res://main/global.gd"
 VarsProgramming="*res://main/level_programming/vars_programming.gd"
 VarsChemistry="*res://main/level_chemistry/vars_chemistry.gd"
-VarsMinigame="*res://main/vars_minigame.gd"
+VarsMinigame="*res://main/minigame/vars_minigame.gd"
 
 [display]
 

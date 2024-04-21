@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dag0e6got2t4m" path="res://assets/sprites/Tilesets/Room_Builder_free_16x16.png" id="3_mw3on"]
 [ext_resource type="PackedScene" uid="uid://4xfhgbqjhejp" path="res://main/player/player.tscn" id="4_qkdj6"]
 [ext_resource type="Texture2D" uid="uid://c8jp2thbxd721" path="res://icon.svg" id="6_kipo0"]
-[ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/minigame_interface.tscn" id="6_s3x6t"]
+[ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/minigame/minigame_interface.tscn" id="6_s3x6t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdk64"]
 resource_name = "interiors"
