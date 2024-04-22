@@ -1,8 +1,9 @@
 extends Control
 
+signal minigame_completed(minigame_type: int)
+
 # Extern link to level node for signals
 @export var level_node: Node2D
-
 # Extern link for data script, set at init_minigame
 @onready var data: Node
 
@@ -11,7 +12,8 @@ extends Control
 @onready var shortcuts_interface: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/RightVBoxContainer/ItemList
 @onready var preview_interface: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer/ItemList
 
-# Minigame text storage
+# Minigame variables
+var minigame_type: int
 var instructions: Dictionary
 var sequences: Array
 
@@ -50,6 +52,7 @@ func handle_step():
 	if instr_idx < curr_seq.size() - 1:
 		instr_idx+= 1
 	else:
+		minigame_completed.emit(minigame_type)
 		_on_minigame_closed()
 
 """ Logic for minigame instruction checks """
@@ -76,6 +79,7 @@ func get_random_sequence_index() -> int:
 
 """ Handle which values to load depending on the minigame """
 func init_minigame(type):
+	minigame_type = type
 	match type:
 		MinigameTypes.PROGRAMMING:
 			data = get_node("/root/VarsProgramming")

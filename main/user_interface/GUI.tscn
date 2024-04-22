@@ -29,14 +29,18 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 
-[node name="EnergyBar" parent="BarsUI/VBoxContainer" instance=ExtResource("1_ca0pu")]
+[node name="EnergyBar" parent="BarsUI/VBoxContainer" node_paths=PackedStringArray("gui_node") instance=ExtResource("1_ca0pu")]
 layout_mode = 2
+gui_node = NodePath("../../..")
 
-[node name="MentalBar" parent="BarsUI/VBoxContainer" instance=ExtResource("2_6kn6v")]
+[node name="MentalBar" parent="BarsUI/VBoxContainer" node_paths=PackedStringArray("gui_node") instance=ExtResource("2_6kn6v")]
 layout_mode = 2
+gui_node = NodePath("../../..")
 
-[node name="HappinessBar" parent="BarsUI/VBoxContainer" instance=ExtResource("3_nk13j")]
+[node name="HappinessBar" parent="BarsUI/VBoxContainer" node_paths=PackedStringArray("gui_node") instance=ExtResource("3_nk13j")]
 layout_mode = 2
+gui_node = NodePath("../../..")
 
-[node name="HungerBar" parent="BarsUI/VBoxContainer" instance=ExtResource("4_tprvj")]
+[node name="HungerBar" parent="BarsUI/VBoxContainer" node_paths=PackedStringArray("gui_node") instance=ExtResource("4_tprvj")]
 layout_mode = 2
+gui_node = NodePath("../../..")

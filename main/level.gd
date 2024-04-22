@@ -4,10 +4,11 @@ extends Node2D
 signal minigame_started(type: int)
 signal minigame_closed()
 
+signal start_resource_timers()
+signal stop_resource_timers()
+
 # Scene nodes
 @onready var curr_scene: String = get_tree().current_scene.name
-@onready var player_node: CharacterBody2D = $Player
-@onready var minigame_node: Control = $"../MinigameInterface"
 
 # Constants
 const MAX_MOVE: int = 4
@@ -17,6 +18,8 @@ var log_enabled: bool = true
 var is_moving: bool = false
 var possible_moves: Array[String] = ["up", "down", "right", "left"]
 var minigames_from_scene: Dictionary
+
+var timers_on: bool = false
 
 """ Called once when instanciated """
 func _ready():
@@ -32,6 +35,15 @@ func _process(_delta):
 	# Check if a minigame is closed
 	if Input.is_action_just_released("close"):
 		minigame_closed.emit()
+	
+	if Input.is_action_just_released("start"):
+		if timers_on:
+			stop_resource_timers.emit()
+			timers_on = false
+		else:
+			start_resource_timers.emit()
+			timers_on = true
+		
 	
 	# Handle movement between levels
 	handle_movement()
