@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://sge1t10x7omc"]
+[gd_scene load_steps=11 format=3 uid="uid://sge1t10x7omc"]
 
 [ext_resource type="Script" path="res://main/level.gd" id="1_we8um"]
 [ext_resource type="Texture2D" uid="uid://dvsl6dwyfusst" path="res://assets/sprites/Tilesets/Interiors_free_16x16.png" id="2_u70qx"]
 [ext_resource type="Texture2D" uid="uid://dag0e6got2t4m" path="res://assets/sprites/Tilesets/Room_Builder_free_16x16.png" id="3_mw3on"]
 [ext_resource type="PackedScene" uid="uid://4xfhgbqjhejp" path="res://main/player/player.tscn" id="4_qkdj6"]
+[ext_resource type="PackedScene" uid="uid://8pxb3uavro5v" path="res://main/user_interface/GUI.tscn" id="6_1nuef"]
 [ext_resource type="Texture2D" uid="uid://c8jp2thbxd721" path="res://icon.svg" id="6_kipo0"]
 [ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/minigame/minigame_interface.tscn" id="6_s3x6t"]
 
@@ -4182,10 +4183,6 @@ sources/1 = SubResource("TileSetAtlasSource_stlc5")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = 2.0
-offset_right = -1.0
-offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.101961, 0.101961, 0.101961, 1)
@@ -4197,7 +4194,7 @@ script = ExtResource("1_we8um")
 
 [node name="TileMap" type="TileMap" parent="Level"]
 y_sort_enabled = true
-position = Vector2(257, 90)
+position = Vector2(342, 116)
 tile_set = SubResource("TileSet_igrk0")
 format = 2
 layer_0/name = "Ground"
@@ -4219,13 +4216,25 @@ layer_3/tile_data = PackedInt32Array(131072, 917504, 36, 196608, 917504, 37, 327
 
 [node name="Player" parent="Level" instance=ExtResource("4_qkdj6")]
 y_sort_enabled = true
-position = Vector2(236, 172)
+position = Vector2(322, 200)
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(321, 148)
+position = Vector2(408, 177)
 scale = Vector2(0.5625, 0.453125)
 texture = ExtResource("6_kipo0")
 
-[node name="MinigameInterface" parent="." node_paths=PackedStringArray("level_node") instance=ExtResource("6_s3x6t")]
+[node name="HUD" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GUI" parent="HUD" instance=ExtResource("6_1nuef")]
+layout_mode = 2
+
+[node name="MinigameInterface" parent="HUD" node_paths=PackedStringArray("level_node") instance=ExtResource("6_s3x6t")]
 visible = false
-level_node = NodePath("../Level")
+layout_mode = 2
+size_flags_horizontal = 3
+level_node = NodePath("../../Level")

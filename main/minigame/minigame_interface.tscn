@@ -3,8 +3,7 @@
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="1_etutl"]
 [ext_resource type="Script" path="res://main/minigame/minigame_logic.gd" id="1_vtmyx"]
 
-[node name="MinigameInterface" type="Control"]
-layout_mode = 3
+[node name="MinigameInterface" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,28 +12,18 @@ grow_vertical = 2
 script = ExtResource("1_vtmyx")
 
 [node name="BackgroundMarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 15
 
-[node name="BackgroundRect" type="ColorRect" parent="BackgroundMarginContainer"]
+[node name="Background" type="ColorRect" parent="BackgroundMarginContainer"]
 layout_mode = 2
 color = Color(0.486275, 0.109804, 0.164706, 0.952941)
 
 [node name="MiniGameMarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -46,36 +35,17 @@ layout_mode = 2
 [node name="LeftVBoxContainer" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.3
-
-[node name="PreviewVBoxContainer" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer"]
-layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.8
 
-[node name="PreviewTitle" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer/PreviewVBoxContainer"]
+[node name="PreviewTitle" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_etutl")
 theme_override_font_sizes/normal_font_size = 20
 text = "Preview"
 fit_content = true
 
-[node name="ItemList" type="ItemList" parent="MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer/PreviewVBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ResourcesHBoxContainer" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ResourcesTitle" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer/ResourcesHBoxContainer"]
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_etutl")
-theme_override_font_sizes/normal_font_size = 20
-text = "Resources"
-fit_content = true
-
-[node name="ItemList" type="ItemList" parent="MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer/ResourcesHBoxContainer"]
+[node name="ItemList" type="ItemList" parent="MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 

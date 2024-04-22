@@ -9,7 +9,7 @@ extends Control
 # Local link to interface parts for display
 @onready var instructions_interface: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/MiddleVBoxContainer/ItemList
 @onready var shortcuts_interface: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/RightVBoxContainer/ItemList
-@onready var preview_interface: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer/PreviewVBoxContainer/ItemList
+@onready var preview_interface: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer/ItemList
 
 # Minigame text storage
 var instructions: Dictionary

@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxogkwmclsfo6"]
+
+[ext_resource type="Texture2D" uid="uid://coci4aov6b3et" path="res://assets/sprites/UI/progress-bar-circle.png" id="1_jjfxe"]
+[ext_resource type="Script" path="res://main/user_interface/resource_bar.gd" id="1_kj6ks"]
+[ext_resource type="Texture2D" uid="uid://dyyhr6dmkfkdr" path="res://assets/sprites/UI/progress-bar-frame.png" id="2_mfaf8"]
+[ext_resource type="Texture2D" uid="uid://dwnnc3ix76oem" path="res://assets/sprites/icons/energy_icon_atlas_texture.tres" id="4_n6r4s"]
+
+[node name="EnergyBar" type="MarginContainer"]
+script = ExtResource("1_kj6ks")
+
+[node name="ResourceProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+max_value = 1000.0
+value = 333.0
+fill_mode = 4
+nine_patch_stretch = true
+stretch_margin_left = 36
+stretch_margin_top = 36
+stretch_margin_right = 36
+stretch_margin_bottom = 36
+texture_under = ExtResource("1_jjfxe")
+texture_over = ExtResource("2_mfaf8")
+texture_progress = ExtResource("1_jjfxe")
+tint_under = Color(0, 0, 0, 0.603922)
+tint_progress = Color(0, 0.866667, 0, 1)
+radial_initial_angle = 215.0
+radial_fill_degrees = 290.0
+
+[node name="ResourceTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="ResourceIconMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_bottom = 3
+
+[node name="ResourceIcon" type="TextureRect" parent="ResourceIconMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("4_n6r4s")
