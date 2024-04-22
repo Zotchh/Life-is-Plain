@@ -1,11 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtroag4wg3q77"]
+[gd_scene load_steps=7 format=3 uid="uid://dtroag4wg3q77"]
 
-[ext_resource type="Script" path="res://main/level.gd" id="1_v0fmv"]
 [ext_resource type="Texture2D" uid="uid://dvsl6dwyfusst" path="res://assets/sprites/Tilesets/Interiors_free_16x16.png" id="2_mss01"]
 [ext_resource type="Texture2D" uid="uid://dag0e6got2t4m" path="res://assets/sprites/Tilesets/Room_Builder_free_16x16.png" id="3_fcx6w"]
 [ext_resource type="PackedScene" uid="uid://4xfhgbqjhejp" path="res://main/player/player.tscn" id="4_8xkw4"]
-[ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/minigame/minigame_interface.tscn" id="5_3wf81"]
-[ext_resource type="PackedScene" uid="uid://8pxb3uavro5v" path="res://main/user_interface/GUI.tscn" id="5_c400r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdk64"]
 resource_name = "interiors"
@@ -4176,22 +4173,10 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_wdk64")
 sources/1 = SubResource("TileSetAtlasSource_stlc5")
 
-[node name="LevelProgramming" type="Node"]
-
-[node name="Background" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.101961, 0.101961, 0.101961, 1)
-
-[node name="Level" type="Node2D" parent="."]
+[node name="LevelProgramming" type="Node2D"]
 y_sort_enabled = true
-position = Vector2(-1, 2)
-script = ExtResource("1_v0fmv")
 
-[node name="TileMap" type="TileMap" parent="Level"]
+[node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
 position = Vector2(342, 116)
 tile_set = SubResource("TileSet_igrk0")
@@ -4213,24 +4198,6 @@ layer_3/y_sort_enabled = true
 layer_3/y_sort_origin = 7
 layer_3/tile_data = PackedInt32Array(131072, 917504, 36, 196608, 917504, 37, 327687, 327680, 10, 393223, 327680, 11, 458759, 327680, 12, 327688, 393216, 10, 393224, 393216, 11, 458760, 393216, 12, 327689, 458752, 10, 393225, 458752, 11, 458761, 458752, 12, 327690, 524288, 10, 393226, 524288, 11, 458762, 524288, 12)
 
-[node name="Player" parent="Level" instance=ExtResource("4_8xkw4")]
+[node name="Player" parent="." instance=ExtResource("4_8xkw4")]
 y_sort_enabled = true
 position = Vector2(322, 200)
-
-[node name="HUD" type="HBoxContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GUI" parent="HUD" node_paths=PackedStringArray("level_node", "minigame_node") instance=ExtResource("5_c400r")]
-layout_mode = 2
-level_node = NodePath("../../Level")
-minigame_node = NodePath("../MinigameInterface")
-
-[node name="MinigameInterface" parent="HUD" node_paths=PackedStringArray("level_node") instance=ExtResource("5_3wf81")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-level_node = NodePath("../../Level")

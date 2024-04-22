@@ -1,12 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://sge1t10x7omc"]
+[gd_scene load_steps=8 format=3 uid="uid://sge1t10x7omc"]
 
-[ext_resource type="Script" path="res://main/level.gd" id="1_we8um"]
 [ext_resource type="Texture2D" uid="uid://dvsl6dwyfusst" path="res://assets/sprites/Tilesets/Interiors_free_16x16.png" id="2_u70qx"]
 [ext_resource type="Texture2D" uid="uid://dag0e6got2t4m" path="res://assets/sprites/Tilesets/Room_Builder_free_16x16.png" id="3_mw3on"]
 [ext_resource type="PackedScene" uid="uid://4xfhgbqjhejp" path="res://main/player/player.tscn" id="4_qkdj6"]
-[ext_resource type="PackedScene" uid="uid://8pxb3uavro5v" path="res://main/user_interface/GUI.tscn" id="6_1nuef"]
 [ext_resource type="Texture2D" uid="uid://c8jp2thbxd721" path="res://icon.svg" id="6_kipo0"]
-[ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/minigame/minigame_interface.tscn" id="6_s3x6t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdk64"]
 resource_name = "interiors"
@@ -4177,29 +4174,17 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_wdk64")
 sources/1 = SubResource("TileSetAtlasSource_stlc5")
 
-[node name="LevelChemistry" type="Node"]
-
-[node name="Background" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.101961, 0.101961, 0.101961, 1)
-
-[node name="Level" type="Node2D" parent="."]
+[node name="LevelChemistry" type="Node2D"]
 y_sort_enabled = true
-position = Vector2(-1, 2)
-script = ExtResource("1_we8um")
 
-[node name="TileMap" type="TileMap" parent="Level"]
+[node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
 position = Vector2(342, 116)
 tile_set = SubResource("TileSet_igrk0")
 format = 2
 layer_0/name = "Ground"
 layer_0/y_sort_enabled = true
-layer_0/y_sort_origin = -7
+layer_0/y_sort_origin = -25
 layer_0/tile_data = PackedInt32Array(65533, 917505, 9, 131069, 917505, 10, 196605, 917505, 10, 262141, 917505, 10, 327677, 917505, 10, 393213, 917505, 10, 458749, 917505, 10, 524285, 917505, 10, 65534, 983041, 9, 65535, 983041, 9, 0, 983041, 9, 1, 983041, 9, 2, 983041, 9, 3, 983041, 9, 4, 983041, 9, 5, 983041, 9, 6, 983041, 9, 65542, 983041, 10, 131078, 983041, 10, 131079, 983041, 9, 131080, 983041, 9, 131081, 983041, 9, 131082, 983041, 9, 131083, 983041, 9, 196619, 983041, 10, 262155, 983041, 10, 327691, 983041, 10, 393227, 983041, 10, 458763, 983041, 10, 458762, 983041, 10, 458761, 983041, 10, 458760, 983041, 10, 458759, 983041, 10, 458758, 983041, 10, 458757, 983041, 10, 458756, 983041, 10, 458755, 983041, 10, 458754, 983041, 10, 458753, 983041, 10, 458752, 983041, 10, 524287, 983041, 10, 524286, 983041, 10, 458750, 983041, 10, 458751, 983041, 10, 393216, 983041, 10, 393217, 983041, 10, 393218, 983041, 10, 393219, 983041, 10, 393220, 983041, 10, 393221, 983041, 10, 393222, 983041, 10, 393223, 983041, 10, 393224, 983041, 10, 393225, 983041, 10, 393226, 983041, 10, 327690, 983041, 10, 327689, 983041, 10, 327688, 983041, 10, 327687, 983041, 10, 327686, 983041, 10, 327685, 983041, 10, 327684, 983041, 10, 327683, 983041, 10, 327682, 983041, 10, 327681, 983041, 10, 327680, 983041, 10, 393215, 983041, 10, 393214, 983041, 10, 327678, 983041, 10, 327679, 983041, 10, 262144, 983041, 10, 262145, 983041, 10, 262146, 983041, 10, 262147, 983041, 10, 262148, 983041, 10, 262149, 983041, 10, 262150, 983041, 10, 262151, 983041, 10, 262152, 983041, 10, 262153, 983041, 10, 262154, 983041, 10, 196618, 983041, 10, 196617, 983041, 10, 196616, 983041, 10, 196615, 983041, 10, 196614, 983041, 10, 196613, 983041, 10, 196612, 983041, 10, 196611, 983041, 10, 196610, 983041, 10, 196609, 983041, 10, 196608, 983041, 10, 262143, 983041, 10, 262142, 983041, 10, 196606, 983041, 10, 131070, 983041, 10, 131071, 983041, 10, 196607, 983041, 10, 131072, 983041, 10, 65536, 983041, 10, 65537, 983041, 10, 131073, 983041, 10, 65538, 983041, 10, 131074, 983041, 10, 131075, 983041, 10, 65539, 983041, 10, 65540, 983041, 10, 131076, 983041, 10, 65541, 983041, 10, 131077, 983041, 10)
 layer_1/name = "Walls"
 layer_1/y_sort_enabled = true
@@ -4214,29 +4199,11 @@ layer_3/y_sort_enabled = true
 layer_3/y_sort_origin = 7
 layer_3/tile_data = PackedInt32Array(131072, 917504, 36, 196608, 917504, 37, 327687, 327680, 10, 393223, 327680, 11, 458759, 327680, 12, 327688, 393216, 10, 393224, 393216, 11, 458760, 393216, 12, 327689, 458752, 10, 393225, 458752, 11, 458761, 458752, 12, 327690, 524288, 10, 393226, 524288, 11, 458762, 524288, 12)
 
-[node name="Player" parent="Level" instance=ExtResource("4_qkdj6")]
+[node name="Player" parent="." instance=ExtResource("4_qkdj6")]
 y_sort_enabled = true
 position = Vector2(322, 200)
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(408, 177)
+position = Vector2(409, 179)
 scale = Vector2(0.5625, 0.453125)
 texture = ExtResource("6_kipo0")
-
-[node name="HUD" type="HBoxContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GUI" parent="HUD" node_paths=PackedStringArray("level_node", "minigame_node") instance=ExtResource("6_1nuef")]
-layout_mode = 2
-level_node = NodePath("../../Level")
-minigame_node = NodePath("../MinigameInterface")
-
-[node name="MinigameInterface" parent="HUD" node_paths=PackedStringArray("level_node") instance=ExtResource("6_s3x6t")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-level_node = NodePath("../../Level")

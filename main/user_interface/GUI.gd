@@ -6,8 +6,8 @@ signal timer_stop()
 signal resource_increment(resource_type: int, value: int)
 
 # External node
-@export var level_node: Node2D
 @export var minigame_node: MarginContainer
+@export var level_node: Node
 
 """ Called once when instanciated """
 func _ready():

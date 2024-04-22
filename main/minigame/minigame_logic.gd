@@ -3,7 +3,7 @@ extends Control
 signal minigame_completed(minigame_type: int)
 
 # Extern link to level node for signals
-@export var level_node: Node2D
+@export var level_node: Node
 # Extern link for data script, set at init_minigame
 @onready var data: Node
 
@@ -89,7 +89,7 @@ func init_minigame(type):
 """ Called when minigame starts """
 func _on_minigame_started(type):
 	if !minigame_opened:
-		print("programming minigame started")
+		Log.print("minigame started")
 
 		# Determine which data to load
 		init_minigame(type)
@@ -118,7 +118,7 @@ func _on_minigame_started(type):
 """ Called when minigame ends """
 func _on_minigame_closed():
 	if minigame_opened:
-		print("programming minigame closed")
+		Log.print("minigame closed")
 
 		self.set_visible(false)
 		instructions_interface.clear()

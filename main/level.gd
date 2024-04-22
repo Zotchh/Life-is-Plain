@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 # Signals
 signal minigame_started(type: int)
@@ -7,8 +7,9 @@ signal minigame_closed()
 signal start_resource_timers()
 signal stop_resource_timers()
 
-# Scene nodes
-@onready var curr_scene: String = get_tree().current_scene.name
+# Child Scenes
+@onready var background: ColorRect = $Background
+@onready var curr_level: Node2D = $LevelProgramming
 
 # Constants
 const MAX_MOVE: int = 4
@@ -29,7 +30,7 @@ func _ready():
 func _process(_delta):
 	# Check if a minigame is launched
 	if Input.is_action_just_released("interact"):
-		var minigame: Minigame = minigames_from_scene[curr_scene]
+		var minigame: Minigame = minigames_from_scene[curr_level.name]
 		minigame_started.emit(minigame.type)
 	
 	# Check if a minigame is closed
@@ -93,13 +94,16 @@ func check_counters_completion():
 		var value: Minigame = minigames_from_scene[key]
 		
 		# Reset sequence counter if player is in the same scene
-		if value.key_counter == MAX_MOVE && key == curr_scene:
+		if value.key_counter == MAX_MOVE && key == curr_level.name:
 			value.key_counter = 0
 		# Otherwise change to destination scene
 		elif value.key_counter == MAX_MOVE:
 			is_moving = false
 			var dest_file: String = "res://main/" + value.file_name + "/" + value.file_name + ".tscn"
-			get_tree().change_scene_to_file(dest_file)
+			var levelScene = load(dest_file).instantiate()
+			background.add_sibling(levelScene)
+			curr_level.queue_free()
+			curr_level = levelScene
 
 """ Handle movement in 2 phases
 	- Track if any move is pressed and update each possible counters
