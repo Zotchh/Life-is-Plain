@@ -85,6 +85,10 @@ func init_minigame(type):
 			data = get_node("/root/VarsProgramming")
 		MinigameTypes.CHEMISTRY:
 			data = get_node("/root/VarsChemistry")
+		MinigameTypes.ARCHITECTURE:
+			data = get_node("/root/VarsArchitecture")
+		MinigameTypes.MATH:
+			data = get_node("/root/VarsMath")
 
 """ Called when minigame starts """
 func _on_minigame_started(type):

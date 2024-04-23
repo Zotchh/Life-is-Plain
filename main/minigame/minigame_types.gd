@@ -18,5 +18,9 @@ static func get_dest_name(type: int) -> String:
 			return "PROG"
 		CHEMISTRY:
 			return "LAB"
+		ARCHITECTURE:
+			return "ARCH"
+		MATH:
+			return "MATH"
 	
 	return "UNMATCHED"

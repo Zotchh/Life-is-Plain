@@ -35,3 +35,9 @@ func _on_minigame_completed(minigame_type: int):
 		MinigameTypes.CHEMISTRY:
 			resource_increment.emit(ResourceTypes.HAPPINESS, 200)
 			resource_increment.emit(ResourceTypes.HUNGER, 300)
+		MinigameTypes.ARCHITECTURE:
+			resource_increment.emit(ResourceTypes.HAPPINESS, 200)
+			resource_increment.emit(ResourceTypes.HUNGER, 300)
+		MinigameTypes.MATH:
+			resource_increment.emit(ResourceTypes.HAPPINESS, 200)
+			resource_increment.emit(ResourceTypes.HUNGER, 300)
