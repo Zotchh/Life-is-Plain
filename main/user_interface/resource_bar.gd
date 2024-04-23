@@ -8,7 +8,7 @@ extends Control
 const PB_MAX: int = 1000
 const PB_MIN_RANDOM: int = 550
 const PB_MAX_RANDOM: int = 950
-const PB_STEP: int = 2
+const PB_STEP: int = 5
 
 var type_from_name: Dictionary = {
 	"EnergyBar": ResourceTypes.ENERGY,

@@ -11,3 +11,12 @@ enum {
 	ARCHITECTURE=2,
 	MATH=3,
 }
+
+static func get_dest_name(type: int) -> String:
+	match type:
+		PROGRAMMING:
+			return "PROG"
+		CHEMISTRY:
+			return "LAB"
+	
+	return "UNMATCHED"

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://clnk0ar2n3f1g"]
+[gd_scene load_steps=6 format=3 uid="uid://clnk0ar2n3f1g"]
 
 [ext_resource type="PackedScene" uid="uid://dtroag4wg3q77" path="res://main/level_programming/level_programming.tscn" id="1_6wt4w"]
 [ext_resource type="Script" path="res://main/level.gd" id="1_ysoi0"]
+[ext_resource type="PackedScene" uid="uid://daobh6oywgntn" path="res://main/user_interface/move_interface.tscn" id="3_p2ttm"]
 [ext_resource type="PackedScene" uid="uid://8pxb3uavro5v" path="res://main/user_interface/GUI.tscn" id="5_ufsk5"]
 [ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/minigame/minigame_interface.tscn" id="6_vtnfc"]
 
@@ -17,6 +18,12 @@ grow_vertical = 2
 color = Color(0.101961, 0.101961, 0.101961, 1)
 
 [node name="LevelProgramming" parent="." instance=ExtResource("1_6wt4w")]
+
+[node name="MoveInterface" parent="." node_paths=PackedStringArray("level_node") instance=ExtResource("3_p2ttm")]
+visible = false
+offset_left = -194.0
+offset_top = -61.0
+level_node = NodePath("..")
 
 [node name="HUD" type="HBoxContainer" parent="."]
 anchors_preset = 15

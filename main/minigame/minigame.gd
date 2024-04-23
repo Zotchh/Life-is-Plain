@@ -29,3 +29,10 @@ func _init(
 	dest_names = p_dest_names
 	dest_keys = p_dest_keys
 	key_counter = p_key_counter
+
+static func concat_string(arr: Array[String]):
+	var str: String = ""
+	for s in arr:
+		str += s + " "
+	
+	return str.left(str.length() - 1)

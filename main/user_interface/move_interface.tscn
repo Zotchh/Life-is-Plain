@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://daobh6oywgntn"]
+
+[ext_resource type="Script" path="res://main/user_interface/move_interface.gd" id="1_uowgu"]
+[ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="1_ysjhb"]
+
+[node name="MoveInterface" type="MarginContainer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_uowgu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.486275, 0.109804, 0.164706, 0.952941)
+
+[node name="InnerContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="InnerVBox" type="VBoxContainer" parent="InnerContainer"]
+layout_mode = 2
+
+[node name="TitleContainer" type="MarginContainer" parent="InnerContainer/InnerVBox"]
+layout_mode = 2
+theme_override_constants/margin_right = 90
+
+[node name="Title" type="RichTextLabel" parent="InnerContainer/InnerVBox/TitleContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_ysjhb")
+theme_override_font_sizes/normal_font_size = 24
+text = "EPFL MAP"
+fit_content = true
+autowrap_mode = 0
+
+[node name="ItemList" type="ItemList" parent="InnerContainer/InnerVBox"]
+layout_mode = 2
+auto_height = true

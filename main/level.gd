@@ -4,12 +4,16 @@ extends Node
 signal minigame_started(type: int)
 signal minigame_closed()
 
+signal map_opened()
+signal map_closed()
+
 signal start_resource_timers()
 signal stop_resource_timers()
 
 # Child Scenes
 @onready var background: ColorRect = $Background
 @onready var curr_level: Node2D = $LevelProgramming
+@onready var minigame_interface: Control = $HUD/MinigameInterface
 
 # Constants
 const MAX_MOVE: int = 4
@@ -17,6 +21,7 @@ const MAX_MOVE: int = 4
 # Variables
 var log_enabled: bool = true
 var is_moving: bool = false
+var is_minigame_opened: bool = false
 var possible_moves: Array[String] = ["up", "down", "right", "left"]
 var minigames_from_scene: Dictionary
 
@@ -28,8 +33,13 @@ func _ready():
 
 """ Called every frame """
 func _process(_delta):
+	if minigame_interface.visible:
+		is_minigame_opened = true
+	else:
+		is_minigame_opened = false
+	
 	# Check if a minigame is launched
-	if Input.is_action_just_released("interact"):
+	if Input.is_action_just_released("interact") && !is_moving:
 		var minigame: Minigame = minigames_from_scene[curr_level.name]
 		minigame_started.emit(minigame.type)
 	
@@ -97,8 +107,11 @@ func check_counters_completion():
 		if value.key_counter == MAX_MOVE && key == curr_level.name:
 			value.key_counter = 0
 		# Otherwise change to destination scene
+		# And reset interface
 		elif value.key_counter == MAX_MOVE:
 			is_moving = false
+			map_closed.emit()
+			
 			var dest_file: String = "res://main/" + value.file_name + "/" + value.file_name + ".tscn"
 			var levelScene = load(dest_file).instantiate()
 			background.add_sibling(levelScene)
@@ -110,7 +123,12 @@ func check_counters_completion():
 	- Then check if a sequence is complete
 """
 func handle_movement():
-	if Input.is_action_just_pressed("movement"):
+	if Input.is_action_just_pressed("movement") && !is_minigame_opened:
+		if is_moving:
+			map_closed.emit()
+		else:
+			map_opened.emit()
+		
 		is_moving = !is_moving
 	
 	if is_moving:
