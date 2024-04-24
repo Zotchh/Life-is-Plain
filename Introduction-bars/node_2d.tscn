@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://deigd5ekpnjft"]
+
+[ext_resource type="Script" path="res://node_2d.gd" id="1_svs8m"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_svs8m")
+
+[node name="ProgressBarH" type="ProgressBar" parent="."]
+offset_right = 4.0
+offset_bottom = 27.0
+step = 5.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBarH" type="ProgressBar" parent="Control"]
+layout_mode = 0
+offset_right = 4.0
+offset_bottom = 27.0
