@@ -4173,7 +4173,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_wdk64")
 sources/1 = SubResource("TileSetAtlasSource_stlc5")
 
-[node name="LevelChemistry" type="Node2D"]
+[node name="LevelArchitecture" type="Node2D"]
 y_sort_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]

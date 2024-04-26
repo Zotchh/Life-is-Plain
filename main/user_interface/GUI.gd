@@ -27,17 +27,15 @@ func _on_timers_stopped():
 	Log.print("timers stopped")
 	timer_stop.emit()
 
-func _on_minigame_completed(minigame_type: int):
+func _on_minigame_completed(minigame_type: int, score: float):
+	var incr = score * 300
 	match minigame_type:
 		MinigameTypes.PROGRAMMING:
-			resource_increment.emit(ResourceTypes.ENERGY, 300)
-			resource_increment.emit(ResourceTypes.MENTAL, 200)
+			resource_increment.emit(ResourceTypes.ENERGY, incr)
 		MinigameTypes.CHEMISTRY:
-			resource_increment.emit(ResourceTypes.HAPPINESS, 200)
-			resource_increment.emit(ResourceTypes.HUNGER, 300)
+			resource_increment.emit(ResourceTypes.HUNGER, incr)
 		MinigameTypes.ARCHITECTURE:
-			resource_increment.emit(ResourceTypes.HAPPINESS, 200)
-			resource_increment.emit(ResourceTypes.HUNGER, 300)
+			resource_increment.emit(ResourceTypes.HAPPINESS, incr)
 		MinigameTypes.MATH:
-			resource_increment.emit(ResourceTypes.HAPPINESS, 200)
-			resource_increment.emit(ResourceTypes.HUNGER, 300)
+			resource_increment.emit(ResourceTypes.MENTAL, incr)
+

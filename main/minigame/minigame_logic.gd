@@ -1,6 +1,6 @@
 extends Control
 
-signal minigame_completed(minigame_type: int)
+signal minigame_completed(minigame_type: int, score: float)
 
 # Extern link to level node for signals
 @export var level_node: Node
@@ -12,10 +12,14 @@ signal minigame_completed(minigame_type: int)
 @onready var shortcuts_interface: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/RightVBoxContainer/ItemList
 @onready var preview_interface: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer/ItemList
 
+const SCORE_INCREMENT: float = 2
+const SCORE_DECREMENT: float = 1
+
 # Minigame variables
 var minigame_type: int
 var instructions: Dictionary
 var sequences: Array
+var score: float
 
 # current instruction text
 var instr_idx: int = 0
@@ -52,7 +56,9 @@ func handle_step():
 	if instr_idx < curr_seq.size() - 1:
 		instr_idx+= 1
 	else:
-		minigame_completed.emit(minigame_type)
+		var total_score = curr_seq.size() * SCORE_INCREMENT
+		var weighted_score = score / total_score
+		minigame_completed.emit(minigame_type, weighted_score)
 		_on_minigame_closed()
 
 """ Logic for minigame instruction checks """
@@ -66,10 +72,15 @@ func check_instruction():
 		var item_idx: int = preview_interface.add_item(curr_instr.instr_name, null, false)
 		preview_interface.set_item_custom_bg_color(item_idx, Color.GREEN)
 		
+		score += SCORE_INCREMENT
+		
 		handle_step()
 	elif !is_key_correct && is_any_key_pressed():
 		var item_idx: int = preview_interface.add_item(curr_instr.instr_name, null, false)
 		preview_interface.set_item_custom_bg_color(item_idx, Color.RED)
+		
+		if score >= SCORE_DECREMENT:
+			score -= SCORE_DECREMENT
 		
 		handle_step()
 
@@ -118,6 +129,7 @@ func _on_minigame_started(type):
 
 		is_ready = true
 		minigame_opened = true
+		score = 0
 
 """ Called when minigame ends """
 func _on_minigame_closed():
@@ -134,3 +146,4 @@ func _on_minigame_closed():
 		
 		is_ready = false
 		minigame_opened = false
+		score = 0

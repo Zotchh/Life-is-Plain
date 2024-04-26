@@ -9,6 +9,6 @@ var instructions: Dictionary = {
 }
 
 var sequences: Array = [
-	['S', 'P', 'D', 'E', 'M', 'P', 'P', 'P', 'D', 'S'],
+	['S', 'P', 'D', 'E', 'M', 'D', 'P', 'P', 'D', 'S'],
 	['D', 'E', 'P', 'P', 'E', 'S', 'P'],
 ]
