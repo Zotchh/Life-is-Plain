@@ -4,6 +4,7 @@ signal minigame_completed(minigame_type: int, score: float)
 
 # Extern link to level node for signals
 @export var level_node: Node
+
 # Extern link for data script, set at init_minigame
 @onready var data: Node
 

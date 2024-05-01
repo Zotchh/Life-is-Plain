@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://clnk0ar2n3f1g"]
+[gd_scene load_steps=7 format=3 uid="uid://clnk0ar2n3f1g"]
 
 [ext_resource type="PackedScene" uid="uid://dtroag4wg3q77" path="res://main/level_programming/level_programming.tscn" id="1_6wt4w"]
 [ext_resource type="Script" path="res://main/level.gd" id="1_ysoi0"]
 [ext_resource type="PackedScene" uid="uid://daobh6oywgntn" path="res://main/user_interface/move_interface.tscn" id="3_p2ttm"]
+[ext_resource type="PackedScene" uid="uid://x5v1f87ic8xd" path="res://main/user_interface/tutorial.tscn" id="5_0bowe"]
 [ext_resource type="PackedScene" uid="uid://8pxb3uavro5v" path="res://main/user_interface/GUI.tscn" id="5_ufsk5"]
 [ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/minigame/minigame_interface.tscn" id="6_vtnfc"]
 
@@ -35,6 +36,11 @@ grow_vertical = 2
 [node name="GUI" parent="HUD" node_paths=PackedStringArray("minigame_node", "level_node") instance=ExtResource("5_ufsk5")]
 layout_mode = 2
 minigame_node = NodePath("../MinigameInterface")
+level_node = NodePath("../..")
+
+[node name="Tutorial" parent="HUD" node_paths=PackedStringArray("level_node") instance=ExtResource("5_0bowe")]
+layout_mode = 2
+size_flags_horizontal = 3
 level_node = NodePath("../..")
 
 [node name="MinigameInterface" parent="HUD" node_paths=PackedStringArray("level_node") instance=ExtResource("6_vtnfc")]
