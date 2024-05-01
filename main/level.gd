@@ -4,6 +4,8 @@ extends Node
 signal minigame_started(type: int)
 signal minigame_closed()
 
+signal tutorial_toggled()
+
 signal map_opened()
 signal map_closed()
 
@@ -22,8 +24,10 @@ const MAX_MOVE: int = 4
 var log_enabled: bool = true
 var is_moving: bool = false
 var is_minigame_opened: bool = false
+var is_tutorial_opened: bool = true
 var possible_moves: Array[String] = ["up", "down", "right", "left"]
 var minigames_from_scene: Dictionary
+
 
 var timers_on: bool = false
 
@@ -46,6 +50,12 @@ func _process(_delta):
 	# Check if a minigame is closed
 	if Input.is_action_just_released("close"):
 		minigame_closed.emit()
+		
+	# Check if a minigame is closed
+	if Input.is_action_just_released("tutorial"):
+		is_tutorial_opened = !is_tutorial_opened
+		tutorial_toggled.emit()
+	
 	
 	if Input.is_action_just_released("start"):
 		if timers_on:
