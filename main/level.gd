@@ -33,19 +33,24 @@ func _ready():
 
 """ Called every frame """
 func _process(_delta):
-	if minigame_interface.visible:
-		is_minigame_opened = true
-	else:
-		is_minigame_opened = false
-	
 	# Check if a minigame is launched
 	if Input.is_action_just_released("interact") && !is_moving:
-		var minigame: Minigame = minigames_from_scene[curr_level.name]
-		minigame_started.emit(minigame.type)
+		if is_minigame_opened:
+			minigame_closed.emit()
+			is_minigame_opened = false
+		else:
+			var minigame: Minigame = minigames_from_scene[curr_level.name]
+			minigame_started.emit(minigame.type)
+			is_minigame_opened = true
 	
 	# Check if a minigame is closed
 	if Input.is_action_just_released("close"):
-		minigame_closed.emit()
+		if is_moving:
+			map_closed.emit()
+			is_moving = false
+		if is_minigame_opened:
+			minigame_closed.emit()
+			is_minigame_opened = false
 	
 	if Input.is_action_just_released("start"):
 		if timers_on:

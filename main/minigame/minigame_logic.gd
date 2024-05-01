@@ -94,12 +94,16 @@ func init_minigame(type):
 	match type:
 		MinigameTypes.PROGRAMMING:
 			data = get_node("/root/VarsProgramming")
+			$BackgroundMarginContainer/Background.set_color(Color.hex(0x00dd00f0))
 		MinigameTypes.CHEMISTRY:
 			data = get_node("/root/VarsChemistry")
+			$BackgroundMarginContainer/Background.set_color(Color.hex(0xb00510f0))
 		MinigameTypes.ARCHITECTURE:
 			data = get_node("/root/VarsArchitecture")
+			$BackgroundMarginContainer/Background.set_color(Color.hex(0xf6b500f0))
 		MinigameTypes.MATH:
 			data = get_node("/root/VarsMath")
+			$BackgroundMarginContainer/Background.set_color(Color.hex(0x2086d6f0))
 
 """ Called when minigame starts """
 func _on_minigame_started(type):
