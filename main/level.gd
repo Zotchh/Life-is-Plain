@@ -137,7 +137,7 @@ func check_counters_completion():
 	- Then check if a sequence is complete
 """
 func handle_movement():
-	if Input.is_action_just_pressed("movement") && !is_minigame_opened:
+	if Input.is_action_just_pressed("movement"):
 		if is_moving:
 			map_closed.emit()
 		else:
