@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://x5v1f87ic8xd"]
+[gd_scene load_steps=3 format=3 uid="uid://cmqi6mw02erjk"]
 
-[ext_resource type="Script" path="res://main/user_interface/tutorial.gd" id="1_t5tul"]
-[ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="2_7ybcx"]
+[ext_resource type="Script" path="res://main/user_interface/tutorial.gd" id="1_mwipq"]
+[ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="2_u1t2h"]
 
-[node name="Tutorial" type="MarginContainer"]
+[node name="Score" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_t5tul")
+script = ExtResource("1_mwipq")
 
 [node name="BackgroundMarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -20,7 +20,7 @@ theme_override_constants/margin_bottom = 15
 
 [node name="Background" type="ColorRect" parent="BackgroundMarginContainer"]
 layout_mode = 2
-color = Color(0.337255, 0.207843, 0.411765, 0.952941)
+color = Color(0.160784, 0.360784, 0.207843, 0.952941)
 
 [node name="TutorialMarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -37,34 +37,25 @@ layout_mode = 2
 
 [node name="PreviewTitle" type="RichTextLabel" parent="TutorialMarginContainer/VBoxContainer/TopVBoxContainer"]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("2_7ybcx")
+theme_override_fonts/normal_font = ExtResource("2_u1t2h")
 theme_override_font_sizes/normal_font_size = 20
-text = "Background"
+text = "Game Over"
 fit_content = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="TutorialMarginContainer/VBoxContainer/TopVBoxContainer"]
 layout_mode = 2
-text = "First year at EPFL !! Youhouuuuu !!!!
-Congratulations, but be careful, it's easy to get carried away with all the work you have to do. Don't forget to go and revise for all your different courses before you fall too far behind :)
-Good luck !
-
-"
+text = "You survived ... days at EPFL !!!! YOUHOU, that's more than 98% of students !!"
 fit_content = true
 
 [node name="BottomVBoxContainer" type="VBoxContainer" parent="TutorialMarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="PreviewTitle" type="RichTextLabel" parent="TutorialMarginContainer/VBoxContainer/BottomVBoxContainer"]
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("2_7ybcx")
-theme_override_font_sizes/normal_font_size = 20
-text = "Controls"
-fit_content = true
-
 [node name="RichTextLabel" type="RichTextLabel" parent="TutorialMarginContainer/VBoxContainer/BottomVBoxContainer"]
 layout_mode = 2
-text = "Enter -> launch the game
-Tab -> see move interface
-Space -> launch minigame
-Backspace -> show/unshow tutorial"
+text = "
+
+
+
+
+Score : ......"
 fit_content = true
