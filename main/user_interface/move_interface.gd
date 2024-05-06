@@ -20,7 +20,7 @@ func _ready():
 		var dest_string: String = MinigameTypes.get_dest_name(value.type)
 		var moves_string: String = Minigame.concat_string(value.dest_names)
 		var item_idx: int = move_items.add_item(dest_string + ": " + moves_string, null, false)
-		move_items.set_item_custom_bg_color(item_idx, Color.hex(value.color))
+		move_items.set_item_custom_bg_color(item_idx, value.color)
 
 """ Called each frame """
 func _process(_delta):

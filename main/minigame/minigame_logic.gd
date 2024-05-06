@@ -9,6 +9,7 @@ signal minigame_completed(minigame_type: int, score: float)
 @onready var data: Node
 
 # Local link to interface parts for display
+@onready var background: ColorRect = $BackgroundMarginContainer/Background
 @onready var preview_title: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/LeftCol/MinigameTitle
 @onready var preview_items: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/LeftCol/ItemList
 @onready var sequence_title: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/MiddleCol/SequenceInstructions
@@ -81,21 +82,10 @@ func check_instruction():
 		handle_step()
 
 """ Handle which values to load depending on the minigame """
-func init_minigame(type):
-	minigame_type = type
-	match type:
-		MinigameTypes.PROGRAMMING:
-			data = get_node("/root/VarsProgramming")
-			$BackgroundMarginContainer/Background.set_color(Color.hex(0x00dd00f0))
-		MinigameTypes.CHEMISTRY:
-			data = get_node("/root/VarsChemistry")
-			$BackgroundMarginContainer/Background.set_color(Color.hex(0xb00510f0))
-		MinigameTypes.ARCHITECTURE:
-			data = get_node("/root/VarsArchitecture")
-			$BackgroundMarginContainer/Background.set_color(Color.hex(0xf6b500f0))
-		MinigameTypes.MATH:
-			data = get_node("/root/VarsMath")
-			$BackgroundMarginContainer/Background.set_color(Color.hex(0x2086d6f0))
+func init_minigame(minigame: Minigame):
+	data = get_node(minigame.file_path)
+	background.set_color(minigame.color)
+	# set title of the window
 
 """ Return a or an depending on the label """
 func get_article(label: String) -> String:
@@ -183,12 +173,12 @@ func setup_minigame(i: int, difficulty: int):
 	display_sequence(seq_title, seq.pattern, args)
 
 """ Called when minigame starts """
-func _on_minigame_started(type):
+func _on_minigame_started(minigame: Minigame):
 	if !minigame_opened:
 		Log.print("minigame started")
 
 		# Determine which data to load
-		init_minigame(type)
+		init_minigame(minigame)
 		# choose a random sequence and setup
 		var i: int = randi_range(0, data.sequences.size() - 1)
 		setup_minigame(i, Global.difficulty)

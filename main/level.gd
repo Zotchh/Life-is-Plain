@@ -1,7 +1,7 @@
 extends Node
 
 # Signals
-signal minigame_started(type: int)
+signal minigame_started(minigame: Minigame)
 signal minigame_closed()
 
 signal tutorial_toggled()
@@ -44,7 +44,7 @@ func _process(_delta):
 			is_minigame_opened = false
 		else:
 			var minigame: Minigame = minigames_from_scene[curr_level.name]
-			minigame_started.emit(minigame.type)
+			minigame_started.emit(minigame)
 			is_minigame_opened = true
 	
 	# Check if a minigame is closed
