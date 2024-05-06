@@ -32,49 +32,37 @@ theme_override_constants/margin_bottom = 20
 [node name="OutterHBoxContainer" type="HBoxContainer" parent="MiniGameMarginContainer"]
 layout_mode = 2
 
-[node name="LeftVBoxContainer" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
+[node name="LeftCol" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 1.8
+size_flags_stretch_ratio = 1.2
 
-[node name="PreviewTitle" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer"]
+[node name="MinigameTitle" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/LeftCol"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_etutl")
 theme_override_font_sizes/normal_font_size = 20
 text = "Preview"
 fit_content = true
 
-[node name="ItemList" type="ItemList" parent="MiniGameMarginContainer/OutterHBoxContainer/LeftVBoxContainer"]
+[node name="ItemList" type="ItemList" parent="MiniGameMarginContainer/OutterHBoxContainer/LeftCol"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MiddleVBoxContainer" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
+[node name="MiddleCol" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PreviewTitle" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/MiddleVBoxContainer"]
+[node name="SequenceInstructions" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/MiddleCol"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_etutl")
 theme_override_font_sizes/normal_font_size = 20
-text = "Instructions"
+text = "Sequence Instructions"
 fit_content = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
 
-[node name="ItemList" type="ItemList" parent="MiniGameMarginContainer/OutterHBoxContainer/MiddleVBoxContainer"]
+[node name="ItemList" type="ItemList" parent="MiniGameMarginContainer/OutterHBoxContainer/MiddleCol"]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="RightVBoxContainer" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PreviewTitle" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/RightVBoxContainer"]
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_etutl")
-theme_override_font_sizes/normal_font_size = 20
-text = "Shortcuts"
-fit_content = true
-
-[node name="ItemList" type="ItemList" parent="MiniGameMarginContainer/OutterHBoxContainer/RightVBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
+allow_search = false
