@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dlberdnhp6oir"]
+
+[ext_resource type="Texture2D" uid="uid://u6mo8fn0laef" path="res://assets/sprites/Characters/Alex_idle_16x16.png" id="1_fuwu7"]
+
+[resource]
+atlas = ExtResource("1_fuwu7")
+region = Rect2(47.5891, 9.09058, 16.4109, 22.9094)
