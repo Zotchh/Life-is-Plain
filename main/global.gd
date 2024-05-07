@@ -22,5 +22,7 @@ const EASY_MAX_INSTR: int = 3
 const MEDIUM_MAX_INSTR: int = 3
 
 # global
-var difficulty: Global.difficulty_level = difficulty_level.MEDIUM
+var difficulty: Global.difficulty_level = difficulty_level.EASY
+var music_volume: int = 70
+var vfx_volume: int = 70
 var score: int = 0

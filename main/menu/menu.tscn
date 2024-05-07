@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://q6exi3bx7m4r"]
+[gd_scene load_steps=8 format=3 uid="uid://q6exi3bx7m4r"]
 
 [ext_resource type="Script" path="res://main/menu/menu.gd" id="1_bykr1"]
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="1_pu22l"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c6ai6o81rdgji" path="res://main/buttons/option_button.tscn" id="4_lfonr"]
 [ext_resource type="PackedScene" uid="uid://c5tqhmscrqnh0" path="res://main/buttons/credit_button.tscn" id="5_bp0tu"]
 [ext_resource type="PackedScene" uid="uid://ce5i5ss4c7emq" path="res://main/buttons/quit_button.tscn" id="6_q3h4x"]
+[ext_resource type="PackedScene" uid="uid://by52ntdxl7j1o" path="res://main/menu/settings.tscn" id="7_7nx2o"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -75,3 +76,8 @@ layout_mode = 2
 
 [node name="QuitButton" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer" instance=ExtResource("6_q3h4x")]
 layout_mode = 2
+
+[node name="Settings" parent="." node_paths=PackedStringArray("menu_node") instance=ExtResource("7_7nx2o")]
+visible = false
+layout_mode = 1
+menu_node = NodePath("..")

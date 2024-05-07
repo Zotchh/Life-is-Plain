@@ -4,6 +4,8 @@ extends Control
 	- Load scenes on button pressed
 """
 
+signal option_opened()
+
 func _ready():
 	# Retrieve all buttons
 	var startButton = get_node("%ButtonListVerticalContainer/StartButton")
@@ -26,6 +28,7 @@ func _start_button_pressed():
 
 func _option_button_pressed():
 	print("Option button pressed")
+	option_opened.emit()
 
 func _credit_button_pressed():
 	print("Credit button pressed")

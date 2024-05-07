@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://ch0dso1gona8n"]
+
+[ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="1_qkjg0"]
+[ext_resource type="StyleBox" uid="uid://01ahi7lkb1iy" path="res://assets/theme/menuButtonNormal.tres" id="2_x6i67"]
+[ext_resource type="StyleBox" uid="uid://pds578xhwt1v" path="res://assets/theme/menuButtonHover.tres" id="3_fqmvb"]
+[ext_resource type="StyleBox" uid="uid://bdnpqg4pilbvx" path="res://assets/theme/menuButtonPressed.tres" id="4_t7xem"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vcpy6"]
+
+[node name="CloseButton" type="Button"]
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("1_qkjg0")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("2_x6i67")
+theme_override_styles/hover = ExtResource("3_fqmvb")
+theme_override_styles/pressed = ExtResource("4_t7xem")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vcpy6")
+text = "X"

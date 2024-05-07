@@ -177,9 +177,9 @@ func display_formula(title: String, pattern: Array, pattern_count: Array):
 	for i in pattern.size():
 		var count: int = pattern_count[i]
 		var instr: Instruction = pattern[i]
+		formula_string += instr.key_label
 		if count > 1:
 			formula_string += str(count)
-		formula_string += instr.key_label
 	formula_content.text = formula_string + "[/center]"
 
 """ Setup all fields for a prog minigame instance """

@@ -13,6 +13,8 @@ signal tutorial_closed()
 signal start_resource_timers()
 signal stop_resource_timers()
 
+signal map_changed(minigame: Minigame)
+
 # Child Scenes
 @onready var background: ColorRect = $Background
 @onready var curr_level: Node2D = $LevelProgramming
@@ -110,6 +112,7 @@ func check_counters_completion():
 		# And reset interface
 		elif value.key_counter == Global.MAX_MOVE:
 			reset_counters()
+			map_changed.emit(value)
 			var dest_file: String = "res://main/" + value.file_name + "/" + value.file_name + ".tscn"
 			var levelScene = load(dest_file).instantiate()
 			background.add_sibling(levelScene)

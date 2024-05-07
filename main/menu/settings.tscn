@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://by52ntdxl7j1o"]
+[gd_scene load_steps=4 format=3 uid="uid://by52ntdxl7j1o"]
 
-[ext_resource type="Script" path="res://main/user_interface/tutorial.gd" id="1_mwipq"]
+[ext_resource type="Script" path="res://main/menu/settings.gd" id="1_fg6i4"]
+[ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="2_dkkln"]
+[ext_resource type="PackedScene" uid="uid://ch0dso1gona8n" path="res://main/buttons/close_button.tscn" id="2_oi252"]
 
 [node name="Settings" type="MarginContainer"]
 anchors_preset = 15
@@ -8,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_mwipq")
+script = ExtResource("1_fg6i4")
 
 [node name="BackgroundMarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -19,53 +21,175 @@ theme_override_constants/margin_bottom = 15
 
 [node name="Background" type="ColorRect" parent="BackgroundMarginContainer"]
 layout_mode = 2
-color = Color(0.227451, 0.262745, 0.615686, 0.952941)
+color = Color(0.458824, 0.211765, 0.254902, 0.980392)
 
-[node name="TutorialMarginContainer" type="MarginContainer" parent="."]
+[node name="ContentMargin" type="MarginContainer" parent="BackgroundMarginContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TutorialMarginContainer"]
+[node name="ContentContainer" type="VBoxContainer" parent="BackgroundMarginContainer/ContentMargin"]
+layout_mode = 2
+
+[node name="GameTitle" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/ContentContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 1
+theme_override_colors/default_color = Color(0.866667, 0.792157, 0.780392, 0.780392)
+theme_override_fonts/normal_font = ExtResource("2_dkkln")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]Game[/center]"
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="GameMargin" type="MarginContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 10
+
+[node name="GameContainer" type="HBoxContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/GameMargin"]
+layout_mode = 2
+
+[node name="TitleContainer" type="VBoxContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/GameMargin/GameContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="DifficultyTitle" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/GameMargin/GameContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("2_dkkln")
+theme_override_font_sizes/normal_font_size = 21
+text = "Difficulty"
+fit_content = true
+
+[node name="ButtonContainer" type="VBoxContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/GameMargin/GameContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DifficultyOption" type="OptionButton" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/GameMargin/GameContainer/ButtonContainer"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TutorialMarginContainer/VBoxContainer"]
+[node name="VideoTitle" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/ContentContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0.866667, 0.792157, 0.780392, 0.780392)
+theme_override_fonts/normal_font = ExtResource("2_dkkln")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]Video[/center]"
+fit_content = true
+
+[node name="VideoMargin" type="MarginContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 10
+
+[node name="VideoContainer" type="HBoxContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/VideoMargin"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TutorialMarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TitleContainer" type="VBoxContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/VideoMargin/VideoContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="TutorialMarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="ResolutionTitle" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/VideoMargin/VideoContainer/TitleContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("2_dkkln")
+theme_override_font_sizes/normal_font_size = 21
+text = "Resolution"
+fit_content = true
+
+[node name="FullscreenTitle" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/VideoMargin/VideoContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("2_dkkln")
+theme_override_font_sizes/normal_font_size = 21
 text = "Fullscreen"
+fit_content = true
 
-[node name="Label2" type="Label" parent="TutorialMarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="ButtonContainer" type="VBoxContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/VideoMargin/VideoContainer"]
 layout_mode = 2
-text = "Borderless	"
+theme_override_constants/separation = 11
 
-[node name="Label3" type="Label" parent="TutorialMarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="ResolutionOption" type="OptionButton" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/VideoMargin/VideoContainer/ButtonContainer"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
-text = "Map always on"
+size_flags_horizontal = 4
+alignment = 1
 
-[node name="Label4" type="Label" parent="TutorialMarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="FullscreenCheck" type="CheckButton" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/VideoMargin/VideoContainer/ButtonContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SoundTitle" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/ContentContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0.866667, 0.792157, 0.780392, 0.780392)
+theme_override_fonts/normal_font = ExtResource("2_dkkln")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]Sound[/center]"
+fit_content = true
+
+[node name="SoundMargin" type="MarginContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 10
+
+[node name="SoundContainer" type="HBoxContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin"]
+layout_mode = 2
+
+[node name="TitleContainer" type="VBoxContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="Music" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("2_dkkln")
+theme_override_font_sizes/normal_font_size = 21
 text = "Music"
+fit_content = true
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="TutorialMarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VFX" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer/TitleContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("2_dkkln")
+theme_override_font_sizes/normal_font_size = 21
+text = "VFX"
+fit_content = true
 
-[node name="CheckBox" type="CheckBox" parent="TutorialMarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="ButtonContainer" type="VBoxContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer"]
 layout_mode = 2
+theme_override_constants/separation = 15
 
-[node name="CheckBox2" type="CheckBox" parent="TutorialMarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="MusicSlider" type="HSlider" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer/ButtonContainer"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="CheckBox3" type="CheckBox" parent="TutorialMarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="VFXSlider" type="HSlider" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer/ButtonContainer"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="HSlider" type="HSlider" parent="TutorialMarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="CloseButton" parent="BackgroundMarginContainer/ContentMargin" instance=ExtResource("2_oi252")]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0

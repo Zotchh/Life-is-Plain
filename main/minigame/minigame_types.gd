@@ -12,8 +12,8 @@ enum type {
 	MATH=3,
 }
 
-static func get_dest_name(type: MinigameTypes.type) -> String:
-	match type:
+static func get_dest_name(t: MinigameTypes.type) -> String:
+	match t:
 		MinigameTypes.type.PROGRAMMING:
 			return "PROG"
 		MinigameTypes.type.CHEMISTRY:

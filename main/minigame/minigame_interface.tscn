@@ -51,6 +51,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="SequenceCol" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -69,7 +70,6 @@ size_flags_vertical = 3
 allow_search = false
 
 [node name="FormulaMargin" type="MarginContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
@@ -84,14 +84,19 @@ size_flags_horizontal = 3
 [node name="FormulaTitle" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_etutl")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]Formula Title[/center]"
 fit_content = true
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="TextureRect" type="TextureRect" parent="MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol"]
+[node name="TextureContainer" type="MarginContainer" parent="MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol"]
+layout_mode = 2
+theme_override_constants/margin_left = 42
+theme_override_constants/margin_right = 42
+
+[node name="TextureRect" type="TextureRect" parent="MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol/TextureContainer"]
 layout_mode = 2
 texture = ExtResource("3_cy2nc")
 expand_mode = 5
@@ -99,7 +104,7 @@ expand_mode = 5
 [node name="FormulaContent" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_etutl")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]Formula Content[/center]"
 fit_content = true

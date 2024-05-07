@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://clnk0ar2n3f1g"]
+[gd_scene load_steps=9 format=3 uid="uid://clnk0ar2n3f1g"]
 
 [ext_resource type="PackedScene" uid="uid://dtroag4wg3q77" path="res://main/level_programming/level_programming.tscn" id="1_6wt4w"]
 [ext_resource type="Script" path="res://main/level.gd" id="1_ysoi0"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://8pxb3uavro5v" path="res://main/user_interface/GUI.tscn" id="5_ufsk5"]
 [ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/minigame/minigame_interface.tscn" id="6_vtnfc"]
 [ext_resource type="PackedScene" uid="uid://uxc6jgx0x571" path="res://main/menu/pause.tscn" id="7_xb6ts"]
+[ext_resource type="PackedScene" uid="uid://by52ntdxl7j1o" path="res://main/menu/settings.tscn" id="8_m766a"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_ysoi0")
@@ -49,6 +50,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 level_node = NodePath("../..")
 
-[node name="Pause" parent="." node_paths=PackedStringArray("level_node") instance=ExtResource("7_xb6ts")]
+[node name="Pause" parent="." node_paths=PackedStringArray("level_node", "option_node") instance=ExtResource("7_xb6ts")]
 visible = false
 level_node = NodePath("..")
+option_node = NodePath("../Settings")
+
+[node name="Settings" parent="." node_paths=PackedStringArray("pause_node") instance=ExtResource("8_m766a")]
+visible = false
+pause_node = NodePath("../Pause")
