@@ -5,11 +5,12 @@ extends MarginContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	level_node.tutorial_toggled.connect(_on_tutorial_toggled)
+	level_node.tutorial_opened.connect(_on_tutorial_toggled)
+	level_node.tutorial_closed.connect(_on_tutorial_toggled)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_tutorial_toggled():

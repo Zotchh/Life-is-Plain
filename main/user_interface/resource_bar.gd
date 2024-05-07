@@ -5,16 +5,16 @@ extends Control
 @onready var timer: Timer = $ResourceTimer
 @onready var pb: TextureProgressBar = $ResourceProgressBar
 
-const PB_MAX: int = 1000
-const PB_MIN_RANDOM: int = 550
-const PB_MAX_RANDOM: int = 950
-const PB_STEP: int = 1
+const PB_MAX: int = Global.RESOURCE_MAX
+const PB_MIN_RANDOM: int = Global.RESOURCE_MIN_RANDOM
+const PB_MAX_RANDOM: int = Global.RESOURCE_MAX_RANDOM
+const PB_STEP: int = Global.RESOURCE_UPDATE_STEP
 
 var type_from_name: Dictionary = {
-	"EnergyBar": ResourceTypes.ENERGY,
-	"MentalBar": ResourceTypes.MENTAL,
-	"HappinessBar": ResourceTypes.HAPPINESS,
-	"HungerBar": ResourceTypes.HUNGER,
+	"EnergyBar": ResourceTypes.type.ENERGY,
+	"MentalBar": ResourceTypes.type.MENTAL,
+	"HappinessBar": ResourceTypes.type.HAPPINESS,
+	"HungerBar": ResourceTypes.type.HUNGER,
 }
 
 func _ready():
@@ -47,7 +47,7 @@ func _on_timer_stopped():
 	Log.print("timer " + self.name + " paused")
 	timer.paused = true
 
-func _on_resource_incremented(resource_type: int, value: int):
+func _on_resource_incremented(resource_type: ResourceTypes.type, value: int):
 	if type_from_name[self.name] == null:
 		return
 	

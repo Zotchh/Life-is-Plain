@@ -5,7 +5,7 @@ class_name ResourceTypes
 """ Represent a resource type
 """
 
-enum {
+enum type {
 	ENERGY=0,
 	MENTAL=1,
 	HAPPINESS=2,

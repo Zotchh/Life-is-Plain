@@ -15,7 +15,7 @@ class_name Minigame
 
 var file_name: String
 var file_path: String
-var type: int
+var type: MinigameTypes.type
 var dest_names: Array[String]
 var dest_keys: Array[String]
 var key_counter: int
@@ -27,13 +27,13 @@ var title: String
 func _init(
 	p_file_name: String,
 	p_file_path: String,
-	p_type: int, 
+	p_type: MinigameTypes.type, 
 	p_dest_names: Array[String], 
 	p_dest_keys: Array[String],
 	p_key_counter: int,
 	p_color: Color,
 	p_icon_path: String,
-	p_title
+	p_title: String
 ):
 	file_name = p_file_name
 	file_path = p_file_path

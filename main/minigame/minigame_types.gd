@@ -5,22 +5,18 @@ class_name MinigameTypes
 """ Represent a minigame type
 """
 
-enum {
+enum type {
 	PROGRAMMING=0,
 	CHEMISTRY=1,
 	ARCHITECTURE=2,
 	MATH=3,
 }
 
-static func get_dest_name(type: int) -> String:
+static func get_dest_name(type: MinigameTypes.type) -> String:
 	match type:
-		PROGRAMMING:
+		MinigameTypes.type.PROGRAMMING:
 			return "PROG"
-		CHEMISTRY:
+		MinigameTypes.type.CHEMISTRY:
 			return "LAB"
-		ARCHITECTURE:
-			return "ARCH"
-		MATH:
-			return "MATH"
 	
 	return "UNMATCHED"

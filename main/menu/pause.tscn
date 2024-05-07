@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://uxc6jgx0x571"]
+
+[ext_resource type="Script" path="res://main/menu/pause.gd" id="1_g42x5"]
+[ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="2_8b7bj"]
+[ext_resource type="PackedScene" uid="uid://b10xrlrcparn5" path="res://main/buttons/resume_button.tscn" id="3_48dw8"]
+[ext_resource type="PackedScene" uid="uid://dntck2byg3cw8" path="res://main/buttons/menu_button.tscn" id="3_uud0k"]
+[ext_resource type="PackedScene" uid="uid://c6ai6o81rdgji" path="res://main/buttons/option_button.tscn" id="4_a0kae"]
+
+[node name="Pause" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g42x5")
+
+[node name="BackgroundMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="Background" type="ColorRect" parent="BackgroundMarginContainer"]
+layout_mode = 2
+color = Color(0.458824, 0.211765, 0.254902, 0.980392)
+
+[node name="ContentMargin" type="MarginContainer" parent="BackgroundMarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Content" type="VBoxContainer" parent="BackgroundMarginContainer/ContentMargin"]
+custom_minimum_size = Vector2(250, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TitleMargin" type="MarginContainer" parent="BackgroundMarginContainer/ContentMargin/Content"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 30
+
+[node name="Title" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/Content/TitleMargin"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 13
+theme_override_fonts/normal_font = ExtResource("2_8b7bj")
+theme_override_font_sizes/normal_font_size = 64
+text = "Pause"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Buttons" type="VBoxContainer" parent="BackgroundMarginContainer/ContentMargin/Content"]
+custom_minimum_size = Vector2(250, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ResumeButton" parent="BackgroundMarginContainer/ContentMargin/Content/Buttons" instance=ExtResource("3_48dw8")]
+layout_mode = 2
+
+[node name="OptionButton" parent="BackgroundMarginContainer/ContentMargin/Content/Buttons" instance=ExtResource("4_a0kae")]
+layout_mode = 2
+
+[node name="MenuButton" parent="BackgroundMarginContainer/ContentMargin/Content/Buttons" instance=ExtResource("3_uud0k")]
+layout_mode = 2

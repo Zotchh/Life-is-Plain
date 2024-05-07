@@ -6,7 +6,7 @@ var minigames_properties: Dictionary = {
 	"LevelProgramming": Minigame.new(
 		"level_programming",
 		"/root/VarsProgramming",
-		MinigameTypes.PROGRAMMING,
+		MinigameTypes.type.PROGRAMMING,
 		["▲", "◀", "▼", "▶"],
 		["up", "left", "down", "right"],
 		0,
@@ -18,7 +18,7 @@ var minigames_properties: Dictionary = {
 	"LevelChemistry": Minigame.new(
 		"level_chemistry",
 		"/root/VarsChemistry",
-		MinigameTypes.CHEMISTRY,
+		MinigameTypes.type.CHEMISTRY,
 		["▼", "▲", "▼", "▲"],
 		["down", "up", "down", "up"],
 		0,
@@ -27,27 +27,27 @@ var minigames_properties: Dictionary = {
 		"CHEMISTRY"
 	),
 	
-	"LevelArchitecture": Minigame.new(
-		"level_architecture",
-		"/root/VarsArchitecture",
-		MinigameTypes.ARCHITECTURE,
-		["▶", "▶", "◀", "▶"],
-		["right", "right", "left", "right"],
-		0,
-		Color.hex(0xf6b500f0),
-		res_root + "minigame_architecture.tres",
-		"ARCHITECTURE"
-	),
-	
-	"LevelMath": Minigame.new(
-		"level_math",
-		"/root/VarsMath",
-		MinigameTypes.MATH,
-		["◀", "▲", "▼", "◀"],
-		["left", "up", "down", "left"],
-		0,
-		Color.hex(0x2086d6f0),
-		res_root + "minigame_math.tres",
-		"MATH"
-	),
+	#"LevelArchitecture": Minigame.new(
+		#"level_architecture",
+		#"/root/VarsArchitecture",
+		#MinigameTypes.type.ARCHITECTURE,
+		#["▶", "▶", "◀", "▶"],
+		#["right", "right", "left", "right"],
+		#0,
+		#Color.hex(0xf6b500f0),
+		#res_root + "minigame_architecture.tres",
+		#"ARCHITECTURE"
+	#),
+	#
+	#"LevelMath": Minigame.new(
+		#"level_math",
+		#"/root/VarsMath",
+		#MinigameTypes.type.MATH,
+		#["◀", "▲", "▼", "◀"],
+		#["left", "up", "down", "left"],
+		#0,
+		#Color.hex(0x2086d6f0),
+		#res_root + "minigame_math.tres",
+		#"MATH"
+	#),
 }

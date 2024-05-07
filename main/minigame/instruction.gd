@@ -6,19 +6,20 @@ class_name Instruction
 	- its instruction name
 	- its key name
 	- its key value, the input map action name
+	- an associated icon given by a path to the resource
 """
 
 var label: String
 var key_label: String
 var key_value: String
-var icon
+var icon: String
 
 """ Called when built """
 func _init(
 	p_label: String,
 	p_key_label: String,
 	p_key_value: String,
-	p_icon
+	p_icon: String
 ):
 	label = p_label
 	key_label = p_key_label

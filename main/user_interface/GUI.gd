@@ -3,7 +3,7 @@ extends MarginContainer
 # Signals
 signal timer_start()
 signal timer_stop()
-signal resource_increment(resource_type: int, value: int)
+signal resource_increment(resource_type: ResourceTypes.type, value: int)
 
 # External node
 @export var minigame_node: MarginContainer
@@ -27,15 +27,11 @@ func _on_timers_stopped():
 	Log.print("timers stopped")
 	timer_stop.emit()
 
-func _on_minigame_completed(minigame_type: int, score: float):
+func _on_minigame_completed(minigame_type: MinigameTypes.type, score: float):
 	var incr = score * 300
 	match minigame_type:
-		MinigameTypes.PROGRAMMING:
-			resource_increment.emit(ResourceTypes.ENERGY, incr)
-		MinigameTypes.CHEMISTRY:
-			resource_increment.emit(ResourceTypes.HUNGER, incr)
-		MinigameTypes.ARCHITECTURE:
-			resource_increment.emit(ResourceTypes.HAPPINESS, incr)
-		MinigameTypes.MATH:
-			resource_increment.emit(ResourceTypes.MENTAL, incr)
+		MinigameTypes.type.PROGRAMMING:
+			resource_increment.emit(ResourceTypes.type.ENERGY, incr)
+		MinigameTypes.type.CHEMISTRY:
+			resource_increment.emit(ResourceTypes.type.HUNGER, incr)
 

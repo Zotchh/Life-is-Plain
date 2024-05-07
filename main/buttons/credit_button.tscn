@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5tqhmscrqnh0"]
+
+[ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="1_knv1t"]
+[ext_resource type="StyleBox" uid="uid://01ahi7lkb1iy" path="res://assets/theme/menuButtonNormal.tres" id="2_beg5g"]
+[ext_resource type="StyleBox" uid="uid://pds578xhwt1v" path="res://assets/theme/menuButtonHover.tres" id="3_q7ex4"]
+[ext_resource type="StyleBox" uid="uid://bdnpqg4pilbvx" path="res://assets/theme/menuButtonPressed.tres" id="4_l7rkg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nc756"]
+
+[node name="CreditButton" type="Button"]
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("1_knv1t")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("2_beg5g")
+theme_override_styles/hover = ExtResource("3_q7ex4")
+theme_override_styles/pressed = ExtResource("4_l7rkg")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nc756")
+text = "Credit"

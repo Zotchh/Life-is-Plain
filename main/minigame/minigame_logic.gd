@@ -1,6 +1,6 @@
 extends Control
 
-signal minigame_completed(minigame_type: int, score: float)
+signal minigame_completed(type: MinigameTypes.type, score: float)
 
 # Extern link to level node for signals
 @export var level_node: Node
@@ -20,7 +20,7 @@ signal minigame_completed(minigame_type: int, score: float)
 @onready var formula_content: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol/FormulaContent
 
 # Minigame variables
-var minigame_type: int
+var minigame_type: MinigameTypes.type
 var solution: Array
 var seq: Sequence
 var formula: Formula
@@ -44,9 +44,9 @@ func _process(_delta):
 """ Tracks if any possible key is pressed """
 func is_any_key_pressed() -> bool:	
 	var controled_array: Array[Instruction]
-	if minigame_type == MinigameTypes.PROGRAMMING:
+	if minigame_type == MinigameTypes.type.PROGRAMMING:
 		controled_array = seq.pattern
-	if minigame_type == MinigameTypes.CHEMISTRY:
+	if minigame_type == MinigameTypes.type.CHEMISTRY:
 		controled_array = formula.pattern
 	
 	var is_pressed: bool = false
@@ -66,7 +66,6 @@ func handle_step():
 		var total_score = solution.size() * Global.SCORE_INCREMENT
 		var weighted_score = score / total_score
 		minigame_completed.emit(minigame_type, weighted_score)
-		_on_minigame_closed()
 
 """ Logic for minigame instruction checks """
 func check_instruction():
@@ -217,12 +216,12 @@ func _on_minigame_started(minigame: Minigame):
 		# Determine which data to load
 		init_minigame(minigame)
 		# choose a random sequence and setup
-		if minigame.type == MinigameTypes.PROGRAMMING:
+		if minigame.type == MinigameTypes.type.PROGRAMMING:
 			var i: int = randi_range(0, data.sequences.size() - 1)
 			setup_prog_minigame(i, Global.difficulty)
 			formula_tree.set_visible(false)
 			sequence_tree.set_visible(true)
-		if minigame.type == MinigameTypes.CHEMISTRY:
+		if minigame.type == MinigameTypes.type.CHEMISTRY:
 			var i: int = randi_range(0, data.formulas.size() - 1)
 			setup_chem_minigame(i, Global.difficulty)
 			formula_tree.set_visible(true)

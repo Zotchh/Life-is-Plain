@@ -11,8 +11,6 @@ var minigames: Dictionary
 
 """ Called once when instantiated """
 func _ready():
-	level_node.map_opened.connect(_on_map_opened)
-	level_node.map_closed.connect(_on_map_closed)
 	minigames = VarsMinigame.minigames_properties
 	
 	for key in minigames:

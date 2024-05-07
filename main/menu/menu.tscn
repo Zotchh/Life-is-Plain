@@ -1,18 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://q6exi3bx7m4r"]
+[gd_scene load_steps=7 format=3 uid="uid://q6exi3bx7m4r"]
 
 [ext_resource type="Script" path="res://main/menu/menu.gd" id="1_bykr1"]
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="1_pu22l"]
-[ext_resource type="StyleBox" uid="uid://01ahi7lkb1iy" path="res://assets/theme/menuButtonNormal.tres" id="2_7nl3k"]
-[ext_resource type="StyleBox" uid="uid://pds578xhwt1v" path="res://assets/theme/menuButtonHover.tres" id="3_epvdq"]
-[ext_resource type="StyleBox" uid="uid://bdnpqg4pilbvx" path="res://assets/theme/menuButtonPressed.tres" id="4_ggu4k"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vcpy6"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ntr6"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nc756"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ixjp7"]
+[ext_resource type="PackedScene" uid="uid://bvmgvm62c2tw0" path="res://main/buttons/start_button.tscn" id="3_mfvsw"]
+[ext_resource type="PackedScene" uid="uid://c6ai6o81rdgji" path="res://main/buttons/option_button.tscn" id="4_lfonr"]
+[ext_resource type="PackedScene" uid="uid://c5tqhmscrqnh0" path="res://main/buttons/credit_button.tscn" id="5_bp0tu"]
+[ext_resource type="PackedScene" uid="uid://ce5i5ss4c7emq" path="res://main/buttons/quit_button.tscn" id="6_q3h4x"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -71,50 +64,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 10
 
-[node name="StartButton" type="Button" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer"]
+[node name="StartButton" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer" instance=ExtResource("3_mfvsw")]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 9
-theme_override_fonts/font = ExtResource("1_pu22l")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("2_7nl3k")
-theme_override_styles/hover = ExtResource("3_epvdq")
-theme_override_styles/pressed = ExtResource("4_ggu4k")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_vcpy6")
-text = "Start"
 
-[node name="OptionButton" type="Button" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer"]
+[node name="OptionButton" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer" instance=ExtResource("4_lfonr")]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 9
-theme_override_fonts/font = ExtResource("1_pu22l")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("2_7nl3k")
-theme_override_styles/hover = ExtResource("3_epvdq")
-theme_override_styles/pressed = ExtResource("4_ggu4k")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_5ntr6")
-text = "Option"
 
-[node name="CreditButton" type="Button" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer"]
+[node name="CreditButton" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer" instance=ExtResource("5_bp0tu")]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 9
-theme_override_fonts/font = ExtResource("1_pu22l")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("2_7nl3k")
-theme_override_styles/hover = ExtResource("3_epvdq")
-theme_override_styles/pressed = ExtResource("4_ggu4k")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nc756")
-text = "Credit"
 
-[node name="QuitButton" type="Button" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer"]
+[node name="QuitButton" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer" instance=ExtResource("6_q3h4x")]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 9
-theme_override_fonts/font = ExtResource("1_pu22l")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("2_7nl3k")
-theme_override_styles/hover = ExtResource("3_epvdq")
-theme_override_styles/pressed = ExtResource("4_ggu4k")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ixjp7")
-text = "Quit"
