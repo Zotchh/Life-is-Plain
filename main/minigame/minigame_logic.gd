@@ -12,22 +12,22 @@ signal minigame_completed(minigame_type: int, score: float)
 @onready var background: ColorRect = $BackgroundMarginContainer/Background
 @onready var preview_title: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/LeftCol/MinigameTitle
 @onready var preview_items: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/LeftCol/ItemList
-@onready var sequence_title: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/MiddleCol/SequenceInstructions
-@onready var sequence_items: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/MiddleCol/ItemList
-
-const SCORE_INCREMENT: float = Global.SCORE_INCREMENT
-const SCORE_DECREMENT: float = Global.SCORE_DECREMENT
+@onready var sequence_tree: VBoxContainer = $MiniGameMarginContainer/OutterHBoxContainer/SequenceCol
+@onready var sequence_title: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/SequenceCol/SequenceInstructions
+@onready var sequence_items: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/SequenceCol/ItemList
+@onready var formula_tree: MarginContainer = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin
+@onready var formula_title: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol/FormulaTitle
+@onready var formula_content: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol/FormulaContent
 
 # Minigame variables
 var minigame_type: int
 var solution: Array
 var seq: Sequence
+var formula: Formula
 var score: float
-
-# current instruction text
 var instr_idx: int = 0
 
-# tracks if minigame is ready to start
+# state flags
 var minigame_opened: bool = false
 var is_ready: bool = false
 
@@ -42,9 +42,15 @@ func _process(_delta):
 		check_instruction()
 
 """ Tracks if any possible key is pressed """
-func is_any_key_pressed() -> bool:
+func is_any_key_pressed() -> bool:	
+	var controled_array: Array[Instruction]
+	if minigame_type == MinigameTypes.PROGRAMMING:
+		controled_array = seq.pattern
+	if minigame_type == MinigameTypes.CHEMISTRY:
+		controled_array = formula.pattern
+	
 	var is_pressed: bool = false
-	for instr: Instruction in seq.pattern:
+	for instr: Instruction in controled_array:
 		is_pressed = is_pressed || Input.is_action_just_pressed(instr.key_value)
 	
 	return is_pressed
@@ -57,7 +63,7 @@ func handle_step():
 	if instr_idx < solution.size() - 1:
 		instr_idx+= 1
 	else:
-		var total_score = solution.size() * SCORE_INCREMENT
+		var total_score = solution.size() * Global.SCORE_INCREMENT
 		var weighted_score = score / total_score
 		minigame_completed.emit(minigame_type, weighted_score)
 		_on_minigame_closed()
@@ -72,19 +78,20 @@ func check_instruction():
 	if is_key_correct:
 		var item_idx: int = preview_items.add_item(curr_instr.label, null, false)
 		preview_items.set_item_custom_bg_color(item_idx, Color.GREEN)
-		score += SCORE_INCREMENT
+		score += Global.SCORE_INCREMENT
 		handle_step()
 	elif !is_key_correct && is_any_key_pressed():
 		var item_idx: int = preview_items.add_item(curr_instr.label, null, false)
 		preview_items.set_item_custom_bg_color(item_idx, Color.RED)
-		if score >= SCORE_DECREMENT:
-			score -= SCORE_DECREMENT
+		if score >= Global.SCORE_DECREMENT:
+			score -= Global.SCORE_DECREMENT
 		handle_step()
 
 """ Handle which values to load depending on the minigame """
 func init_minigame(minigame: Minigame):
 	data = get_node(minigame.file_path)
 	background.set_color(minigame.color)
+	minigame_type = minigame.type
 	# set title of the window
 
 """ Return a or an depending on the label """
@@ -113,7 +120,7 @@ func sum(accum, number):
 	that sum up to at most max_instr and
 	associate it to each instruction in args
 """
-func setup_fields(args: Dictionary, instr: Array[Instruction], max_instr: int):
+func setup_prog_args(args: Dictionary, instr: Array[Instruction], max_instr: int):
 	var total_instr = randi_range(1, max_instr)
 	var instr_counts = []
 	
@@ -134,8 +141,8 @@ func setup_fields(args: Dictionary, instr: Array[Instruction], max_instr: int):
 		args[i] = instr_counts[idx]
 		idx += 1
 
-""" Build a solution as a correct sequence of instruction """
-func setup_solution(pattern: Array, args: Dictionary):
+""" Build a prog solution as a correct sequence of instruction """
+func setup_prog_solution(pattern: Array, args: Dictionary):
 	solution = []
 	for instr: Instruction in pattern:
 		if args.has(instr):
@@ -144,6 +151,14 @@ func setup_solution(pattern: Array, args: Dictionary):
 				solution.append(instr)
 		else:
 			solution.append(instr)
+
+""" Build a chemistry solution as a correct sequence of instruction """
+func setup_chem_solution(pattern: Array, pattern_count: Array):
+	solution = []
+	for i in pattern.size():
+		var count: int = pattern_count[i]
+		for c in count:
+			solution.append(pattern[i])
 
 """ Display the sequence title and the sequence items """
 func display_sequence(title: String, pattern: Array, args: Dictionary):
@@ -156,21 +171,43 @@ func display_sequence(title: String, pattern: Array, args: Dictionary):
 		else:
 			sequence_items.add_item(instr.label, load(instr.icon), false)
 
-""" Setup all fields for a minigame instance """
-func setup_minigame(i: int, difficulty: int):
+""" Display the formula title and the formula items """
+func display_formula(title: String, pattern: Array, pattern_count: Array):
+	formula_title.text = "[center]" + title + "[/center]"
+	var formula_string = "[center]"
+	for i in pattern.size():
+		var count: int = pattern_count[i]
+		var instr: Instruction = pattern[i]
+		if count > 1:
+			formula_string += str(count)
+		formula_string += instr.key_label
+	formula_content.text = formula_string + "[/center]"
+
+""" Setup all fields for a prog minigame instance """
+func setup_prog_minigame(i: int, difficulty: int):
 	seq = data.sequences[i]
 	var seq_title: String = build_seq_title(seq.label)
 	var args: Dictionary = {}
 	Log.print("selected sequence: " + seq.label)
 
 	if difficulty == Global.difficulty_level.EASY:
-		setup_fields(args, seq.easy_instr, Global.EASY_MAX_INSTR)
+		setup_prog_args(args, seq.easy_instr, Global.EASY_MAX_INSTR)
 	if difficulty == Global.difficulty_level.MEDIUM:
-		setup_fields(args, seq.easy_instr, Global.EASY_MAX_INSTR)
-		setup_fields(args, seq.medium_instr, Global.MEDIUM_MAX_INSTR)
+		setup_prog_args(args, seq.easy_instr, Global.EASY_MAX_INSTR)
+		setup_prog_args(args, seq.medium_instr, Global.MEDIUM_MAX_INSTR)
 	
-	setup_solution(seq.pattern, args)
+	setup_prog_solution(seq.pattern, args)
 	display_sequence(seq_title, seq.pattern, args)
+
+""" Setup all fields for a chemistry minigame instance """
+func setup_chem_minigame(i: int, difficulty: int):
+	if difficulty == Global.difficulty_level.EASY:
+		i -= data.easy_offset
+	formula = data.formulas[i]
+	Log.print("selected formula: " + formula.label)
+
+	setup_chem_solution(formula.pattern, formula.pattern_count)
+	display_formula(formula.label, formula.pattern, formula.pattern_count)
 
 """ Called when minigame starts """
 func _on_minigame_started(minigame: Minigame):
@@ -180,8 +217,16 @@ func _on_minigame_started(minigame: Minigame):
 		# Determine which data to load
 		init_minigame(minigame)
 		# choose a random sequence and setup
-		var i: int = randi_range(0, data.sequences.size() - 1)
-		setup_minigame(i, Global.difficulty)
+		if minigame.type == MinigameTypes.PROGRAMMING:
+			var i: int = randi_range(0, data.sequences.size() - 1)
+			setup_prog_minigame(i, Global.difficulty)
+			formula_tree.set_visible(false)
+			sequence_tree.set_visible(true)
+		if minigame.type == MinigameTypes.CHEMISTRY:
+			var i: int = randi_range(0, data.formulas.size() - 1)
+			setup_chem_minigame(i, Global.difficulty)
+			formula_tree.set_visible(true)
+			sequence_tree.set_visible(false)
 		self.set_visible(true)
 
 		is_ready = true
@@ -197,6 +242,7 @@ func _on_minigame_closed():
 		
 		solution = []
 		seq = null
+		formula = null
 		instr_idx = 0
 		score = 0
 		

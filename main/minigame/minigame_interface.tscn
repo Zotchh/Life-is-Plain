@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cap3afu2y48l6"]
+[gd_scene load_steps=4 format=3 uid="uid://cap3afu2y48l6"]
 
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="1_etutl"]
 [ext_resource type="Script" path="res://main/minigame/minigame_logic.gd" id="1_vtmyx"]
+[ext_resource type="Texture2D" uid="uid://cgk3y3enu1kf4" path="res://assets/sprites/UI/chemistry_background.tres" id="3_cy2nc"]
 
 [node name="MinigameInterface" type="MarginContainer"]
 anchors_preset = 15
@@ -49,11 +50,11 @@ fit_content = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MiddleCol" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
+[node name="SequenceCol" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SequenceInstructions" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/MiddleCol"]
+[node name="SequenceInstructions" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/SequenceCol"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_etutl")
 theme_override_font_sizes/normal_font_size = 20
@@ -62,7 +63,45 @@ fit_content = true
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="ItemList" type="ItemList" parent="MiniGameMarginContainer/OutterHBoxContainer/MiddleCol"]
+[node name="ItemList" type="ItemList" parent="MiniGameMarginContainer/OutterHBoxContainer/SequenceCol"]
 layout_mode = 2
 size_flags_vertical = 3
 allow_search = false
+
+[node name="FormulaMargin" type="MarginContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 50
+
+[node name="FormulaCol" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FormulaTitle" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_etutl")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]Formula Title[/center]"
+fit_content = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="TextureRect" type="TextureRect" parent="MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol"]
+layout_mode = 2
+texture = ExtResource("3_cy2nc")
+expand_mode = 5
+
+[node name="FormulaContent" type="RichTextLabel" parent="MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_etutl")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]Formula Content[/center]"
+fit_content = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false

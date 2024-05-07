@@ -1,14 +1,22 @@
 extends Node
 
-#var instructions: Dictionary = {
-	#"A": Instruction.new("Azote", "A", "minigame_a"),
-	#"L": Instruction.new("Lithium", "L", "minigame_l"),
-	#"M": Instruction.new("Mercure", "M", "minigame_m"),
-	#"N": Instruction.new("Nitrogen", "N", "minigame_n"),
-	#"S": Instruction.new("Sodium", "S", "minigame_s"),
-#}
-#
-#var sequences: Array = [
-	#["A", "L", "L", "M", "A", "L", "L", "M"],
-	#["S", "N", "M", "A", "N", "M"],
-#]
+var res_root: String = "res://assets/sprites/key_icons/"
+var easy_offset: int = 0
+
+# Instructions for Programming minigame
+var i_hydrogen = Instruction.new("Hydrogen", "H", "minigame_h", res_root + "key_h.tres")
+var i_oxygen = Instruction.new("Oxygen", "O", "minigame_o", res_root + "key_o.tres")
+
+# Sequences for Programming minigame
+var s_water = Formula.new(
+	"water",
+	Global.difficulty_level.EASY,
+	[i_hydrogen, i_oxygen],
+	[i_hydrogen, i_oxygen],
+	[1, 2]
+)
+
+# Global array for public access
+var formulas: Array = [
+	s_water
+]
