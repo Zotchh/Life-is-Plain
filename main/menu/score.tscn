@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmqi6mw02erjk"]
+[gd_scene load_steps=4 format=3 uid="uid://cmqi6mw02erjk"]
 
 [ext_resource type="Script" path="res://main/user_interface/tutorial.gd" id="1_mwipq"]
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="2_u1t2h"]
+[ext_resource type="AudioStream" uid="uid://cc0ol2a06u0r4" path="res://assets/sound/music/score.mp3" id="3_0lifu"]
 
 [node name="Score" type="MarginContainer"]
 anchors_preset = 15
@@ -59,3 +60,6 @@ text = "
 
 Score : ......"
 fit_content = true
+
+[node name="music_score" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_0lifu")

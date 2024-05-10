@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://clnk0ar2n3f1g"]
+[gd_scene load_steps=10 format=3 uid="uid://clnk0ar2n3f1g"]
 
 [ext_resource type="PackedScene" uid="uid://dtroag4wg3q77" path="res://main/level_programming/level_programming.tscn" id="1_6wt4w"]
 [ext_resource type="Script" path="res://main/level.gd" id="1_ysoi0"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/minigame/minigame_interface.tscn" id="6_vtnfc"]
 [ext_resource type="PackedScene" uid="uid://uxc6jgx0x571" path="res://main/menu/pause.tscn" id="7_xb6ts"]
 [ext_resource type="PackedScene" uid="uid://by52ntdxl7j1o" path="res://main/menu/settings.tscn" id="8_m766a"]
+[ext_resource type="AudioStream" uid="uid://dpj2mi3at78rh" path="res://assets/sound/music/game.mp3" id="9_ud6kc"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_ysoi0")
@@ -58,3 +59,7 @@ option_node = NodePath("../Settings")
 [node name="Settings" parent="." node_paths=PackedStringArray("pause_node") instance=ExtResource("8_m766a")]
 visible = false
 pause_node = NodePath("../Pause")
+
+[node name="music_game" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_ud6kc")
+volume_db = -6.42

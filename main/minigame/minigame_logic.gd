@@ -18,6 +18,9 @@ signal minigame_completed(type: MinigameTypes.type, score: float)
 @onready var formula_tree: MarginContainer = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin
 @onready var formula_title: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol/FormulaTitle
 @onready var formula_content: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol/FormulaContent
+@onready var correct = $correct
+@onready var uncorrect = $uncorrect
+
 
 # Minigame variables
 var minigame_type: MinigameTypes.type
@@ -75,11 +78,13 @@ func check_instruction():
 	
 	# append instructions in preview
 	if is_key_correct:
+		correct.play()
 		var item_idx: int = preview_items.add_item(curr_instr.label, null, false)
 		preview_items.set_item_custom_bg_color(item_idx, Color.GREEN)
 		score += Global.SCORE_INCREMENT
 		handle_step()
 	elif !is_key_correct && is_any_key_pressed():
+		uncorrect.play()
 		var item_idx: int = preview_items.add_item(curr_instr.label, null, false)
 		preview_items.set_item_custom_bg_color(item_idx, Color.RED)
 		if score >= Global.SCORE_DECREMENT:

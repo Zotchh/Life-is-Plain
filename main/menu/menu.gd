@@ -4,9 +4,12 @@ extends Control
 	- Load scenes on button pressed
 """
 
+@onready var menu_music = $menu_music
+
 signal option_opened()
 
 func _ready():
+	menu_music.play()
 	# Retrieve all buttons
 	var startButton = get_node("%ButtonListVerticalContainer/StartButton")
 	var optionButton = get_node("%ButtonListVerticalContainer/OptionButton")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cyjudp8hc3fsj"
+path="res://.godot/imported/Chill Chiptune Music  - Vanilla Cola.mp3-fe0732596a466eceb4d9badcb677f682.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/music/Chill Chiptune Music  - Vanilla Cola.mp3"
+dest_files=["res://.godot/imported/Chill Chiptune Music  - Vanilla Cola.mp3-fe0732596a466eceb4d9badcb677f682.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

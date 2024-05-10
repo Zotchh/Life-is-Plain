@@ -5,12 +5,15 @@ extends MarginContainer
 
 # Internal nodes
 @onready var move_items: ItemList = $InnerContainer/InnerVBox/ItemList
+@onready var music_game = $"../music_game"
+
 
 # Variables
 var minigames: Dictionary
 
 """ Called once when instantiated """
 func _ready():
+	music_game.play()
 	level_node.map_changed.connect(_on_map_changed)
 	minigames = VarsMinigame.minigames_properties
 	

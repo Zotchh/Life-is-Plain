@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://q6exi3bx7m4r"]
+[gd_scene load_steps=9 format=3 uid="uid://q6exi3bx7m4r"]
 
 [ext_resource type="Script" path="res://main/menu/menu.gd" id="1_bykr1"]
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="1_pu22l"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c5tqhmscrqnh0" path="res://main/buttons/credit_button.tscn" id="5_bp0tu"]
 [ext_resource type="PackedScene" uid="uid://ce5i5ss4c7emq" path="res://main/buttons/quit_button.tscn" id="6_q3h4x"]
 [ext_resource type="PackedScene" uid="uid://by52ntdxl7j1o" path="res://main/menu/settings.tscn" id="7_7nx2o"]
+[ext_resource type="AudioStream" uid="uid://cw1al0el3ftga" path="res://assets/sound/music/menu.mp3" id="8_2ddcn"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -81,3 +82,6 @@ layout_mode = 2
 visible = false
 layout_mode = 1
 menu_node = NodePath("..")
+
+[node name="menu_music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_2ddcn")
