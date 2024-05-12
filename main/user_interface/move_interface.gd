@@ -28,7 +28,6 @@ func _process(_delta):
 
 """ Set minigame values for movement interface """
 func add_move(v: Minigame) -> int:
-	var dest_string: String = MinigameTypes.get_dest_name(v.type)
 	var moves_string: String = Minigame.concat_string(v.dest_names)
 	var item_idx: int = move_items.add_item(moves_string, load(v.icon_path), true)
 	move_items.set_item_custom_bg_color(item_idx, v.color)

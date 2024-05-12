@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://clnk0ar2n3f1g"]
+[gd_scene load_steps=11 format=3 uid="uid://clnk0ar2n3f1g"]
 
 [ext_resource type="PackedScene" uid="uid://dtroag4wg3q77" path="res://main/level_programming/level_programming.tscn" id="1_6wt4w"]
 [ext_resource type="Script" path="res://main/level.gd" id="1_ysoi0"]
+[ext_resource type="Texture2D" uid="uid://dd0vrrv2jbdpd" path="res://assets/sprites/icons/minigame_prog.tres" id="3_a8xdv"]
 [ext_resource type="PackedScene" uid="uid://daobh6oywgntn" path="res://main/user_interface/move_interface.tscn" id="3_p2ttm"]
 [ext_resource type="PackedScene" uid="uid://x5v1f87ic8xd" path="res://main/user_interface/tutorial.tscn" id="5_0bowe"]
 [ext_resource type="PackedScene" uid="uid://8pxb3uavro5v" path="res://main/user_interface/GUI.tscn" id="5_ufsk5"]
@@ -24,6 +25,71 @@ color = Color(0.101961, 0.101961, 0.101961, 1)
 [node name="LevelProgramming" parent="." instance=ExtResource("1_6wt4w")]
 position = Vector2(-40, 2.08165e-12)
 
+[node name="CountdownMargin" type="MarginContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CountdownBar" type="TextureProgressBar" parent="CountdownMargin"]
+layout_mode = 2
+
+[node name="RightHUD" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="LevelMargin" type="MarginContainer" parent="RightHUD"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 160
+
+[node name="LevelBackground" type="ColorRect" parent="RightHUD/LevelMargin"]
+custom_minimum_size = Vector2(2.08165e-12, 24)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0, 0.866667, 0, 1)
+
+[node name="LevelIconMargin" type="MarginContainer" parent="RightHUD/LevelMargin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+
+[node name="LevelIcon" type="TextureRect" parent="RightHUD/LevelMargin/LevelIconMargin"]
+layout_mode = 2
+texture = ExtResource("3_a8xdv")
+stretch_mode = 2
+
+[node name="LevelNameMargin" type="MarginContainer" parent="RightHUD/LevelMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/margin_left = 28
+
+[node name="LevelName" type="RichTextLabel" parent="RightHUD/LevelMargin/LevelNameMargin"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Programming"
+fit_content = true
+
+[node name="MoveInterface" parent="RightHUD" node_paths=PackedStringArray("level_node") instance=ExtResource("3_p2ttm")]
+custom_minimum_size = Vector2(158, 2.08165e-12)
+layout_mode = 2
+level_node = NodePath("../..")
+
 [node name="HUD" type="HBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,26 +102,16 @@ layout_mode = 2
 minigame_node = NodePath("../MinigameInterface")
 level_node = NodePath("../..")
 
-[node name="Tutorial" parent="HUD" node_paths=PackedStringArray("level_node") instance=ExtResource("5_0bowe")]
-layout_mode = 2
-size_flags_horizontal = 3
-level_node = NodePath("../..")
-
 [node name="MinigameInterface" parent="HUD" node_paths=PackedStringArray("level_node") instance=ExtResource("6_vtnfc")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 level_node = NodePath("../..")
 
-[node name="Spacing" type="Control" parent="HUD"]
+[node name="Tutorial" parent="." node_paths=PackedStringArray("level_node") instance=ExtResource("5_0bowe")]
 visible = false
-layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="MoveInterface" parent="HUD" node_paths=PackedStringArray("level_node") instance=ExtResource("3_p2ttm")]
-custom_minimum_size = Vector2(158, 2.08165e-12)
-layout_mode = 2
-level_node = NodePath("../..")
+level_node = NodePath("..")
 
 [node name="Pause" parent="." node_paths=PackedStringArray("level_node", "option_node") instance=ExtResource("7_xb6ts")]
 visible = false

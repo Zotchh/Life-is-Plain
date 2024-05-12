@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dwnnc3ix76oem" path="res://assets/sprites/icons/energy_icon_atlas_texture.tres" id="4_n6r4s"]
 
 [node name="EnergyBar" type="MarginContainer"]
+offset_right = 72.0
+offset_bottom = 72.0
 script = ExtResource("1_kj6ks")
 
 [node name="ResourceProgressBar" type="TextureProgressBar" parent="."]

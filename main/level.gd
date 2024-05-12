@@ -21,8 +21,10 @@ signal map_changed(minigame: Minigame)
 @onready var background: ColorRect = $Background
 @onready var curr_level: Node2D = $LevelProgramming
 @onready var minigame_interface: MarginContainer = $HUD/MinigameInterface
-@onready var spacing_node: Control = $HUD/Spacing
-@onready var movement_interface: MarginContainer = $HUD/MoveInterface
+@onready var movement_interface: MarginContainer = $RightHUD/MoveInterface
+@onready var level_title: RichTextLabel = $RightHUD/LevelMargin/LevelNameMargin/LevelName
+@onready var level_icon: TextureRect = $RightHUD/LevelMargin/LevelIconMargin/LevelIcon
+@onready var level_background: ColorRect = $RightHUD/LevelMargin/LevelBackground
 @onready var resume_button: Button = $Pause/BackgroundMarginContainer/ContentMargin/Content/Buttons/ResumeButton
 
 # Variables
@@ -44,6 +46,7 @@ func _ready():
 	resume_button.pressed.connect(_on_resumed)
 	minigame_interface.minigame_completed.connect(_on_minigame_completed)
 	minigames_from_scene = VarsMinigame.minigames_properties
+	update_level_info(minigames_from_scene.get("LevelProgramming"))
 
 """ Called every frame """
 func _process(_delta):
@@ -122,7 +125,12 @@ func check_counters_completion():
 			background.add_sibling(levelScene)
 			curr_level.queue_free()
 			curr_level = levelScene
-			curr_level.position.x = -40
+			update_level_info(value)
+
+func update_level_info(v: Minigame):
+	level_background.color = v.color
+	level_icon.texture = load(v.icon_path)
+	level_title.text = MinigameTypes.get_dest_name(v.type)
 
 """ Handle movement in 2 phases
 	- Track if any move is pressed and update each possible counters
@@ -138,12 +146,10 @@ func handle_movement():
 func handle_minigame():
 	if is_minigame_toggled && !is_tutorial_toggled && !is_pause_toggled:
 		minigame_closed.emit()
-		spacing_node.set_visible(true)
 		is_minigame_toggled = !is_minigame_toggled
 	elif !is_minigame_toggled && !is_tutorial_toggled && !is_pause_toggled:
 		var minigame: Minigame = minigames_from_scene[curr_level.name]
 		minigame_started.emit(minigame)
-		spacing_node.set_visible(false)
 		is_minigame_toggled = !is_minigame_toggled
 	print_states()
 
@@ -152,12 +158,10 @@ func handle_tutorial():
 	if is_tutorial_toggled && !is_minigame_toggled && !is_pause_toggled:
 		unpause()
 		tutorial_closed.emit()
-		spacing_node.set_visible(true)
 		is_tutorial_toggled = !is_tutorial_toggled
 	elif !is_tutorial_toggled && !is_minigame_toggled && !is_pause_toggled:
 		pause()
 		tutorial_opened.emit()
-		spacing_node.set_visible(false)
 		is_tutorial_toggled = !is_tutorial_toggled
 	print_states()
 

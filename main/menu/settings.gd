@@ -53,8 +53,8 @@ func _process(_delta):
 	pass
 
 func get_res_index() -> int:
-	var size: Vector2i = DisplayServer.window_get_size()
-	return resolutions.values().find(size)
+	var w_size: Vector2i = DisplayServer.window_get_size()
+	return resolutions.values().find(w_size)
 
 func is_fullscreen() -> bool:
 	var mode: DisplayServer.WindowMode = DisplayServer.window_get_mode()
@@ -97,8 +97,8 @@ func _close_button_pressed():
 	self.set_visible(false)
 
 func _on_resolution_item_selected(index: int):
-	var size: Vector2i = resolutions.get(resolution_option.get_item_text(index))
-	DisplayServer.window_set_size(size)
+	var w_size: Vector2i = resolutions.get(resolution_option.get_item_text(index))
+	DisplayServer.window_set_size(w_size)
 
 func _on_difficulty_item_selected(index: int):
 	var diff: Global.difficulty_level = difficulties.get(difficulty_option.get_item_text(index))

@@ -1,66 +1,101 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmqi6mw02erjk"]
+[gd_scene load_steps=8 format=3 uid="uid://by6ldmsjjwn61"]
 
-[ext_resource type="Script" path="res://main/user_interface/tutorial.gd" id="1_mwipq"]
+[ext_resource type="Script" path="res://main/menu/score.gd" id="1_oju2q"]
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="2_u1t2h"]
-[ext_resource type="AudioStream" uid="uid://cc0ol2a06u0r4" path="res://assets/sound/music/score.mp3" id="3_0lifu"]
+[ext_resource type="PackedScene" uid="uid://bvmgvm62c2tw0" path="res://main/buttons/start_button.tscn" id="3_hke6t"]
+[ext_resource type="PackedScene" uid="uid://c6ai6o81rdgji" path="res://main/buttons/option_button.tscn" id="4_2ugrk"]
+[ext_resource type="PackedScene" uid="uid://dntck2byg3cw8" path="res://main/buttons/menu_button.tscn" id="5_uibjt"]
+[ext_resource type="AudioStream" uid="uid://cc0ol2a06u0r4" path="res://assets/sound/music/score.mp3" id="7_5skye"]
+[ext_resource type="PackedScene" uid="uid://by52ntdxl7j1o" path="res://main/menu/settings.tscn" id="7_eoju5"]
 
-[node name="Score" type="MarginContainer"]
+[node name="Score" type="Control"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_mwipq")
+script = ExtResource("1_oju2q")
 
-[node name="BackgroundMarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 15
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.458824, 0.211765, 0.254902, 1)
 
-[node name="Background" type="ColorRect" parent="BackgroundMarginContainer"]
-layout_mode = 2
-color = Color(0.160784, 0.360784, 0.207843, 0.952941)
+[node name="MenuMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 40
 
-[node name="TutorialMarginContainer" type="MarginContainer" parent="."]
+[node name="MenuVerticalContainer" type="VBoxContainer" parent="MenuMarginContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/separation = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TutorialMarginContainer"]
+[node name="TitleMarginContainer" type="MarginContainer" parent="MenuMarginContainer/MenuVerticalContainer"]
 layout_mode = 2
+theme_override_constants/margin_bottom = 30
 
-[node name="TopVBoxContainer" type="VBoxContainer" parent="TutorialMarginContainer/VBoxContainer"]
+[node name="Title" type="RichTextLabel" parent="MenuMarginContainer/MenuVerticalContainer/TitleMarginContainer"]
+clip_contents = false
 layout_mode = 2
-
-[node name="PreviewTitle" type="RichTextLabel" parent="TutorialMarginContainer/VBoxContainer/TopVBoxContainer"]
-layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 13
 theme_override_fonts/normal_font = ExtResource("2_u1t2h")
-theme_override_font_sizes/normal_font_size = 20
-text = "Game Over"
+theme_override_font_sizes/normal_font_size = 64
+text = "DAY COMPLETE!"
 fit_content = true
+autowrap_mode = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TutorialMarginContainer/VBoxContainer/TopVBoxContainer"]
+[node name="ScoreMargin" type="MarginContainer" parent="MenuMarginContainer/MenuVerticalContainer"]
 layout_mode = 2
-text = "You survived ... days at EPFL !!!! YOUHOU, that's more than 98% of students !!"
+theme_override_constants/margin_bottom = 30
+
+[node name="Score" type="RichTextLabel" parent="MenuMarginContainer/MenuVerticalContainer/ScoreMargin"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 13
+theme_override_fonts/normal_font = ExtResource("2_u1t2h")
+theme_override_font_sizes/normal_font_size = 32
+text = "You gained ??? IQ"
 fit_content = true
+autowrap_mode = 0
 
-[node name="BottomVBoxContainer" type="VBoxContainer" parent="TutorialMarginContainer/VBoxContainer"]
+[node name="ButtonListVerticalContainer" type="VBoxContainer" parent="MenuMarginContainer/MenuVerticalContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="StartButton" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer" instance=ExtResource("3_hke6t")]
+layout_mode = 2
+text = "Start Again"
+
+[node name="OptionButton" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer" instance=ExtResource("4_2ugrk")]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TutorialMarginContainer/VBoxContainer/BottomVBoxContainer"]
+[node name="MenuButton" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer" instance=ExtResource("5_uibjt")]
 layout_mode = 2
-text = "
 
+[node name="Settings" parent="." node_paths=PackedStringArray("menu_node") instance=ExtResource("7_eoju5")]
+visible = false
+layout_mode = 1
+menu_node = NodePath("..")
 
-
-
-Score : ......"
-fit_content = true
-
-[node name="music_score" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_0lifu")
+[node name="score_music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_5skye")
 bus = &"Music"

@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://x5v1f87ic8xd"]
+[gd_scene load_steps=7 format=3 uid="uid://x5v1f87ic8xd"]
 
 [ext_resource type="Script" path="res://main/user_interface/tutorial.gd" id="1_t5tul"]
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="2_7ybcx"]
+[ext_resource type="Texture2D" uid="uid://0ju481kh26cl" path="res://assets/sprites/key_icons/key_backspace.tres" id="3_pwlkp"]
+[ext_resource type="Texture2D" uid="uid://dwv8hyv3tvcft" path="res://assets/sprites/UI/tutorial_resource.jpg" id="3_r420v"]
+[ext_resource type="Texture2D" uid="uid://ddgw0fvyq2no5" path="res://assets/sprites/UI/tutorial_move.jpg" id="4_qjcyi"]
+[ext_resource type="Texture2D" uid="uid://sxh25i6yg1ek" path="res://assets/sprites/UI/tutorial_minigame.jpg" id="5_86r6x"]
 
 [node name="Tutorial" type="MarginContainer"]
 anchors_preset = 15
@@ -20,51 +24,95 @@ theme_override_constants/margin_bottom = 15
 
 [node name="Background" type="ColorRect" parent="BackgroundMarginContainer"]
 layout_mode = 2
-color = Color(0.337255, 0.207843, 0.411765, 0.952941)
+color = Color(0.458824, 0.211765, 0.254902, 0.980392)
 
-[node name="TutorialMarginContainer" type="MarginContainer" parent="."]
+[node name="TutorialMarginContainer" type="MarginContainer" parent="BackgroundMarginContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TutorialMarginContainer"]
-layout_mode = 2
-
-[node name="TopVBoxContainer" type="VBoxContainer" parent="TutorialMarginContainer/VBoxContainer"]
+[node name="TextContainer" type="VBoxContainer" parent="BackgroundMarginContainer/TutorialMarginContainer"]
 layout_mode = 2
 
-[node name="PreviewTitle" type="RichTextLabel" parent="TutorialMarginContainer/VBoxContainer/TopVBoxContainer"]
+[node name="PreviewTitle" type="RichTextLabel" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("2_7ybcx")
-theme_override_font_sizes/normal_font_size = 20
-text = "Background"
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center]WELCOME TO EPFL !![/center]"
 fit_content = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TutorialMarginContainer/VBoxContainer/TopVBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer"]
 layout_mode = 2
-text = "First year at EPFL !! Youhouuuuu !!!!
-Congratulations, but be careful, it's easy to get carried away with all the work you have to do. Don't forget to go and revise for all your different courses before you fall too far behind :)
-Good luck !
+theme_override_constants/line_separation = -2
+bbcode_enabled = true
+text = "You will play as [color=yellow]Murphy[/color], a student who thought he could achieve 2 Bachelors at the same time while having a social life!
+
+What a fool... but you might be able to get him through if you're fast enough!
+
+All you have to do is get to the right location and play the corresponding game... hum... I mean work!
 
 "
 fit_content = true
 
-[node name="BottomVBoxContainer" type="VBoxContainer" parent="TutorialMarginContainer/VBoxContainer"]
+[node name="ControlContainer" type="HBoxContainer" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 70
+alignment = 1
 
-[node name="PreviewTitle" type="RichTextLabel" parent="TutorialMarginContainer/VBoxContainer/BottomVBoxContainer"]
+[node name="ResourceIcon" type="TextureRect" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/ControlContainer"]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("2_7ybcx")
-theme_override_font_sizes/normal_font_size = 20
-text = "Controls"
-fit_content = true
+size_flags_horizontal = 4
+texture = ExtResource("3_r420v")
+expand_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TutorialMarginContainer/VBoxContainer/BottomVBoxContainer"]
+[node name="MovementIcon" type="TextureRect" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/ControlContainer"]
 layout_mode = 2
-text = "Enter -> launch the game
-Tab -> see move interface
-Space -> launch minigame
-Backspace -> show/unshow tutorial"
+size_flags_horizontal = 4
+texture = ExtResource("4_qjcyi")
+expand_mode = 3
+
+[node name="MinigameIcon" type="TextureRect" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/ControlContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("5_86r6x")
+expand_mode = 3
+
+[node name="ControlTextContainer" type="HBoxContainer" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer"]
+layout_mode = 2
+theme_override_constants/separation = 47
+alignment = 1
+
+[node name="ResourceText" type="RichTextLabel" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/ControlTextContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "Don't run out!"
 fit_content = true
+autowrap_mode = 0
+
+[node name="MovementText" type="RichTextLabel" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/ControlTextContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "Go to the right place!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MinigameText" type="RichTextLabel" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/ControlTextContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "Complete all to score!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="CloseIcon" type="TextureRect" parent="BackgroundMarginContainer"]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("3_pwlkp")
