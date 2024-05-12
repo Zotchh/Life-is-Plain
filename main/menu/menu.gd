@@ -4,7 +4,7 @@ extends Control
 	- Load scenes on button pressed
 """
 
-@onready var menu_music = $menu_music
+@onready var menu_music: AudioStreamPlayer2D = $menu_music
 
 signal option_opened()
 
@@ -38,3 +38,4 @@ func _credit_button_pressed():
 
 func _quit_button_pressed():
 	print("Quit button pressed")
+	get_tree().quit(0)

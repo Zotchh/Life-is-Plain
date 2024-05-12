@@ -85,3 +85,4 @@ menu_node = NodePath("..")
 
 [node name="menu_music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_2ddcn")
+bus = &"Music"

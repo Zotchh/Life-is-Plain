@@ -21,7 +21,6 @@ signal minigame_completed(type: MinigameTypes.type, score: float)
 @onready var correct = $correct
 @onready var uncorrect = $uncorrect
 
-
 # Minigame variables
 var minigame_type: MinigameTypes.type
 var solution: Array

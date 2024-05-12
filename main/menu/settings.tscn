@@ -39,7 +39,7 @@ size_flags_vertical = 0
 mouse_filter = 1
 theme_override_colors/default_color = Color(0.866667, 0.792157, 0.780392, 0.780392)
 theme_override_fonts/normal_font = ExtResource("2_dkkln")
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = "[center]Game[/center]"
 fit_content = true
@@ -83,7 +83,7 @@ layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/default_color = Color(0.866667, 0.792157, 0.780392, 0.780392)
 theme_override_fonts/normal_font = ExtResource("2_dkkln")
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = "[center]Video[/center]"
 fit_content = true
@@ -138,7 +138,7 @@ layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/default_color = Color(0.866667, 0.792157, 0.780392, 0.780392)
 theme_override_fonts/normal_font = ExtResource("2_dkkln")
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = "[center]Sound[/center]"
 fit_content = true
@@ -158,35 +158,54 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
+[node name="Master" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("2_dkkln")
+theme_override_font_sizes/normal_font_size = 21
+text = "Master Volume"
+fit_content = true
+
 [node name="Music" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer/TitleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/normal_font = ExtResource("2_dkkln")
 theme_override_font_sizes/normal_font_size = 21
-text = "Music"
+text = "Music Volume"
 fit_content = true
 
-[node name="VFX" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer/TitleContainer"]
+[node name="SFX" type="RichTextLabel" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer/TitleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/normal_font = ExtResource("2_dkkln")
 theme_override_font_sizes/normal_font_size = 21
-text = "VFX"
+text = "VFX Volume"
 fit_content = true
 
 [node name="ButtonContainer" type="VBoxContainer" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
+[node name="MasterSlider" type="HSlider" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer/ButtonContainer"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 4
+max_value = 1.0
+step = 0.001
+
 [node name="MusicSlider" type="HSlider" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer/ButtonContainer"]
 custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
+max_value = 1.0
+step = 0.001
 
-[node name="VFXSlider" type="HSlider" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer/ButtonContainer"]
+[node name="SFXSlider" type="HSlider" parent="BackgroundMarginContainer/ContentMargin/ContentContainer/SoundMargin/SoundContainer/ButtonContainer"]
 custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
+max_value = 1.0
+step = 0.001
 
 [node name="CloseButton" parent="BackgroundMarginContainer/ContentMargin" instance=ExtResource("2_oi252")]
 custom_minimum_size = Vector2(32, 32)

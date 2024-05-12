@@ -15,6 +15,8 @@ signal stop_resource_timers()
 
 signal map_changed(minigame: Minigame)
 
+@onready var music_game = $music_game
+
 # Child Scenes
 @onready var background: ColorRect = $Background
 @onready var curr_level: Node2D = $LevelProgramming
@@ -37,6 +39,7 @@ var states_logged = true
 
 """ Called once when instanciated """
 func _ready():
+	music_game.play()
 	resume_button.pressed.connect(_on_resumed)
 	minigame_interface.minigame_completed.connect(_on_minigame_completed)
 	minigames_from_scene = VarsMinigame.minigames_properties
