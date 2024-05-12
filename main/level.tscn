@@ -22,11 +22,7 @@ grow_vertical = 2
 color = Color(0.101961, 0.101961, 0.101961, 1)
 
 [node name="LevelProgramming" parent="." instance=ExtResource("1_6wt4w")]
-
-[node name="MoveInterface" parent="." node_paths=PackedStringArray("level_node") instance=ExtResource("3_p2ttm")]
-offset_left = -194.0
-offset_top = -61.0
-level_node = NodePath("..")
+position = Vector2(-40, 2.08165e-12)
 
 [node name="HUD" type="HBoxContainer" parent="."]
 anchors_preset = 15
@@ -49,6 +45,16 @@ level_node = NodePath("../..")
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+level_node = NodePath("../..")
+
+[node name="Spacing" type="Control" parent="HUD"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveInterface" parent="HUD" node_paths=PackedStringArray("level_node") instance=ExtResource("3_p2ttm")]
+custom_minimum_size = Vector2(158, 2.08165e-12)
+layout_mode = 2
 level_node = NodePath("../..")
 
 [node name="Pause" parent="." node_paths=PackedStringArray("level_node", "option_node") instance=ExtResource("7_xb6ts")]

@@ -15,7 +15,7 @@ script = ExtResource("1_ne5tq")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 2
-color = Color(0.250214, 0.250214, 0.250213, 1)
+color = Color(0.25098, 0.25098, 0.25098, 1)
 
 [node name="BarsUI" type="MarginContainer" parent="."]
 layout_mode = 2

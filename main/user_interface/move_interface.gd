@@ -4,7 +4,7 @@ extends MarginContainer
 @export var level_node: Node
 
 # Internal nodes
-@onready var move_items: ItemList = $InnerContainer/InnerVBox/ItemList
+@onready var move_items: ItemList = $MoveMargin/MapContainer/MapItems
 
 # Variables
 var minigames: Dictionary

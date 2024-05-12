@@ -21,7 +21,8 @@ signal map_changed(minigame: Minigame)
 @onready var background: ColorRect = $Background
 @onready var curr_level: Node2D = $LevelProgramming
 @onready var minigame_interface: MarginContainer = $HUD/MinigameInterface
-@onready var movement_interface: MarginContainer = $MoveInterface
+@onready var spacing_node: Control = $HUD/Spacing
+@onready var movement_interface: MarginContainer = $HUD/MoveInterface
 @onready var resume_button: Button = $Pause/BackgroundMarginContainer/ContentMargin/Content/Buttons/ResumeButton
 
 # Variables
@@ -128,20 +129,20 @@ func check_counters_completion():
 """
 func handle_movement():
 	if !is_minigame_toggled && !is_tutorial_toggled && !is_pause_toggled:
-		movement_interface.set_visible(true)
 		track_moves_counters()
 		check_counters_completion()
-	else:
-		movement_interface.set_visible(false)
+
 
 """ Handle minigame instanciation in the state diagram """
 func handle_minigame():
 	if is_minigame_toggled && !is_tutorial_toggled && !is_pause_toggled:
 		minigame_closed.emit()
+		spacing_node.set_visible(true)
 		is_minigame_toggled = !is_minigame_toggled
 	elif !is_minigame_toggled && !is_tutorial_toggled && !is_pause_toggled:
 		var minigame: Minigame = minigames_from_scene[curr_level.name]
 		minigame_started.emit(minigame)
+		spacing_node.set_visible(false)
 		is_minigame_toggled = !is_minigame_toggled
 	print_states()
 
@@ -150,10 +151,12 @@ func handle_tutorial():
 	if is_tutorial_toggled && !is_minigame_toggled && !is_pause_toggled:
 		unpause()
 		tutorial_closed.emit()
+		spacing_node.set_visible(true)
 		is_tutorial_toggled = !is_tutorial_toggled
 	elif !is_tutorial_toggled && !is_minigame_toggled && !is_pause_toggled:
 		pause()
 		tutorial_opened.emit()
+		spacing_node.set_visible(false)
 		is_tutorial_toggled = !is_tutorial_toggled
 	print_states()
 
