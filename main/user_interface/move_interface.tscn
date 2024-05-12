@@ -69,6 +69,16 @@ layout_mode = 2
 [node name="ScoreName" type="VBoxContainer" parent="MoveMargin/ScoreContainer/ScoreInner"]
 layout_mode = 2
 
+[node name="IQName" type="RichTextLabel" parent="MoveMargin/ScoreContainer/ScoreInner/ScoreName"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/normal_font = ExtResource("1_ysjhb")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[left][color=white]IQ[/color][/left]"
+fit_content = true
+autowrap_mode = 0
+
 [node name="PerfectName" type="RichTextLabel" parent="MoveMargin/ScoreContainer/ScoreInner/ScoreName"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -105,6 +115,16 @@ size_flags_horizontal = 3
 
 [node name="ScoreValue" type="VBoxContainer" parent="MoveMargin/ScoreContainer/ScoreInner"]
 layout_mode = 2
+
+[node name="IQValue" type="RichTextLabel" parent="MoveMargin/ScoreContainer/ScoreInner/ScoreValue"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/normal_font = ExtResource("1_ysjhb")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[right][color=white]102[/color][/right]"
+fit_content = true
+autowrap_mode = 0
 
 [node name="PerfectValue" type="RichTextLabel" parent="MoveMargin/ScoreContainer/ScoreInner/ScoreValue"]
 layout_mode = 2

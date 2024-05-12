@@ -4,7 +4,7 @@ extends Control
 	- Load scenes on button pressed
 """
 
-@onready var score_music: AudioStreamPlayer2D = $menu_music
+@onready var score_music: AudioStreamPlayer2D = $score_music
 
 signal option_opened()
 

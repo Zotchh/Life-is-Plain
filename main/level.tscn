@@ -1,15 +1,42 @@
-[gd_scene load_steps=11 format=3 uid="uid://clnk0ar2n3f1g"]
+[gd_scene load_steps=17 format=3 uid="uid://clnk0ar2n3f1g"]
 
 [ext_resource type="PackedScene" uid="uid://dtroag4wg3q77" path="res://main/level_programming/level_programming.tscn" id="1_6wt4w"]
 [ext_resource type="Script" path="res://main/level.gd" id="1_ysoi0"]
 [ext_resource type="Texture2D" uid="uid://dd0vrrv2jbdpd" path="res://assets/sprites/icons/minigame_prog.tres" id="3_a8xdv"]
+[ext_resource type="Texture2D" uid="uid://ow3t1w64dso" path="res://assets/sprites/key_icons/key_space.tres" id="3_bnndx"]
+[ext_resource type="Script" path="res://main/user_interface/CountdownBar.gd" id="3_j7xd0"]
 [ext_resource type="PackedScene" uid="uid://daobh6oywgntn" path="res://main/user_interface/move_interface.tscn" id="3_p2ttm"]
+[ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="4_fivox"]
 [ext_resource type="PackedScene" uid="uid://x5v1f87ic8xd" path="res://main/user_interface/tutorial.tscn" id="5_0bowe"]
 [ext_resource type="PackedScene" uid="uid://8pxb3uavro5v" path="res://main/user_interface/GUI.tscn" id="5_ufsk5"]
+[ext_resource type="Texture2D" uid="uid://0ju481kh26cl" path="res://assets/sprites/key_icons/key_backspace.tres" id="6_beiqu"]
 [ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/minigame/minigame_interface.tscn" id="6_vtnfc"]
 [ext_resource type="PackedScene" uid="uid://uxc6jgx0x571" path="res://main/menu/pause.tscn" id="7_xb6ts"]
 [ext_resource type="PackedScene" uid="uid://by52ntdxl7j1o" path="res://main/menu/settings.tscn" id="8_m766a"]
 [ext_resource type="AudioStream" uid="uid://dpj2mi3at78rh" path="res://assets/sound/music/game.mp3" id="9_ud6kc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vh6ob"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.956863, 0.956863, 0.956863, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3n85"]
+bg_color = Color(0.690196, 0.0196078, 0.0627451, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="Level" type="Node"]
 script = ExtResource("1_ysoi0")
@@ -25,20 +52,95 @@ color = Color(0.101961, 0.101961, 0.101961, 1)
 [node name="LevelProgramming" parent="." instance=ExtResource("1_6wt4w")]
 position = Vector2(-40, 2.08165e-12)
 
-[node name="CountdownMargin" type="MarginContainer" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
+[node name="DownHUD" type="VBoxContainer" parent="."]
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
+offset_top = -4.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_horizontal = 3
 
-[node name="CountdownBar" type="TextureProgressBar" parent="CountdownMargin"]
+[node name="MinigameIndicatorMargin" type="MarginContainer" parent="DownHUD"]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_right = 210
+
+[node name="MinigameIndicator" type="HBoxContainer" parent="DownHUD/MinigameIndicatorMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="MinigameIcon" type="TextureRect" parent="DownHUD/MinigameIndicatorMargin/MinigameIndicator"]
+custom_minimum_size = Vector2(2.08165e-12, 30)
+layout_mode = 2
+texture = ExtResource("3_bnndx")
+expand_mode = 3
+
+[node name="MinigameText" type="RichTextLabel" parent="DownHUD/MinigameIndicatorMargin/MinigameIndicator"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("4_fivox")
+theme_override_font_sizes/normal_font_size = 26
+text = "START WORKING!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="CountdownMargin" type="MarginContainer" parent="DownHUD"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 210
+theme_override_constants/margin_bottom = 15
+
+[node name="CountdownBar" type="ProgressBar" parent="DownHUD/CountdownMargin" node_paths=PackedStringArray("level_node")]
+custom_minimum_size = Vector2(2.08165e-12, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_vh6ob")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b3n85")
+value = 50.0
+show_percentage = false
+script = ExtResource("3_j7xd0")
+level_node = NodePath("../../..")
+
+[node name="CountdownTimer" type="Timer" parent="DownHUD/CountdownMargin/CountdownBar"]
+
+[node name="UpperHUD" type="VBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="TutorialIndicatorMargin" type="MarginContainer" parent="UpperHUD"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 15
+
+[node name="TutorialIndicator" type="HBoxContainer" parent="UpperHUD/TutorialIndicatorMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="TutorialIcon" type="TextureRect" parent="UpperHUD/TutorialIndicatorMargin/TutorialIndicator"]
+custom_minimum_size = Vector2(2.08165e-12, 30)
+layout_mode = 2
+texture = ExtResource("6_beiqu")
+expand_mode = 3
+
+[node name="TutorialText" type="RichTextLabel" parent="UpperHUD/TutorialIndicatorMargin/TutorialIndicator"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("4_fivox")
+theme_override_font_sizes/normal_font_size = 26
+text = "TUTO"
+fit_content = true
+autowrap_mode = 0
 
 [node name="RightHUD" type="HBoxContainer" parent="."]
 anchors_preset = 15
@@ -109,7 +211,6 @@ size_flags_horizontal = 3
 level_node = NodePath("../..")
 
 [node name="Tutorial" parent="." node_paths=PackedStringArray("level_node") instance=ExtResource("5_0bowe")]
-visible = false
 size_flags_horizontal = 3
 level_node = NodePath("..")
 

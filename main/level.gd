@@ -13,6 +13,9 @@ signal tutorial_closed()
 signal start_resource_timers()
 signal stop_resource_timers()
 
+signal start_countdown_timers()
+signal stop_countdown_timers()
+
 signal map_changed(minigame: Minigame)
 
 @onready var music_game = $music_game
@@ -68,10 +71,12 @@ func _process(_delta):
 """ stops all pausable nodes """
 func pause():
 	stop_resource_timers.emit()
+	stop_countdown_timers.emit()
 
 """ unstops all pausable nodes """
 func unpause():
 	start_resource_timers.emit()
+	start_countdown_timers.emit()
 
 """ Reset all sequence counters """
 func reset_counters():

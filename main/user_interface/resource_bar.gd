@@ -6,8 +6,8 @@ extends Control
 @onready var pb: TextureProgressBar = $ResourceProgressBar
 
 const PB_MAX: int = Global.RESOURCE_MAX
-const PB_MIN_RANDOM: int = Global.RESOURCE_MIN_RANDOM
-const PB_MAX_RANDOM: int = Global.RESOURCE_MAX_RANDOM
+const PB_MIN: int = Global.RESOURCE_MIN
+const PB_START: int = Global.RESOURCE_START
 const PB_STEP: int = Global.RESOURCE_UPDATE_STEP
 
 var type_from_name: Dictionary = {
@@ -19,8 +19,9 @@ var type_from_name: Dictionary = {
 
 func _ready():
 	pb.max_value = PB_MAX
+	pb.min_value = PB_MIN
 	pb.min_value = 0
-	pb.value = get_random_bar_value()
+	pb.value = PB_START
 	
 	timer.timeout.connect(_on_timeout)
 	gui_node.timer_start.connect(_on_timer_started)
@@ -29,9 +30,6 @@ func _ready():
 
 func _process(_delta):
 	pass
-
-func get_random_bar_value() -> int:
-	return randi_range(PB_MIN_RANDOM, PB_MAX_RANDOM)
 
 func _on_timeout():
 	pb.value -= PB_STEP
