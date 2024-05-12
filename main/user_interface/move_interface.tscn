@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://daobh6oywgntn"]
+[gd_scene load_steps=6 format=3 uid="uid://daobh6oywgntn"]
 
 [ext_resource type="Script" path="res://main/user_interface/move_interface.gd" id="1_uowgu"]
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="1_ysjhb"]
+[ext_resource type="Theme" uid="uid://djksvgbhs8jhj" path="res://assets/theme/uiTheme.tres" id="3_russ8"]
+[ext_resource type="Texture2D" uid="uid://dlevjajuvon3k" path="res://assets/sprites/icons/happiness_icon_atlas_texture.tres" id="4_3o8xh"]
+[ext_resource type="Texture2D" uid="uid://doq8g7ona3qbc" path="res://assets/sprites/icons/hunger_icon_atlas_texture.tres" id="5_ni27o"]
 
 [node name="MoveInterface" type="MarginContainer"]
 anchors_preset = 11
@@ -38,8 +41,14 @@ autowrap_mode = 0
 
 [node name="MapItems" type="ItemList" parent="MoveMargin/MapContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme = ExtResource("3_russ8")
 auto_height = true
+item_count = 3
+item_0/text = "This is Home"
+item_0/icon = ExtResource("4_3o8xh")
+item_1/text = "This is not Home"
+item_1/icon = ExtResource("5_ni27o")
+item_2/text = "This might be home"
 
 [node name="ScoreContainer" type="VBoxContainer" parent="MoveMargin"]
 layout_mode = 2

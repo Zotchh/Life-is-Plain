@@ -11,7 +11,7 @@ var minigames_properties: Dictionary = {
 		["up", "left", "down", "right"],
 		0,
 		Color.hex(0x00dd00f0),
-		res_root + "minigame_programming.tres",
+		res_root + "minigame_prog.tres",
 		"PROGRAMMING"
 	),
 
@@ -22,7 +22,7 @@ var minigames_properties: Dictionary = {
 		["▼", "▲", "▼", "▲"],
 		["down", "up", "down", "up"],
 		0,
-		Color.hex(0xb00510f0),
+		Color.hex(0x2086d6f0),
 		res_root + "minigame_chemistry.tres",
 		"CHEMISTRY"
 	),
@@ -46,7 +46,7 @@ var minigames_properties: Dictionary = {
 		#["◀", "▲", "▼", "◀"],
 		#["left", "up", "down", "left"],
 		#0,
-		#Color.hex(0x2086d6f0),
+		#Color.hex(0xb00510f0),
 		#res_root + "minigame_math.tres",
 		#"MATH"
 	#),

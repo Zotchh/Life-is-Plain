@@ -4178,7 +4178,7 @@ y_sort_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
-position = Vector2(342, 116)
+position = Vector2(234, 125)
 tile_set = SubResource("TileSet_igrk0")
 format = 2
 layer_0/name = "Ground"
@@ -4200,4 +4200,4 @@ layer_3/tile_data = PackedInt32Array(196619, 851968, 36, 262155, 851968, 37, 393
 
 [node name="Player" parent="." instance=ExtResource("4_qkdj6")]
 y_sort_enabled = true
-position = Vector2(380, 221)
+position = Vector2(337, 160)

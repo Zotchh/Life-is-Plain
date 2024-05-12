@@ -122,6 +122,7 @@ func check_counters_completion():
 			background.add_sibling(levelScene)
 			curr_level.queue_free()
 			curr_level = levelScene
+			curr_level.position.x = -40
 
 """ Handle movement in 2 phases
 	- Track if any move is pressed and update each possible counters

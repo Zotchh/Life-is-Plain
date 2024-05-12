@@ -8,8 +8,7 @@ class_name MinigameTypes
 enum type {
 	PROGRAMMING=0,
 	CHEMISTRY=1,
-	ARCHITECTURE=2,
-	MATH=3,
+	FOOD=2,
 }
 
 static func get_dest_name(t: MinigameTypes.type) -> String:
@@ -18,5 +17,7 @@ static func get_dest_name(t: MinigameTypes.type) -> String:
 			return "PROG"
 		MinigameTypes.type.CHEMISTRY:
 			return "LAB"
+		MinigameTypes.type.FOOD:
+			return "FOOD"
 	
 	return "UNMATCHED"
