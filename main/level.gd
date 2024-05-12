@@ -45,6 +45,11 @@ var states_logged = true
 
 """ Called once when instanciated """
 func _ready():
+	Global.score_iq = 0
+	Global.perfect_counter = 0
+	Global.great_counter = 0
+	Global.nice_counter = 0
+	
 	music_game.play()
 	resume_button.pressed.connect(_on_resumed)
 	minigame_interface.minigame_completed.connect(_on_minigame_completed)
