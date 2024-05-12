@@ -1,6 +1,6 @@
 extends Control
 
-signal minigame_completed(type: MinigameTypes.type, score: float)
+signal minigame_completed(type: MinigameTypes.type, res: float, score: int, rank: String)
 
 # Extern link to level node for signals
 @export var level_node: Node
@@ -18,16 +18,22 @@ signal minigame_completed(type: MinigameTypes.type, score: float)
 @onready var formula_tree: MarginContainer = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin
 @onready var formula_title: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol/FormulaTitle
 @onready var formula_content: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol/FormulaContent
+
 @onready var correct = $correct
 @onready var uncorrect = $uncorrect
+@onready var perfect_sfx = $perfect
+@onready var great_sfx = $great
+@onready var nice_sfx = $nice
 
 # Minigame variables
 var minigame_type: MinigameTypes.type
 var solution: Array
 var seq: Sequence
 var formula: Formula
-var score: float
 var instr_idx: int = 0
+
+var correct_count: int = 0
+var wrong_count: int = 0
 
 # state flags
 var minigame_opened: bool = false
@@ -57,6 +63,44 @@ func is_any_key_pressed() -> bool:
 	
 	return is_pressed
 
+func compute_rank() -> String:
+	if correct_count == solution.size():
+		return "perfect"
+	if correct_count >= solution.size() - 2 && correct_count < solution.size():
+		return "great"
+	if correct_count < solution.size() - 2:
+		return "nice"
+	
+	return ""
+
+func play_rank_sfx(rank: String):
+	match rank:
+		"perfect":
+			perfect_sfx.play()
+		"great":
+			great_sfx.play()
+		"nice":
+			nice_sfx.play()
+
+func compute_res() -> float:
+	var diff_mod = Global.get_diff_modifier()
+	var res: float = maxf(correct_count - wrong_count, 1.0)
+	res *= Global.SCORE_STEEP
+	res = Global.SCORE_INCREASE_MIN * log(res) / Global.SCORE_HEIGHT
+	res *= diff_mod
+	
+	return res
+
+func compute_score(res: float, type: MinigameTypes.type) -> int:
+	var resource_mod: float = 1.0
+	match type:
+		MinigameTypes.type.PROGRAMMING:
+			resource_mod = Global.energy_modifier
+		MinigameTypes.type.CHEMISTRY:
+			resource_mod = Global.mental_modifier
+	
+	return floori(res * resource_mod)
+
 """ Handle a minigame step:
 	- increment instruction index
 	- close minigame if ended
@@ -65,9 +109,11 @@ func handle_step():
 	if instr_idx < solution.size() - 1:
 		instr_idx+= 1
 	else:
-		var total_score = solution.size() * Global.SCORE_INCREMENT
-		var weighted_score = score / total_score
-		minigame_completed.emit(minigame_type, weighted_score)
+		var rank: String = compute_rank()
+		play_rank_sfx(rank)
+		var res: float = compute_res()
+		var score: int = compute_score(res, minigame_type)
+		minigame_completed.emit(minigame_type, res, score, rank)
 
 """ Logic for minigame instruction checks """
 func check_instruction():
@@ -78,16 +124,15 @@ func check_instruction():
 	# append instructions in preview
 	if is_key_correct:
 		correct.play()
+		correct_count += 1
 		var item_idx: int = preview_items.add_item(curr_instr.label, null, false)
 		preview_items.set_item_custom_bg_color(item_idx, Color.GREEN)
-		score += Global.SCORE_INCREMENT
 		handle_step()
 	elif !is_key_correct && is_any_key_pressed():
 		uncorrect.play()
+		wrong_count += 1
 		var item_idx: int = preview_items.add_item(curr_instr.label, null, false)
 		preview_items.set_item_custom_bg_color(item_idx, Color.RED)
-		if score >= Global.SCORE_DECREMENT:
-			score -= Global.SCORE_DECREMENT
 		handle_step()
 
 """ Handle which values to load depending on the minigame """
@@ -247,7 +292,8 @@ func _on_minigame_closed():
 		seq = null
 		formula = null
 		instr_idx = 0
-		score = 0
+		correct_count = 0
+		wrong_count = 0
 		
 		is_ready = false
 		minigame_opened = false

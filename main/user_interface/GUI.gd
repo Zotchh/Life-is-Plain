@@ -27,11 +27,10 @@ func _on_timers_stopped():
 	Log.print("timers stopped")
 	timer_stop.emit()
 
-func _on_minigame_completed(minigame_type: MinigameTypes.type, score: float):
-	var incr = score * 300
+func _on_minigame_completed(minigame_type: MinigameTypes.type, res: float, score: int, rank: String):
 	match minigame_type:
 		MinigameTypes.type.PROGRAMMING:
-			resource_increment.emit(ResourceTypes.type.ENERGY, incr)
+			resource_increment.emit(ResourceTypes.type.ENERGY, res)
 		MinigameTypes.type.CHEMISTRY:
-			resource_increment.emit(ResourceTypes.type.HUNGER, incr)
+			resource_increment.emit(ResourceTypes.type.MENTAL, res)
 

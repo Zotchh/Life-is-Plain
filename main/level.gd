@@ -198,6 +198,6 @@ func _on_resumed():
 	handle_pause()
 	print_states()
 
-func _on_minigame_completed(type: MinigameTypes.type, score: float):
+func _on_minigame_completed(type: MinigameTypes.type, res: float, score: int, rank: String):
 	handle_minigame()
 	print_states()

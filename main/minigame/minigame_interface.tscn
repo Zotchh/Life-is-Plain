@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cap3afu2y48l6"]
+[gd_scene load_steps=9 format=3 uid="uid://cap3afu2y48l6"]
 
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="1_etutl"]
 [ext_resource type="Script" path="res://main/minigame/minigame_logic.gd" id="1_vtmyx"]
 [ext_resource type="Texture2D" uid="uid://cgk3y3enu1kf4" path="res://assets/sprites/UI/chemistry_background.tres" id="3_cy2nc"]
 [ext_resource type="AudioStream" uid="uid://bv5mukbwuxqsr" path="res://assets/sound/sfx/ting.wav" id="4_g5032"]
 [ext_resource type="AudioStream" uid="uid://5y07t2yyib4h" path="res://assets/sound/sfx/tutu.wav" id="5_tafok"]
+[ext_resource type="AudioStream" uid="uid://bcmkechmf0jgq" path="res://assets/sound/sfx/perfect.mp3" id="6_wq1bp"]
+[ext_resource type="AudioStream" uid="uid://3vbg1dubeasi" path="res://assets/sound/sfx/great.mp3" id="7_sgc8n"]
+[ext_resource type="AudioStream" uid="uid://c6q6mhrjk1o7n" path="res://assets/sound/sfx/nice.mp3" id="8_e1wml"]
 
 [node name="MinigameInterface" type="MarginContainer"]
 anchors_preset = 15
@@ -120,5 +123,20 @@ bus = &"SFX"
 
 [node name="uncorrect" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_tafok")
+volume_db = 9.0
+bus = &"SFX"
+
+[node name="perfect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_wq1bp")
+volume_db = 9.0
+bus = &"SFX"
+
+[node name="great" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_sgc8n")
+volume_db = 9.0
+bus = &"SFX"
+
+[node name="nice" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_e1wml")
 volume_db = 9.0
 bus = &"SFX"

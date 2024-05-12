@@ -5,11 +5,13 @@ extends Control
 """
 
 @onready var score_music: AudioStreamPlayer2D = $score_music
+@onready var score_text: RichTextLabel = $MenuMarginContainer/MenuVerticalContainer/ScoreMargin/Score
 
 signal option_opened()
 
 func _ready():
 	score_music.play()
+	score_text.text = "You gained " + str(Global.score_iq) + " IQ with " + str(Global.perfect_counter) + " Perfects!"
 	# Retrieve all buttons
 	var startButton = get_node("%ButtonListVerticalContainer/StartButton")
 	var optionButton = get_node("%ButtonListVerticalContainer/OptionButton")

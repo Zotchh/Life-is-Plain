@@ -1,14 +1,16 @@
 extends Control
 
 @export var gui_node: MarginContainer
+@export var modifier_name: String
 
 @onready var timer: Timer = $ResourceTimer
 @onready var pb: TextureProgressBar = $ResourceProgressBar
+@onready var modifier: RichTextLabel = $ResourceModifier/Modifier
 
-const PB_MAX: int = Global.RESOURCE_MAX
-const PB_MIN: int = Global.RESOURCE_MIN
-const PB_START: int = Global.RESOURCE_START
-const PB_STEP: int = Global.RESOURCE_UPDATE_STEP
+const PB_MAX: float = Global.RESOURCE_MAX
+const PB_MIN: float = Global.RESOURCE_MIN
+const PB_START: float = Global.RESOURCE_START
+const PB_STEP: float = Global.RESOURCE_UPDATE_STEP
 
 var type_from_name: Dictionary = {
 	"EnergyBar": ResourceTypes.type.ENERGY,
@@ -20,7 +22,6 @@ var type_from_name: Dictionary = {
 func _ready():
 	pb.max_value = PB_MAX
 	pb.min_value = PB_MIN
-	pb.min_value = 0
 	pb.value = PB_START
 	
 	timer.timeout.connect(_on_timeout)
@@ -29,7 +30,22 @@ func _ready():
 	gui_node.resource_increment.connect(_on_resource_incremented)
 
 func _process(_delta):
-	pass
+	update_modifier()
+
+func update_modifier():
+	var modifier_value = pb.value / PB_MAX
+	modifier_value += 1.0
+	
+	modifier.text = "x" + ("%.1f" % modifier_value)
+	match modifier_name:
+		"EnergyBar":
+			Global.energy_modifier = modifier_value
+		"MentalBar":
+			Global.mental_modifier = modifier_value
+		"HappinessBar":
+			Global.happiness_modifier = modifier_value
+		"HungerBar":
+			Global.hunger_modifier = modifier_value
 
 func _on_timeout():
 	pb.value -= PB_STEP
