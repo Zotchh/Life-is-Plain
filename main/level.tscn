@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://clnk0ar2n3f1g"]
+[gd_scene load_steps=16 format=3 uid="uid://clnk0ar2n3f1g"]
 
 [ext_resource type="PackedScene" uid="uid://dtroag4wg3q77" path="res://main/level_programming/level_programming.tscn" id="1_6wt4w"]
 [ext_resource type="Script" path="res://main/level.gd" id="1_ysoi0"]
@@ -9,7 +9,6 @@
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="4_fivox"]
 [ext_resource type="PackedScene" uid="uid://x5v1f87ic8xd" path="res://main/user_interface/tutorial.tscn" id="5_0bowe"]
 [ext_resource type="PackedScene" uid="uid://8pxb3uavro5v" path="res://main/user_interface/GUI.tscn" id="5_ufsk5"]
-[ext_resource type="Texture2D" uid="uid://0ju481kh26cl" path="res://assets/sprites/key_icons/key_backspace.tres" id="6_beiqu"]
 [ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/minigame/minigame_interface.tscn" id="6_vtnfc"]
 [ext_resource type="PackedScene" uid="uid://uxc6jgx0x571" path="res://main/menu/pause.tscn" id="7_xb6ts"]
 [ext_resource type="PackedScene" uid="uid://by52ntdxl7j1o" path="res://main/menu/settings.tscn" id="8_m766a"]
@@ -115,32 +114,42 @@ offset_bottom = 30.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 
-[node name="TutorialIndicatorMargin" type="MarginContainer" parent="UpperHUD"]
+[node name="LevelMargin" type="MarginContainer" parent="UpperHUD"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 200
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 15
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 160
 
-[node name="TutorialIndicator" type="HBoxContainer" parent="UpperHUD/TutorialIndicatorMargin"]
-layout_mode = 2
-size_flags_horizontal = 4
-alignment = 1
-
-[node name="TutorialIcon" type="TextureRect" parent="UpperHUD/TutorialIndicatorMargin/TutorialIndicator"]
-custom_minimum_size = Vector2(2.08165e-12, 30)
-layout_mode = 2
-texture = ExtResource("6_beiqu")
-expand_mode = 3
-
-[node name="TutorialText" type="RichTextLabel" parent="UpperHUD/TutorialIndicatorMargin/TutorialIndicator"]
+[node name="LevelBackground" type="ColorRect" parent="UpperHUD/LevelMargin"]
+custom_minimum_size = Vector2(2.08165e-12, 24)
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_fonts/normal_font = ExtResource("4_fivox")
-theme_override_font_sizes/normal_font_size = 26
-text = "TUTO"
+color = Color(0, 0.866667, 0, 1)
+
+[node name="LevelIconMargin" type="MarginContainer" parent="UpperHUD/LevelMargin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+
+[node name="LevelIcon" type="TextureRect" parent="UpperHUD/LevelMargin/LevelIconMargin"]
+layout_mode = 2
+texture = ExtResource("3_a8xdv")
+stretch_mode = 2
+
+[node name="LevelNameMargin" type="MarginContainer" parent="UpperHUD/LevelMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/margin_left = 28
+
+[node name="LevelName" type="RichTextLabel" parent="UpperHUD/LevelMargin/LevelNameMargin"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Programming"
 fit_content = true
-autowrap_mode = 0
 
 [node name="RightHUD" type="HBoxContainer" parent="."]
 anchors_preset = 15
@@ -149,43 +158,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
-
-[node name="LevelMargin" type="MarginContainer" parent="RightHUD"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme_override_constants/margin_left = 160
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 160
-
-[node name="LevelBackground" type="ColorRect" parent="RightHUD/LevelMargin"]
-custom_minimum_size = Vector2(2.08165e-12, 24)
-layout_mode = 2
-size_flags_vertical = 4
-color = Color(0, 0.866667, 0, 1)
-
-[node name="LevelIconMargin" type="MarginContainer" parent="RightHUD/LevelMargin"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-theme_override_constants/margin_left = 5
-
-[node name="LevelIcon" type="TextureRect" parent="RightHUD/LevelMargin/LevelIconMargin"]
-layout_mode = 2
-texture = ExtResource("3_a8xdv")
-stretch_mode = 2
-
-[node name="LevelNameMargin" type="MarginContainer" parent="RightHUD/LevelMargin"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme_override_constants/margin_left = 28
-
-[node name="LevelName" type="RichTextLabel" parent="RightHUD/LevelMargin/LevelNameMargin"]
-layout_mode = 2
-size_flags_vertical = 4
-text = "Programming"
-fit_content = true
 
 [node name="MoveInterface" parent="RightHUD" node_paths=PackedStringArray("level_node", "minigame_node") instance=ExtResource("3_p2ttm")]
 custom_minimum_size = Vector2(158, 2.08165e-12)
@@ -211,14 +183,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 level_node = NodePath("../..")
 
-[node name="Tutorial" parent="." node_paths=PackedStringArray("level_node") instance=ExtResource("5_0bowe")]
+[node name="Tutorial" parent="." node_paths=PackedStringArray("pause_node") instance=ExtResource("5_0bowe")]
+visible = false
 size_flags_horizontal = 3
-level_node = NodePath("..")
+pause_node = NodePath("../Pause")
 
-[node name="Pause" parent="." node_paths=PackedStringArray("level_node", "option_node") instance=ExtResource("7_xb6ts")]
+[node name="Pause" parent="." node_paths=PackedStringArray("level_node", "option_node", "tutorial_node") instance=ExtResource("7_xb6ts")]
 visible = false
 level_node = NodePath("..")
 option_node = NodePath("../Settings")
+tutorial_node = NodePath("../Tutorial")
 
 [node name="Settings" parent="." node_paths=PackedStringArray("pause_node") instance=ExtResource("8_m766a")]
 visible = false

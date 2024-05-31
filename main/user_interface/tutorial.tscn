@@ -1,11 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://x5v1f87ic8xd"]
+[gd_scene load_steps=4 format=3 uid="uid://x5v1f87ic8xd"]
 
 [ext_resource type="Script" path="res://main/user_interface/tutorial.gd" id="1_t5tul"]
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="2_7ybcx"]
-[ext_resource type="Texture2D" uid="uid://0ju481kh26cl" path="res://assets/sprites/key_icons/key_backspace.tres" id="3_pwlkp"]
-[ext_resource type="Texture2D" uid="uid://dwv8hyv3tvcft" path="res://assets/sprites/UI/tutorial_resource.jpg" id="3_r420v"]
-[ext_resource type="Texture2D" uid="uid://ddgw0fvyq2no5" path="res://assets/sprites/UI/tutorial_move.jpg" id="4_qjcyi"]
-[ext_resource type="Texture2D" uid="uid://sxh25i6yg1ek" path="res://assets/sprites/UI/tutorial_minigame.jpg" id="5_86r6x"]
+[ext_resource type="PackedScene" uid="uid://ch0dso1gona8n" path="res://main/buttons/close_button.tscn" id="3_73c2b"]
 
 [node name="Tutorial" type="MarginContainer"]
 anchors_preset = 15
@@ -36,7 +33,7 @@ theme_override_constants/margin_bottom = 10
 [node name="TextContainer" type="VBoxContainer" parent="BackgroundMarginContainer/TutorialMarginContainer"]
 layout_mode = 2
 
-[node name="PreviewTitle" type="RichTextLabel" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer"]
+[node name="Tutorial Title" type="RichTextLabel" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("2_7ybcx")
 theme_override_font_sizes/normal_font_size = 30
@@ -44,7 +41,11 @@ bbcode_enabled = true
 text = "[center]WELCOME TO EPFL !![/center]"
 fit_content = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer"]
+[node name="MainTextMargin" type="MarginContainer" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="MainText" type="RichTextLabel" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/MainTextMargin"]
 layout_mode = 2
 theme_override_constants/line_separation = -2
 bbcode_enabled = true
@@ -57,62 +58,8 @@ All you have to do is get to the right location and play the corresponding game.
 "
 fit_content = true
 
-[node name="ControlContainer" type="HBoxContainer" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 70
-alignment = 1
-
-[node name="ResourceIcon" type="TextureRect" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/ControlContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("3_r420v")
-expand_mode = 2
-
-[node name="MovementIcon" type="TextureRect" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/ControlContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("4_qjcyi")
-expand_mode = 3
-
-[node name="MinigameIcon" type="TextureRect" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/ControlContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("5_86r6x")
-expand_mode = 3
-
-[node name="ControlTextContainer" type="HBoxContainer" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer"]
-layout_mode = 2
-theme_override_constants/separation = 47
-alignment = 1
-
-[node name="ResourceText" type="RichTextLabel" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/ControlTextContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-bbcode_enabled = true
-text = "Don't run out!"
-fit_content = true
-autowrap_mode = 0
-
-[node name="MovementText" type="RichTextLabel" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/ControlTextContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-bbcode_enabled = true
-text = "Go to the right place!"
-fit_content = true
-autowrap_mode = 0
-
-[node name="MinigameText" type="RichTextLabel" parent="BackgroundMarginContainer/TutorialMarginContainer/TextContainer/ControlTextContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-bbcode_enabled = true
-text = "Complete all to score!"
-fit_content = true
-autowrap_mode = 0
-
-[node name="CloseIcon" type="TextureRect" parent="BackgroundMarginContainer"]
-custom_minimum_size = Vector2(80, 40)
+[node name="CloseButton" parent="BackgroundMarginContainer/TutorialMarginContainer" instance=ExtResource("3_73c2b")]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource("3_pwlkp")

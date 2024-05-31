@@ -79,7 +79,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 
 [node name="StartButton" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer" instance=ExtResource("3_hke6t")]
 layout_mode = 2
@@ -91,10 +91,9 @@ layout_mode = 2
 [node name="MenuButton" parent="MenuMarginContainer/MenuVerticalContainer/ButtonListVerticalContainer" instance=ExtResource("5_uibjt")]
 layout_mode = 2
 
-[node name="Settings" parent="." node_paths=PackedStringArray("menu_node") instance=ExtResource("7_eoju5")]
+[node name="Settings" parent="." instance=ExtResource("7_eoju5")]
 visible = false
 layout_mode = 1
-menu_node = NodePath("..")
 
 [node name="score_music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_5skye")

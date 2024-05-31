@@ -7,9 +7,6 @@ signal minigame_closed()
 signal pause_opened()
 signal pause_closed()
 
-signal tutorial_opened()
-signal tutorial_closed()
-
 signal start_resource_timers()
 signal stop_resource_timers()
 
@@ -25,19 +22,17 @@ signal map_changed(minigame: Minigame)
 @onready var curr_level: Node2D = $LevelProgramming
 @onready var minigame_interface: MarginContainer = $HUD/MinigameInterface
 @onready var movement_interface: MarginContainer = $RightHUD/MoveInterface
-@onready var level_title: RichTextLabel = $RightHUD/LevelMargin/LevelNameMargin/LevelName
-@onready var level_icon: TextureRect = $RightHUD/LevelMargin/LevelIconMargin/LevelIcon
-@onready var level_background: ColorRect = $RightHUD/LevelMargin/LevelBackground
+@onready var level_title: RichTextLabel = $UpperHUD/LevelMargin/LevelNameMargin/LevelName
+@onready var level_icon: TextureRect = $UpperHUD/LevelMargin/LevelIconMargin/LevelIcon
+@onready var level_background: ColorRect = $UpperHUD/LevelMargin/LevelBackground
 @onready var resume_button: Button = $Pause/BackgroundMarginContainer/ContentMargin/Content/Buttons/ResumeButton
 
 # Variables
 var minigames_from_scene: Dictionary
 
 # state flags
-var is_tutorial_toggled: bool = true
 var is_pause_toggled: bool = false
 var is_minigame_toggled: bool = false
-var timers_on: bool = false
 
 # log flags
 var key_logged = true
@@ -61,10 +56,6 @@ func _process(_delta):
 	# Check if a minigame is launched
 	if Input.is_action_just_released("interact"):
 		handle_minigame()
-	
-		# Check if tutorial is opened
-	if Input.is_action_just_released("tutorial"):
-		handle_tutorial()
 	
 	# Check if the game is paused
 	if Input.is_action_just_released("pause"):
@@ -147,40 +138,25 @@ func update_level_info(v: Minigame):
 	- Then check if a sequence is complete
 """
 func handle_movement():
-	if !is_minigame_toggled && !is_tutorial_toggled && !is_pause_toggled:
+	if !is_minigame_toggled && !is_pause_toggled:
 		track_moves_counters()
 		check_counters_completion()
 
 
 """ Handle minigame instanciation in the state diagram """
 func handle_minigame():
-	if is_minigame_toggled && !is_tutorial_toggled && !is_pause_toggled:
+	if is_minigame_toggled && !is_pause_toggled:
 		minigame_closed.emit()
 		is_minigame_toggled = !is_minigame_toggled
-	elif !is_minigame_toggled && !is_tutorial_toggled && !is_pause_toggled:
+	elif !is_minigame_toggled && !is_pause_toggled:
 		var minigame: Minigame = minigames_from_scene[curr_level.name]
 		minigame_started.emit(minigame)
 		is_minigame_toggled = !is_minigame_toggled
 	print_states()
 
-""" Handle tutorial instanciation in the state diagram """
-func handle_tutorial():
-	if is_tutorial_toggled && !is_minigame_toggled && !is_pause_toggled:
-		unpause()
-		tutorial_closed.emit()
-		is_tutorial_toggled = !is_tutorial_toggled
-	elif !is_tutorial_toggled && !is_minigame_toggled && !is_pause_toggled:
-		pause()
-		tutorial_opened.emit()
-		is_tutorial_toggled = !is_tutorial_toggled
-	print_states()
-
 """ Handle pause instanciation in the state diagram """
 func handle_pause():
-	if is_pause_toggled && is_tutorial_toggled:
-		pause_closed.emit()
-		is_pause_toggled = !is_pause_toggled
-	elif is_pause_toggled:
+	if is_pause_toggled:
 		unpause()
 		pause_closed.emit()
 		is_pause_toggled = !is_pause_toggled
@@ -195,7 +171,6 @@ func print_states():
 	var states: String = ""
 	states += "is_minigame_toggled: " + str(is_minigame_toggled) + "\n"
 	states += "is_pause_toggled: " + str(is_pause_toggled) + "\n"
-	states += "is_tutorial_toggled: " + str(is_tutorial_toggled) + "\n"
 	Log.print_if(states, states_logged)
 
 """ Trigger when resume button from pause is pressed """
