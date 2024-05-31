@@ -49,8 +49,10 @@ func _ready():
 	init_difficulty_option()
 	init_sound_sliders()
 
-func _process(_delta):
-	pass
+func _input(_delta):
+	if Input.is_action_just_pressed("pause") && is_visible_in_tree():
+		_close_button_pressed()
+		get_viewport().set_input_as_handled()
 
 func get_res_index() -> int:
 	var w_size: Vector2i = DisplayServer.window_get_size()

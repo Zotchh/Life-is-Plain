@@ -1,6 +1,7 @@
 extends Control
 
 signal minigame_completed(type: MinigameTypes.type, res: float, score: int, rank: String)
+signal food_mashed(type: MinigameTypes.type, amount: float)
 
 # Extern link to level node for signals
 @export var level_node: Node
@@ -10,6 +11,7 @@ signal minigame_completed(type: MinigameTypes.type, res: float, score: int, rank
 
 # Local link to interface parts for display
 @onready var background: ColorRect = $BackgroundMarginContainer/Background
+@onready var preview_node: VBoxContainer = $MiniGameMarginContainer/OutterHBoxContainer/LeftCol
 @onready var preview_title: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/LeftCol/MinigameTitle
 @onready var preview_items: ItemList = $MiniGameMarginContainer/OutterHBoxContainer/LeftCol/ItemList
 @onready var sequence_tree: VBoxContainer = $MiniGameMarginContainer/OutterHBoxContainer/SequenceCol
@@ -18,6 +20,9 @@ signal minigame_completed(type: MinigameTypes.type, res: float, score: int, rank
 @onready var formula_tree: MarginContainer = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin
 @onready var formula_title: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol/FormulaTitle
 @onready var formula_content: RichTextLabel = $MiniGameMarginContainer/OutterHBoxContainer/FormulaMargin/FormulaCol/FormulaContent
+@onready var food_node: Control = $MiniGameMarginContainer/FoodNode
+@onready var food_image: TextureRect = $MiniGameMarginContainer/FoodNode/FoodTexture
+@onready var food_key_icon: TextureRect = $MiniGameMarginContainer/FoodNode/FoodTexture/FoodKeyIcon
 
 @onready var correct = $correct
 @onready var uncorrect = $uncorrect
@@ -31,6 +36,7 @@ var solution: Array
 var seq: Sequence
 var formula: Formula
 var instr_idx: int = 0
+var curr_food: Food
 
 var correct_count: int = 0
 var wrong_count: int = 0
@@ -43,19 +49,28 @@ var is_ready: bool = false
 func _ready():
 	level_node.minigame_started.connect(_on_minigame_started)
 	level_node.minigame_closed.connect(_on_minigame_closed)
+	
+	sequence_tree.hide()
+	formula_tree.hide()
+	preview_node.hide()
+	food_node.hide()
 
 """ Called every frame """
 func _process(_delta):
-	if is_ready:
+	if is_ready && minigame_type == MinigameTypes.type.FOOD:
+		check_food_key()
+	elif is_ready:
 		check_instruction()
 
 """ Tracks if any possible key is pressed """
-func is_any_key_pressed() -> bool:	
+func is_any_key_pressed() -> bool:
 	var controled_array: Array[Instruction]
 	if minigame_type == MinigameTypes.type.PROGRAMMING:
 		controled_array = seq.pattern
 	if minigame_type == MinigameTypes.type.CHEMISTRY:
 		controled_array = formula.pattern
+	if minigame_type == MinigameTypes.type.FOOD:
+		return false
 	
 	var is_pressed: bool = false
 	for instr: Instruction in controled_array:
@@ -140,7 +155,6 @@ func init_minigame(minigame: Minigame):
 	data = get_node(minigame.file_path)
 	background.set_color(minigame.color)
 	minigame_type = minigame.type
-	# set title of the window
 
 """ Return a or an depending on the label """
 func get_article(label: String) -> String:
@@ -257,6 +271,18 @@ func setup_chem_minigame(i: int, difficulty: int):
 	setup_chem_solution(formula.pattern, formula.pattern_count)
 	display_formula(formula.label, formula.pattern, formula.pattern_count)
 
+""" Setup all fields for a food minigame instance """
+func setup_food_minigame(i: int):
+	var random_food: Food = data.foods[i]
+	food_image.texture = load(random_food.image)
+	food_key_icon.texture = load(random_food.key_icon)
+	curr_food = random_food
+
+func check_food_key():
+	var is_key_correct: bool = Input.is_action_just_pressed(curr_food.key_value)
+	if is_key_correct:
+		food_mashed.emit(MinigameTypes.type.FOOD, Global.FOOD_INCREMENT)
+
 """ Called when minigame starts """
 func _on_minigame_started(minigame: Minigame):
 	if !minigame_opened:
@@ -268,14 +294,18 @@ func _on_minigame_started(minigame: Minigame):
 		if minigame.type == MinigameTypes.type.PROGRAMMING:
 			var i: int = randi_range(0, data.sequences.size() - 1)
 			setup_prog_minigame(i, Global.difficulty)
-			formula_tree.set_visible(false)
-			sequence_tree.set_visible(true)
+			preview_node.show()
+			sequence_tree.show()
 		if minigame.type == MinigameTypes.type.CHEMISTRY:
 			var i: int = randi_range(0, data.formulas.size() - 1)
 			setup_chem_minigame(i, Global.difficulty)
-			formula_tree.set_visible(true)
-			sequence_tree.set_visible(false)
-		self.set_visible(true)
+			preview_node.show()
+			formula_tree.show()
+		if minigame.type == MinigameTypes.type.FOOD:
+			var i: int = randi_range(0, data.foods.size() - 1)
+			setup_food_minigame(i)
+			food_node.show()
+		self.show()
 
 		is_ready = true
 		minigame_opened = true
@@ -284,9 +314,14 @@ func _on_minigame_started(minigame: Minigame):
 func _on_minigame_closed():
 	if minigame_opened:
 		Log.print("minigame closed")
-		self.set_visible(false)
+		self.hide()
 		preview_items.clear()
 		sequence_items.clear()
+		
+		sequence_tree.hide()
+		formula_tree.hide()
+		preview_node.hide()
+		food_node.hide()
 		
 		solution = []
 		seq = null

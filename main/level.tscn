@@ -1,44 +1,23 @@
-[gd_scene load_steps=16 format=3 uid="uid://clnk0ar2n3f1g"]
+[gd_scene load_steps=12 format=3 uid="uid://clnk0ar2n3f1g"]
 
 [ext_resource type="PackedScene" uid="uid://dtroag4wg3q77" path="res://main/level_programming/level_programming.tscn" id="1_6wt4w"]
 [ext_resource type="Script" path="res://main/level.gd" id="1_ysoi0"]
-[ext_resource type="Texture2D" uid="uid://dd0vrrv2jbdpd" path="res://assets/sprites/icons/minigame_prog.tres" id="3_a8xdv"]
-[ext_resource type="Texture2D" uid="uid://ow3t1w64dso" path="res://assets/sprites/key_icons/key_space.tres" id="3_bnndx"]
-[ext_resource type="Script" path="res://main/user_interface/CountdownBar.gd" id="3_j7xd0"]
-[ext_resource type="PackedScene" uid="uid://daobh6oywgntn" path="res://main/user_interface/move_interface.tscn" id="3_p2ttm"]
-[ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="4_fivox"]
-[ext_resource type="PackedScene" uid="uid://x5v1f87ic8xd" path="res://main/user_interface/tutorial.tscn" id="5_0bowe"]
-[ext_resource type="PackedScene" uid="uid://8pxb3uavro5v" path="res://main/user_interface/GUI.tscn" id="5_ufsk5"]
+[ext_resource type="PackedScene" uid="uid://daobh6oywgntn" path="res://main/HUD/right_hud.tscn" id="3_p2ttm"]
+[ext_resource type="PackedScene" uid="uid://bc4623v6fe3ic" path="res://main/HUD/upper_hud.tscn" id="4_yi0qq"]
+[ext_resource type="PackedScene" uid="uid://x5v1f87ic8xd" path="res://main/menu/tutorial.tscn" id="5_0bowe"]
+[ext_resource type="PackedScene" uid="uid://h8s5upu5rbfv" path="res://main/HUD/lower_hud.tscn" id="5_bnybl"]
+[ext_resource type="PackedScene" uid="uid://8pxb3uavro5v" path="res://main/HUD/left_hud.tscn" id="5_ufsk5"]
 [ext_resource type="PackedScene" uid="uid://cap3afu2y48l6" path="res://main/minigame/minigame_interface.tscn" id="6_vtnfc"]
 [ext_resource type="PackedScene" uid="uid://uxc6jgx0x571" path="res://main/menu/pause.tscn" id="7_xb6ts"]
 [ext_resource type="PackedScene" uid="uid://by52ntdxl7j1o" path="res://main/menu/settings.tscn" id="8_m766a"]
 [ext_resource type="AudioStream" uid="uid://dpj2mi3at78rh" path="res://assets/sound/music/game.mp3" id="9_ud6kc"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vh6ob"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.956863, 0.956863, 0.956863, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3n85"]
-bg_color = Color(0.690196, 0.0196078, 0.0627451, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[node name="Level" type="Node"]
+[node name="Level" type="Node" node_paths=PackedStringArray("pause_node", "lower_HUD", "left_HUD", "minigame_interface")]
 script = ExtResource("1_ysoi0")
+pause_node = NodePath("Menu/Pause")
+lower_HUD = NodePath("GUI/LowerHUD")
+left_HUD = NodePath("GUI/MiniGameContainer/LeftHUD")
+minigame_interface = NodePath("GUI/MiniGameContainer/MinigameInterface")
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -51,154 +30,89 @@ color = Color(0.101961, 0.101961, 0.101961, 1)
 [node name="LevelProgramming" parent="." instance=ExtResource("1_6wt4w")]
 position = Vector2(-40, 2.08165e-12)
 
-[node name="DownHUD" type="VBoxContainer" parent="."]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-
-[node name="MinigameIndicatorMargin" type="MarginContainer" parent="DownHUD"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 160
-theme_override_constants/margin_right = 210
-
-[node name="MinigameIndicator" type="HBoxContainer" parent="DownHUD/MinigameIndicatorMargin"]
-layout_mode = 2
-size_flags_horizontal = 4
-alignment = 1
-
-[node name="MinigameIcon" type="TextureRect" parent="DownHUD/MinigameIndicatorMargin/MinigameIndicator"]
-custom_minimum_size = Vector2(2.08165e-12, 30)
-layout_mode = 2
-texture = ExtResource("3_bnndx")
-expand_mode = 3
-
-[node name="MinigameText" type="RichTextLabel" parent="DownHUD/MinigameIndicatorMargin/MinigameIndicator"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_fonts/normal_font = ExtResource("4_fivox")
-theme_override_font_sizes/normal_font_size = 26
-text = "START WORKING!"
-fit_content = true
-autowrap_mode = 0
-
-[node name="CountdownMargin" type="MarginContainer" parent="DownHUD"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 160
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 210
-theme_override_constants/margin_bottom = 15
-
-[node name="CountdownBar" type="ProgressBar" parent="DownHUD/CountdownMargin" node_paths=PackedStringArray("level_node")]
-custom_minimum_size = Vector2(2.08165e-12, 10)
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_vh6ob")
-theme_override_styles/fill = SubResource("StyleBoxFlat_b3n85")
-value = 50.0
-show_percentage = false
-script = ExtResource("3_j7xd0")
-level_node = NodePath("../../..")
-
-[node name="CountdownTimer" type="Timer" parent="DownHUD/CountdownMargin/CountdownBar"]
-
-[node name="UpperHUD" type="VBoxContainer" parent="."]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 30.0
-grow_horizontal = 2
-size_flags_horizontal = 3
-
-[node name="LevelMargin" type="MarginContainer" parent="UpperHUD"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme_override_constants/margin_left = 160
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 160
-
-[node name="LevelBackground" type="ColorRect" parent="UpperHUD/LevelMargin"]
-custom_minimum_size = Vector2(2.08165e-12, 24)
-layout_mode = 2
-size_flags_vertical = 4
-color = Color(0, 0.866667, 0, 1)
-
-[node name="LevelIconMargin" type="MarginContainer" parent="UpperHUD/LevelMargin"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-theme_override_constants/margin_left = 5
-
-[node name="LevelIcon" type="TextureRect" parent="UpperHUD/LevelMargin/LevelIconMargin"]
-layout_mode = 2
-texture = ExtResource("3_a8xdv")
-stretch_mode = 2
-
-[node name="LevelNameMargin" type="MarginContainer" parent="UpperHUD/LevelMargin"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme_override_constants/margin_left = 28
-
-[node name="LevelName" type="RichTextLabel" parent="UpperHUD/LevelMargin/LevelNameMargin"]
-layout_mode = 2
-size_flags_vertical = 4
-text = "Programming"
-fit_content = true
-
-[node name="RightHUD" type="HBoxContainer" parent="."]
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 2
 
-[node name="MoveInterface" parent="RightHUD" node_paths=PackedStringArray("level_node", "minigame_node") instance=ExtResource("3_p2ttm")]
-custom_minimum_size = Vector2(158, 2.08165e-12)
-layout_mode = 2
+[node name="UpperHUD" parent="GUI" node_paths=PackedStringArray("level_node") instance=ExtResource("4_yi0qq")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = 15.0
+offset_right = 111.0
+offset_bottom = 65.0
+grow_horizontal = 2
 level_node = NodePath("../..")
-minigame_node = NodePath("../../HUD/MinigameInterface")
 
-[node name="HUD" type="HBoxContainer" parent="."]
+[node name="LowerHUD" parent="GUI" node_paths=PackedStringArray("level_node") instance=ExtResource("5_bnybl")]
+layout_mode = 1
+offset_left = -20.0
+offset_right = -20.0
+level_node = NodePath("../..")
+
+[node name="RightHUD" parent="GUI" node_paths=PackedStringArray("level_node", "minigame_node") instance=ExtResource("3_p2ttm")]
+custom_minimum_size = Vector2(158, 2.08165e-12)
+layout_mode = 1
+offset_left = -134.0
+level_node = NodePath("../..")
+minigame_node = NodePath("../MiniGameContainer/MinigameInterface")
+
+[node name="MiniGameContainer" type="HBoxContainer" parent="GUI"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GUI" parent="HUD" node_paths=PackedStringArray("minigame_node", "level_node") instance=ExtResource("5_ufsk5")]
+[node name="LeftHUD" parent="GUI/MiniGameContainer" node_paths=PackedStringArray("minigame_node", "level_node") instance=ExtResource("5_ufsk5")]
 layout_mode = 2
 minigame_node = NodePath("../MinigameInterface")
-level_node = NodePath("../..")
+level_node = NodePath("../../..")
 
-[node name="MinigameInterface" parent="HUD" node_paths=PackedStringArray("level_node") instance=ExtResource("6_vtnfc")]
+[node name="MinigameInterface" parent="GUI/MiniGameContainer" node_paths=PackedStringArray("level_node") instance=ExtResource("6_vtnfc")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+level_node = NodePath("../../..")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pause" parent="Menu" node_paths=PackedStringArray("level_node", "option_node", "tutorial_node") instance=ExtResource("7_xb6ts")]
+process_mode = 2
+visible = false
+layout_mode = 1
 level_node = NodePath("../..")
-
-[node name="Tutorial" parent="." node_paths=PackedStringArray("pause_node") instance=ExtResource("5_0bowe")]
-visible = false
-size_flags_horizontal = 3
-pause_node = NodePath("../Pause")
-
-[node name="Pause" parent="." node_paths=PackedStringArray("level_node", "option_node", "tutorial_node") instance=ExtResource("7_xb6ts")]
-visible = false
-level_node = NodePath("..")
 option_node = NodePath("../Settings")
 tutorial_node = NodePath("../Tutorial")
 
-[node name="Settings" parent="." node_paths=PackedStringArray("pause_node") instance=ExtResource("8_m766a")]
+[node name="Tutorial" parent="Menu" node_paths=PackedStringArray("pause_node") instance=ExtResource("5_0bowe")]
+process_mode = 2
 visible = false
+layout_mode = 1
+size_flags_horizontal = 3
+pause_node = NodePath("../Pause")
+
+[node name="Settings" parent="Menu" node_paths=PackedStringArray("pause_node") instance=ExtResource("8_m766a")]
+process_mode = 2
+visible = false
+layout_mode = 1
 pause_node = NodePath("../Pause")
 
 [node name="music_game" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
 stream = ExtResource("9_ud6kc")
 volume_db = -7.0
 bus = &"Music"

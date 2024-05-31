@@ -17,11 +17,11 @@ const RESOURCE_UPDATE_STEP: float = 2
 const SCORE_INCREASE_MIN: float = 38
 const SCORE_STEEP: float = 50
 const SCORE_HEIGHT: float = 1.5
+const FOOD_INCREMENT: float = 20
 
 var energy_modifier: float = 0
 var mental_modifier: float = 0
 var happiness_modifier: float = 0
-var hunger_modifier: float = 0
 
 var score_iq: int = 0
 var perfect_counter: int = 0

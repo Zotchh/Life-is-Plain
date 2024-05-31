@@ -27,6 +27,18 @@ var minigames_properties: Dictionary = {
 		"CHEMISTRY"
 	),
 	
+	"LevelCafeteria": Minigame.new(
+		"level_cafeteria",
+		"/root/VarsCafeteria",
+		MinigameTypes.type.FOOD,
+		["▶", "▶", "◀", "▶"],
+		["right", "right", "left", "right"],
+		0,
+		Color.hex(0xb00510f0),
+		res_root + "hunger_icon_atlas_texture.tres",
+		"CAFETERIA"
+	),
+	
 	#"LevelArchitecture": Minigame.new(
 		#"level_architecture",
 		#"/root/VarsArchitecture",

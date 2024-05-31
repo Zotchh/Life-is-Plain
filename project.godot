@@ -23,6 +23,7 @@ VarsChemistry="*res://main/level_chemistry/vars_chemistry.gd"
 VarsMinigame="*res://main/minigame/vars_minigame.gd"
 VarsArchitecture="*res://main/level_architecture/vars_architecture.gd"
 VarsMath="*res://main/level_math/vars_math.gd"
+VarsCafeteria="*res://main/level_cafeteria/vars_cafeteria.gd"
 
 [display]
 

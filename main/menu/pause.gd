@@ -4,6 +4,7 @@ extends MarginContainer
 	- Handle states on button pressed
 """
 
+signal pause_closed()
 signal option_opened()
 signal tutorial_opened()
 
@@ -16,9 +17,10 @@ signal tutorial_opened()
 @onready var tutorial_button: Button = $BackgroundMarginContainer/ContentMargin/Content/Buttons/TutorialButton
 @onready var menu_button: Button = $BackgroundMarginContainer/ContentMargin/Content/Buttons/MenuButton
 
+var unpausable: bool = false
+
 func _ready():
 	level_node.pause_opened.connect(_on_pause_opened)
-	level_node.pause_closed.connect(_on_pause_closed)
 	option_node.option_closed.connect(_on_option_closed)
 	tutorial_node.tutorial_closed.connect(_on_tutorial_closed)
 	
@@ -27,35 +29,39 @@ func _ready():
 	tutorial_button.pressed.connect(_tutorial_button_pressed)
 	menu_button.pressed.connect(_menu_button_pressed)
 
-func _process(_delta):
-	pass
+func _input(_delta):
+	if Input.is_action_just_pressed("pause"):
+		_resume_button_pressed()
+		get_viewport().set_input_as_handled()
 
 func _on_pause_opened():
-	self.set_visible(true)
-
-func _on_pause_closed():
-	self.set_visible(false)
+	unpausable = false
+	show()
 
 func _on_option_closed():
-	self.set_visible(true)
+	unpausable = false
+	show()
 
 func _on_tutorial_closed():
-	self.set_visible(true)
+	unpausable = false
+	show()
 
 func _resume_button_pressed():
-	print("Resume button pressed")
-	self.set_visible(false)
+	if !unpausable:
+		pause_closed.emit()
+		hide()
+		unpausable = false
 
 func _option_button_pressed():
-	print("Option button pressed")
+	unpausable = true
 	option_opened.emit()
-	self.set_visible(false)
+	hide()
 
 func _tutorial_button_pressed():
-	print("Tutorial button pressed")
+	unpausable = true
 	tutorial_opened.emit()
-	self.set_visible(false)
+	hide()
 
 func _menu_button_pressed():
-	print("Menu button pressed")
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://main/menu/menu.tscn")

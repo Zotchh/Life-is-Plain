@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://cap3afu2y48l6"]
+[gd_scene load_steps=12 format=3 uid="uid://cap3afu2y48l6"]
 
 [ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="1_etutl"]
 [ext_resource type="Script" path="res://main/minigame/minigame_logic.gd" id="1_vtmyx"]
 [ext_resource type="Texture2D" uid="uid://cgk3y3enu1kf4" path="res://assets/sprites/UI/chemistry_background.tres" id="3_cy2nc"]
+[ext_resource type="Texture2D" uid="uid://dytd4ew3trbk" path="res://assets/sprites/GUI/Food/41_eggsalad_bowl.png" id="4_686um"]
 [ext_resource type="AudioStream" uid="uid://bv5mukbwuxqsr" path="res://assets/sound/sfx/ting.wav" id="4_g5032"]
+[ext_resource type="Texture2D" uid="uid://bltjtv2vvsxgs" path="res://assets/sprites/key_icons/key_d.tres" id="5_jbccl"]
 [ext_resource type="AudioStream" uid="uid://5y07t2yyib4h" path="res://assets/sound/sfx/tutu.wav" id="5_tafok"]
+[ext_resource type="Theme" uid="uid://bmhk8xgt3eknq" path="res://assets/theme/textTheme.tres" id="6_r1ec8"]
 [ext_resource type="AudioStream" uid="uid://bcmkechmf0jgq" path="res://assets/sound/sfx/perfect.mp3" id="6_wq1bp"]
 [ext_resource type="AudioStream" uid="uid://3vbg1dubeasi" path="res://assets/sound/sfx/great.mp3" id="7_sgc8n"]
 [ext_resource type="AudioStream" uid="uid://c6q6mhrjk1o7n" path="res://assets/sound/sfx/nice.mp3" id="8_e1wml"]
@@ -39,6 +42,7 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 
 [node name="LeftCol" type="VBoxContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -75,6 +79,7 @@ size_flags_vertical = 3
 allow_search = false
 
 [node name="FormulaMargin" type="MarginContainer" parent="MiniGameMarginContainer/OutterHBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
@@ -115,6 +120,74 @@ text = "[center]Formula Content[/center]"
 fit_content = true
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
+
+[node name="FoodNode" type="Control" parent="MiniGameMarginContainer"]
+layout_mode = 2
+
+[node name="FoodTexture" type="TextureRect" parent="MiniGameMarginContainer/FoodNode"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -140.0
+offset_right = 112.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_686um")
+
+[node name="FoodKeyIcon" type="TextureRect" parent="MiniGameMarginContainer/FoodNode/FoodTexture"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = 15.0
+offset_right = 10.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("5_jbccl")
+
+[node name="FoodTextAfter" type="RichTextLabel" parent="MiniGameMarginContainer/FoodNode/FoodTexture/FoodKeyIcon"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 45.0
+offset_top = -15.0
+offset_right = 224.0
+offset_bottom = 25.0
+grow_vertical = 2
+theme = ExtResource("6_r1ec8")
+text = "TO EAT!"
+fit_content = true
+
+[node name="FoodTextBefore" type="RichTextLabel" parent="MiniGameMarginContainer/FoodNode/FoodTexture/FoodKeyIcon"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -15.0
+offset_right = -40.0
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("6_r1ec8")
+text = "MASH"
+fit_content = true
 
 [node name="correct" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_g5032")

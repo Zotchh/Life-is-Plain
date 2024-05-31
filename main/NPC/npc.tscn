@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4hyus38b0l5n"]
+
+[ext_resource type="Texture2D" uid="uid://dlberdnhp6oir" path="res://assets/sprites/NPC/alex.tres" id="1_bg7j0"]
+[ext_resource type="Script" path="res://main/NPC/npc.gd" id="1_l24i3"]
+[ext_resource type="Texture2D" uid="uid://cy2scd385jnc2" path="res://assets/sprites/NPC/dialog1.tres" id="3_5xbjd"]
+[ext_resource type="Texture2D" uid="uid://dum2g5hx27m81" path="res://assets/sprites/NPC/dialog2.tres" id="4_mpm1d"]
+
+[node name="Npc" type="Node2D"]
+script = ExtResource("1_l24i3")
+
+[node name="npc" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(4, 4)
+texture = ExtResource("1_bg7j0")
+
+[node name="dialog1" type="Sprite2D" parent="."]
+position = Vector2(-1, -125)
+scale = Vector2(0.370536, 0.373402)
+texture = ExtResource("3_5xbjd")
+
+[node name="dialog2" type="Sprite2D" parent="."]
+position = Vector2(102, -115)
+scale = Vector2(0.329358, 0.414083)
+texture = ExtResource("4_mpm1d")
+flip_h = true
+
+[node name="LabelText" type="Label" parent="."]
+offset_left = 38.0
+offset_top = -174.0
+offset_right = 180.0
+offset_bottom = -83.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "balelec was cool, right guyz ?"
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="."]

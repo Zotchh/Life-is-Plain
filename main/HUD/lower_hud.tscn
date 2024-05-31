@@ -1,0 +1,96 @@
+[gd_scene load_steps=6 format=3 uid="uid://h8s5upu5rbfv"]
+
+[ext_resource type="Texture2D" uid="uid://ow3t1w64dso" path="res://assets/sprites/key_icons/key_space.tres" id="1_et800"]
+[ext_resource type="Script" path="res://main/HUD/lower_hud.gd" id="1_y6p15"]
+[ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="2_usc6f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vh6ob"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.956863, 0.956863, 0.956863, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3n85"]
+bg_color = Color(0.690196, 0.0196078, 0.0627451, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="LowerHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_y6p15")
+
+[node name="MinigameIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -68.0
+offset_right = -64.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_et800")
+stretch_mode = 4
+
+[node name="MinigameText" type="RichTextLabel" parent="MinigameIcon"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 70.0
+offset_top = -15.0
+offset_right = 278.0
+offset_bottom = 15.0
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_usc6f")
+theme_override_font_sizes/normal_font_size = 32
+text = "START WORKING!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="CountdownBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_top = -26.0
+offset_right = 140.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_vh6ob")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b3n85")
+value = 50.0
+show_percentage = false
+
+[node name="CountdownTimer" type="Timer" parent="CountdownBar"]

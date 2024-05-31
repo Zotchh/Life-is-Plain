@@ -4200,4 +4200,4 @@ layer_3/tile_data = PackedInt32Array(131072, 917504, 36, 196608, 917504, 37, 327
 
 [node name="Player" parent="." instance=ExtResource("4_8xkw4")]
 y_sort_enabled = true
-position = Vector2(235, 192)
+position = Vector2(236, 194)

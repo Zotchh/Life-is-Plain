@@ -2,10 +2,11 @@ extends CharacterBody2D
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
-var last_direction: Vector2
+var last_direction: Vector2 = Vector2.DOWN
+var move_speed: float = 12.0
+var diagonale_ratio: float = 0.8
 
 func _process(_delta: float):
-	pass
 	## Get the input direction
 	#var input_direction: Vector2 = Vector2(
 		#Input.get_action_strength("right") - Input.get_action_strength("left"),
@@ -17,10 +18,10 @@ func _process(_delta: float):
 	#
 	#if ((input_direction.x > 0 or input_direction.x < 0)
 	#and (input_direction.y > 0 or input_direction.y < 0)):
-		#velocity = velocity / diagonale_ratio
+		#velocity = velocity * diagonale_ratio
 	#
-	## Determine the animation to play
-	#play_animation(input_direction)
+	# Determine the animation to play
+	play_idle_animation()
 	#
 	## Call movement method
 	#move_and_slide()

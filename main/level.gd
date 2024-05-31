@@ -3,35 +3,29 @@ extends Node
 # Signals
 signal minigame_started(minigame: Minigame)
 signal minigame_closed()
-
 signal pause_opened()
-signal pause_closed()
 
 signal start_resource_timers()
-signal stop_resource_timers()
-
 signal start_countdown_timers()
-signal stop_countdown_timers()
 
 signal map_changed(minigame: Minigame)
 
-@onready var music_game = $music_game
+# Modulable nodes
+@export var pause_node: MarginContainer
+@export var lower_HUD: Control
+@export var left_HUD: MarginContainer
+@export var minigame_interface: MarginContainer
 
 # Child Scenes
 @onready var background: ColorRect = $Background
 @onready var curr_level: Node2D = $LevelProgramming
-@onready var minigame_interface: MarginContainer = $HUD/MinigameInterface
-@onready var movement_interface: MarginContainer = $RightHUD/MoveInterface
-@onready var level_title: RichTextLabel = $UpperHUD/LevelMargin/LevelNameMargin/LevelName
-@onready var level_icon: TextureRect = $UpperHUD/LevelMargin/LevelIconMargin/LevelIcon
-@onready var level_background: ColorRect = $UpperHUD/LevelMargin/LevelBackground
-@onready var resume_button: Button = $Pause/BackgroundMarginContainer/ContentMargin/Content/Buttons/ResumeButton
+@onready var music_game = $music_game
 
 # Variables
 var minigames_from_scene: Dictionary
 
 # state flags
-var is_pause_toggled: bool = false
+var paused: bool = false
 var is_minigame_toggled: bool = false
 
 # log flags
@@ -40,39 +34,45 @@ var states_logged = true
 
 """ Called once when instanciated """
 func _ready():
+	music_game.play()
+	
+	init_scores()
+	init_signals()
+	
+	minigames_from_scene = VarsMinigame.minigames_properties
+	map_changed.emit(minigames_from_scene.get("LevelProgramming"))
+	
+	start_resource_timers.emit()
+	start_countdown_timers.emit()
+
+""" Init signal values """
+func init_signals():
+	pause_node.pause_closed.connect(_on_pause_closed)
+	lower_HUD.countdown_ended.connect(_on_countdown_ended)
+	minigame_interface.minigame_completed.connect(_on_minigame_completed)
+	left_HUD.game_ended.connect(_on_countdown_ended)
+
+""" Init score values """
+func init_scores():
 	Global.score_iq = 0
 	Global.perfect_counter = 0
 	Global.great_counter = 0
 	Global.nice_counter = 0
-	
-	music_game.play()
-	resume_button.pressed.connect(_on_resumed)
-	minigame_interface.minigame_completed.connect(_on_minigame_completed)
-	minigames_from_scene = VarsMinigame.minigames_properties
-	update_level_info(minigames_from_scene.get("LevelProgramming"))
+
+func _process(_delta):
+	# Handle movement between levels
+	handle_movement()
 
 """ Called every frame """
-func _process(_delta):
+func _input(_delta):
 	# Check if a minigame is launched
 	if Input.is_action_just_released("interact"):
 		handle_minigame()
 	
 	# Check if the game is paused
-	if Input.is_action_just_released("pause"):
+	if Input.is_action_just_pressed("pause"):
 		handle_pause()
-	
-	# Handle movement between levels
-	handle_movement()
-
-""" stops all pausable nodes """
-func pause():
-	stop_resource_timers.emit()
-	stop_countdown_timers.emit()
-
-""" unstops all pausable nodes """
-func unpause():
-	start_resource_timers.emit()
-	start_countdown_timers.emit()
+		get_viewport().set_input_as_handled()
 
 """ Reset all sequence counters """
 func reset_counters():
@@ -126,29 +126,22 @@ func check_counters_completion():
 			background.add_sibling(levelScene)
 			curr_level.queue_free()
 			curr_level = levelScene
-			update_level_info(value)
-
-func update_level_info(v: Minigame):
-	level_background.color = v.color
-	level_icon.texture = load(v.icon_path)
-	level_title.text = MinigameTypes.get_dest_name(v.type)
 
 """ Handle movement in 2 phases
 	- Track if any move is pressed and update each possible counters
 	- Then check if a sequence is complete
 """
 func handle_movement():
-	if !is_minigame_toggled && !is_pause_toggled:
+	if !is_minigame_toggled && !paused:
 		track_moves_counters()
 		check_counters_completion()
 
-
 """ Handle minigame instanciation in the state diagram """
 func handle_minigame():
-	if is_minigame_toggled && !is_pause_toggled:
+	if is_minigame_toggled && !paused:
 		minigame_closed.emit()
 		is_minigame_toggled = !is_minigame_toggled
-	elif !is_minigame_toggled && !is_pause_toggled:
+	elif !is_minigame_toggled && !paused:
 		var minigame: Minigame = minigames_from_scene[curr_level.name]
 		minigame_started.emit(minigame)
 		is_minigame_toggled = !is_minigame_toggled
@@ -156,28 +149,28 @@ func handle_minigame():
 
 """ Handle pause instanciation in the state diagram """
 func handle_pause():
-	if is_pause_toggled:
-		unpause()
-		pause_closed.emit()
-		is_pause_toggled = !is_pause_toggled
-	elif !is_pause_toggled:
-		pause()
-		pause_opened.emit()
-		is_pause_toggled = !is_pause_toggled
+	pause_opened.emit()
+	get_tree().paused = true
+	
+	paused = !paused
 	print_states()
 
 """ Print states diagram for debugging purpose """
 func print_states():
 	var states: String = ""
 	states += "is_minigame_toggled: " + str(is_minigame_toggled) + "\n"
-	states += "is_pause_toggled: " + str(is_pause_toggled) + "\n"
+	states += "paused: " + str(paused) + "\n"
 	Log.print_if(states, states_logged)
 
 """ Trigger when resume button from pause is pressed """
-func _on_resumed():
-	handle_pause()
+func _on_pause_closed():
+	get_tree().paused = false
+	paused = !paused
 	print_states()
 
-func _on_minigame_completed(type: MinigameTypes.type, res: float, score: int, rank: String):
+func _on_countdown_ended():
+	get_tree().change_scene_to_file("res://main/menu/score.tscn")
+
+func _on_minigame_completed(_type: MinigameTypes.type, _res: float, _score: int, _rank: String):
 	handle_minigame()
 	print_states()

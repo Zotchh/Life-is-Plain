@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc4623v6fe3ic"]
+
+[ext_resource type="Texture2D" uid="uid://dd0vrrv2jbdpd" path="res://assets/sprites/icons/minigame_prog.tres" id="1_1mlqt"]
+[ext_resource type="Texture2D" uid="uid://dm802mtbkr2wk" path="res://assets/sprites/GUI/kenney_ui-pack/Vector/UIpack_vector.svg" id="1_lnmi7"]
+[ext_resource type="Script" path="res://main/HUD/upper_hud.gd" id="2_lt2n5"]
+[ext_resource type="FontFile" uid="uid://dbbd685dur5vv" path="res://assets/fonts/EquipmentPro.ttf" id="2_p46dm"]
+
+[node name="UpperHUD" type="NinePatchRect"]
+offset_right = 271.0
+offset_bottom = 50.0
+texture = ExtResource("1_lnmi7")
+region_rect = Rect2(628, 316, 196, 52)
+script = ExtResource("2_lt2n5")
+
+[node name="LevelIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -14.0
+offset_right = 44.0
+offset_bottom = 14.0
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("1_1mlqt")
+
+[node name="LevelName" type="RichTextLabel" parent="LevelIcon"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 37.0
+offset_top = -15.0
+offset_right = 248.0
+offset_bottom = 17.0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_p46dm")
+theme_override_font_sizes/normal_font_size = 32
+text = "Programming"
+fit_content = true

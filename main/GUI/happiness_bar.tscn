@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=3 uid="uid://bokv21e68434g"]
+
+[ext_resource type="Script" path="res://main/GUI/resource_bar.gd" id="1_d1ene"]
+[ext_resource type="Texture2D" uid="uid://coci4aov6b3et" path="res://assets/sprites/UI/progress-bar-circle.png" id="2_t4vfd"]
+[ext_resource type="Texture2D" uid="uid://dyyhr6dmkfkdr" path="res://assets/sprites/UI/progress-bar-frame.png" id="3_cvld6"]
+[ext_resource type="Texture2D" uid="uid://dlevjajuvon3k" path="res://assets/sprites/icons/happiness_icon_atlas_texture.tres" id="4_vh8ym"]
+[ext_resource type="Theme" uid="uid://bmhk8xgt3eknq" path="res://assets/theme/textTheme.tres" id="5_uhbrv"]
+[ext_resource type="Texture2D" uid="uid://dm802mtbkr2wk" path="res://assets/sprites/GUI/kenney_ui-pack/Vector/UIpack_vector.svg" id="6_eouun"]
+
+[node name="HappinessBar" type="MarginContainer"]
+script = ExtResource("1_d1ene")
+modifier_name = "HappinessBar"
+
+[node name="ResourceProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+max_value = 1000.0
+value = 333.0
+fill_mode = 4
+nine_patch_stretch = true
+stretch_margin_left = 36
+stretch_margin_top = 36
+stretch_margin_right = 36
+stretch_margin_bottom = 36
+texture_under = ExtResource("2_t4vfd")
+texture_over = ExtResource("3_cvld6")
+texture_progress = ExtResource("2_t4vfd")
+tint_under = Color(0, 0, 0, 0.603922)
+tint_progress = Color(0.964706, 0.709804, 0, 1)
+radial_initial_angle = 215.0
+radial_fill_degrees = 290.0
+
+[node name="ResourceTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="ResourceIconMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_bottom = 3
+
+[node name="ResourceIcon" type="TextureRect" parent="ResourceIconMargin"]
+self_modulate = Color(1, 0.894118, 0.164706, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("4_vh8ym")
+
+[node name="ResourceModifier" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_bottom = 27
+
+[node name="Modifier" type="RichTextLabel" parent="ResourceModifier"]
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("5_uhbrv")
+theme_override_colors/default_color = Color(1, 0.894118, 0.164706, 1)
+theme_override_font_sizes/normal_font_size = 16
+text = "x1.0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -21.0
+offset_right = 48.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_eouun")
+region_rect = Rect2(1048, 180, 196, 52)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/NinePatchRect"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -20.0
+offset_right = 46.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_uhbrv")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Work In Progress[/center]"
+fit_content = true
